@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2020-09-03T08:49:55.505Z</updated>
+  <updated>2020-09-08T06:51:35.796Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习Javascript应懂得33个概念之调用堆栈</title>
+    <link href="https://shinichikudo-fe.github.io/2020/09/08/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88/"/>
+    <id>https://shinichikudo-fe.github.io/2020/09/08/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88/</id>
+    <published>2020-09-08T05:53:13.000Z</published>
+    <updated>2020-09-08T06:51:35.796Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.oschina.net/translate/how-does-javascript-actually-work-part-1">原文学习地址</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>堆栈的概念对于我来说是熟悉又陌生的感觉，之前看过很多相关的文章及写过一些demo可后面用不到后，就慢慢淡忘了，今天要好好理解并记录下</p><h2 id="JavaScript-引擎"><a href="#JavaScript-引擎" class="headerlink" title="JavaScript 引擎"></a>JavaScript 引擎</h2><p>Google V8引擎是一个比较流行的javascript引擎示例，该引擎包括两个主要组件：</p><ul><li><ol><li>Memory Heap内存堆 — 这是内存分配的地方</li></ol></li><li><ol start="2"><li>call stack调用堆栈 — 这是你代码执行时栈帧存放的位置</li></ol></li></ul><h2 id="RunTime-运行时"><a href="#RunTime-运行时" class="headerlink" title="RunTime 运行时"></a>RunTime 运行时</h2><p><img src="https://static.oschina.net/uploads/space/2017/1213/104047_yNc9_2896879.png" alt="runtime"></p><h2 id="Call-Stack-调用堆栈"><a href="#Call-Stack-调用堆栈" class="headerlink" title="Call Stack 调用堆栈"></a>Call Stack 调用堆栈</h2><p>JavaScript 是一种<strong>单线程编程语言</strong>，这意味着它只有一个 <code>Call Stack</code> 。因此，它一次仅能做一件事。</p><p><code>Call Stack</code> 是一个数据结构，它基本上记录了我们在程序中的所处的位置。如果我们进入一个函数，我们把它放在堆栈的顶部。如果我们从一个函数中返回，我们弹出堆栈的顶部。这是所有的堆栈可以做的东西。</p><p>我们看一个示例：</p><pre><code class="js">function multiply(x,y)&#123;  return x * y&#125;function printSqure(x)&#123;  var s = multiply(x,x)  console.log(s)&#125;printSqure(5)</code></pre><p>当引擎开始执行这个代码时，Call Stack 将会变成空的。之后，执行的步骤如下：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104147_KJwy_2896879.png" alt="call stack"></p><p>Call Stack 的每个入口被称为 <strong>Stack Frame（栈帧）</strong>。</p><p>这正是在抛出异常时如何构建 <code>stack trace</code> 的方法 - 这基本上是在异常发生时的 <code>Call Stack</code> 的状态。看看下面的代码：</p><pre><code class="js">function foo()&#123;  throw new Error(&#39;SessionStack will help you resolve crashes :)&#39;);&#125;function bar()&#123;  foo()&#125;function start() &#123;  bar();&#125;start();</code></pre><p>如果这是在 Chrome 中执行的（假设这个代码在一个名为 foo.js 的文件中），那么会产生下面的 <code>stack trace</code>:</p><p><code>Blowing the stack</code>—当达到最大调用堆栈大小时，会发生这种情况。这可能会很容易发生，特别是如果你使用递归，而不是非常广泛地测试你的代码。看看这个示例代码：</p><pre><code class="js">function foo() &#123;    foo();&#125;foo();</code></pre><p>当引擎开始执行这个代码时，它首先调用函数“foo”。然而，这个函数是递归的，并且开始调用自己而没有任何终止条件。所以在执行的每个步骤中，同一个函数会一次又一次地添加到调用堆栈中。它看起来像这样：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104326_4B9u_2896879.png" alt="call stack 递归"></p><p>然而，在某些情况下，调用堆栈中函数调用的数量超出了调用堆栈的实际大小，浏览器通过抛出一个错误（如下所示）来决定采取行动：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104350_JCtB_2896879.png" alt="max stack"></p><p>在单线程上运行代码可能非常容易，因为你不必处理多线程环境中出现的复杂场景，例如<strong>死锁</strong>。</p><p>但是在单线程上运行也是非常有限的。由于<code>JavaScript</code>只有一个调用堆栈，所以当事情很慢时会发生什么？</p><h2 id="并发与事件循环"><a href="#并发与事件循环" class="headerlink" title="并发与事件循环"></a>并发与事件循环</h2><p>如果在调用堆栈中执行的函数调用需要花费大量时间才能进行处理，会发生什么？ 例如，假设你想在浏览器中使用 <code>JavaScript</code> 进行一些复杂的图像转换。</p><p>你可能会问 - 为什么这会是一个问题？问题是，虽然调用堆栈有要执行的函数，浏览器实际上不能做任何事情 - 它被阻塞了。这意味着浏览器无法渲染，它不能运行任何其他代码，它就是被卡住了。如果你想在你的应用程序中使用流畅的 UI ，这就会产生问题。</p><p>而且这并不是唯一的问题。一旦你的浏览器开始在 Call Stack 中处理过多的任务，它可能会停止响应相当长的时间。大多数浏览器会通过触发错误来采取行动，询问你是否要终止网页。</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104412_G1jc_2896879.png" alt="阻塞"></p><p>所以，这并不是最好的用户体验，对吗？</p><p>那么，我们如何执行大量代码而不阻塞 UI 使得浏览器无法响应？ <strong>解决方案就是异步回调</strong>。</p><p>这将在“ JavaScript 工作原理”教程的第2部分中更详细地解释：<a href="https://www.oschina.net/translate/how-does-javascript-actually-work-part-2">“V8 引擎内部+关于如何编写优化代码的5个技巧”</a>。</p><p>同时，如果你在 JavaScript 应用程序中难以复现和理解问题，请查看 <code>SessionStack</code> 。 <code>SessionStack</code> 会记录你的 Web 应用中的所有东西：所有的 DOM 更改、用户交互、JavaScript 异常、堆栈跟踪、网络请求失败、调试消息等。</p><p>通过 SessionStack ，你可以以视频的方式重现问题，并查看发生在用户身上的所有事情。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然JavaScript是单线程，但Event Loop是javascript的执行机制，可以很好的处理事件，它也分为同步与异步，当为同步时JavaScript的顺序必须一个完成之后才会完成下一个，如果前面出现无限循环后就会出现爆栈，导致后面的无法执行；而异步时又分为宏观任务（script，setTimeout，setInterval）及微观任务（Promise，process.nextTick）进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.oschina.net/translate/how-does-javascript-actually-work-part-1&quot;&gt;原文学习地址&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;head</summary>
+      
+    
+    
+    
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>深入 TypeScript 中的子类型、逆变、协变</title>
@@ -550,104 +575,6 @@
     
     
     <category term="CSS" scheme="https://shinichikudo-fe.github.io/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>尤雨溪在Vue3.0 Beta直播里聊到了这些…</title>
-    <link href="https://shinichikudo-fe.github.io/2020/04/22/Vue/%E5%B0%A4%E9%9B%A8%E6%BA%AA%E5%9C%A8Vue3-0-Beta%E7%9B%B4%E6%92%AD%E9%87%8C%E8%81%8A%E5%88%B0%E4%BA%86%E8%BF%99%E4%BA%9B%E2%80%A6/"/>
-    <id>https://shinichikudo-fe.github.io/2020/04/22/Vue/%E5%B0%A4%E9%9B%A8%E6%BA%AA%E5%9C%A8Vue3-0-Beta%E7%9B%B4%E6%92%AD%E9%87%8C%E8%81%8A%E5%88%B0%E4%BA%86%E8%BF%99%E4%BA%9B%E2%80%A6/</id>
-    <published>2020-04-22T14:07:49.000Z</published>
-    <updated>2020-09-04T02:18:38.447Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://juejin.im/post/5e9f6b3251882573a855cd52?utm_source=gold_browser_extension#heading-15">原文地址(https://juejin.im/post/5e9f6b3251882573a855cd52?utm_source=gold_browser_extension#heading-15)</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>4月21日晚，Vue作者尤雨溪在哔哩哔哩直播分享了Vue.js 3.0 Beta最新进展。 以下是直播内容整理</p><h2 id="全新文档RFCs"><a href="#全新文档RFCs" class="headerlink" title="全新文档RFCs"></a>全新文档RFCs</h2><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719da838e76e8c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="全新文档RFCs"></p><p><code>Vue.js 3.0 Beta</code>发布后的工作重点是保证稳定性和推进各类库集成</p><p>所有的进度和文档都将在全新<code>RFCs</code>文档可以看到。</p><h2 id="六大亮点"><a href="#六大亮点" class="headerlink" title="六大亮点"></a>六大亮点</h2><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719daca80f3b7c2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="六大亮点"></p><blockquote><ul><li>Performance：性能更比Vue 2.0强。</li><li>Tree shaking support：可以将无用模块“剪辑”，仅打包需要的。</li><li>Composition API：组合API</li><li>Fragment, Teleport, Suspense：“碎片”，Teleport即Protal传送门，“悬念”</li><li>Better TypeScript support：更优秀的Ts支持</li><li>Custom Renderer API：暴露了自定义渲染API</li></ul></blockquote><h3 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/21/1719d6747e723d03?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Performance"></p><ul><li><ol><li>重写了虚拟Dom的实现（且保证了兼容性，脱离模版的渲染需求旺盛）。</li></ol></li><li><ol start="2"><li>编译模板的优化。</li></ol></li><li><ol start="3"><li>更高效的组件初始化。</li></ol></li><li><ol start="4"><li>update性能提高1.3~2倍。</li></ol></li><li><ol start="5"><li>SSR速度提高了2~3倍。</li></ol></li></ul><p>下面是各项性能对比</p><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719db04999e3890?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="性能对比"></p><h4 id="要点1：编译模板的优化"><a href="#要点1：编译模板的优化" class="headerlink" title="要点1：编译模板的优化"></a>要点1：编译模板的优化</h4><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e59cd0f2b668?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="编译模板的优化"></p><p>假设要编译以下代码</p><pre><code class="js">&lt;div&gt;  &lt;span/&gt;  &lt;span&gt;&#123;&#123; msg &#125;&#125;&lt;/span&gt;&lt;/div&gt;</code></pre><pre><code class="js">import &#123; createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock &#125; from &quot;vue&quot;export function render(_ctx, _cache) &#123;  return (_openBlock(), _createBlock(&quot;div&quot;, null, [    _createVNode(&quot;span&quot;, null, &quot;static&quot;),    _createVNode(&quot;span&quot;, null, _toDisplayString(_ctx.msg), 1 /* TEXT */)  ]))&#125;// Check the console for the AST</code></pre><p>注意看第二个<code>_createVNode</code>结尾的“1”：</p><p>Vue在运行时会生成number（大于0）值的<code>PatchFlag</code>，用作标记。</p><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e69419edbc4d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="标记"></p><p>仅带有<code>PatchFlag</code>标记的节点会被真正追踪，且无论层级嵌套多深，它的动态节点都直接与<code>Block</code>根节点绑定，无需再去遍历静态节点</p><p>再看以下例子：</p><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e6d7d3efe7f1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="例子2"></p><pre><code class="js">&lt;div&gt;  &lt;span&gt;static&lt;/span&gt;  &lt;span :id=&quot;hello&quot; class=&quot;bar&quot;&gt;&#123;&#123; msg &#125;&#125;   &lt;/span&gt;&lt;/div&gt;</code></pre><pre><code class="js">import &#123; createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock &#125; from &quot;vue&quot;export function render(_ctx, _cache) &#123;  return (_openBlock(), _createBlock(&quot;div&quot;, null, [    _createVNode(&quot;span&quot;, null, &quot;static&quot;),    _createVNode(&quot;span&quot;, &#123;      id: _ctx.hello,      class: &quot;bar&quot;    &#125;, _toDisplayString(_ctx.msg), 9 /* TEXT, PROPS */, [&quot;id&quot;])  ]))&#125;</code></pre><a id="more"></a><p><code>PatchFlag</code> 变成了<code>9 /* TEXT, PROPS */, [&quot;id&quot;]</code><br>它会告知我们不光有TEXT变化，还有PROPS变化（id）<br>这样既跳出了<code>virtual dom</code>性能的瓶颈，又保留了可以手写<code>render</code>的灵活性。<br>等于是：既有react的灵活性，又有基于模板的性能保证。</p><h4 id="要点2-事件监听缓存：cacheHandlers"><a href="#要点2-事件监听缓存：cacheHandlers" class="headerlink" title="要点2: 事件监听缓存：cacheHandlers"></a>要点2: 事件监听缓存：cacheHandlers</h4><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e775146d5a84?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="cacheHandlers"></p><p>假设我们要绑定一个事件：</p><pre><code class="html">&lt;div&gt;  &lt;span @click=&quot;onClick&quot;&gt;    &#123;&#123;msg&#125;&#125;  &lt;/span&gt;&lt;/div&gt;</code></pre><p>关闭<code>cacheHandlers</code>后：</p><pre><code class="js">import &#123; toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock &#125; from &quot;vue&quot;export function render(_ctx, _cache) &#123;  return (_openBlock(), _createBlock(&quot;div&quot;, null, [    _createVNode(&quot;span&quot;, &#123; onClick: _ctx.onClick &#125;, _toDisplayString(_ctx.msg), 9 /* TEXT, PROPS */, [&quot;onClick&quot;])  ]))&#125;</code></pre><p><code>onClick</code>会被视为<code>PROPS</code>动态绑定，后续替换点击事件时需要进行更新。</p><p>开启<code>cacheHandlers</code>后：</p><pre><code class="js">import &#123; toDisplayString as _toDisplayString, createVNode as _createVNode, openBlock as _openBlock, createBlock as _createBlock &#125; from &quot;vue&quot;export function render(_ctx, _cache) &#123;  return (_openBlock(), _createBlock(&quot;div&quot;, null, [    _createVNode(&quot;span&quot;, &#123;      onClick: _cache[1] || (_cache[1] = $event =&gt; (_ctx.onClick($event)))    &#125;, _toDisplayString(_ctx.msg), 1 /* TEXT */)  ]))&#125;</code></pre><p><code>cache[1]</code>，会自动生成并缓存一个内联函数，“神奇”的变为一个静态节点。 Ps：相当于<code>React中useCallback</code>自动化。</p><p>并且支持手写内联函数：</p><pre><code class="html">&lt;div&gt;  &lt;span @click=&quot;()=&gt;foo()&quot;&gt;    &#123;&#123;msg&#125;&#125;  &lt;/span&gt;&lt;/div&gt;</code></pre><p>补充：<code>PatchFlags</code>枚举定义</p><p>而通过查询Ts枚举定义，我们可以看到分别定义了以下的追踪标记：</p><pre><code class="js">export const enum PatchFlags &#123;  TEXT = 1,// 表示具有动态textContent的元素  CLASS = 1 &lt;&lt; 1,  // 表示有动态Class的元素  STYLE = 1 &lt;&lt; 2,  // 表示动态样式（静态如style=&quot;color: red&quot;，也会提升至动态）  PROPS = 1 &lt;&lt; 3,  // 表示具有非类/样式动态道具的元素。  FULL_PROPS = 1 &lt;&lt; 4,  // 表示带有动态键的道具的元素，与上面三种相斥  HYDRATE_EVENTS = 1 &lt;&lt; 5,  // 表示带有事件监听器的元素  STABLE_FRAGMENT = 1 &lt;&lt; 6,   // 表示其子顺序不变的片段（没懂）。   KEYED_FRAGMENT = 1 &lt;&lt; 7, // 表示带有键控或部分键控子元素的片段。  UNKEYED_FRAGMENT = 1 &lt;&lt; 8, // 表示带有无key绑定的片段  NEED_PATCH = 1 &lt;&lt; 9,   // 表示只需要非属性补丁的元素，例如ref或hooks  DYNAMIC_SLOTS = 1 &lt;&lt; 10,  // 表示具有动态插槽的元素  // 特殊 FLAGS -------------------------------------------------------------  HOISTED = -1,  // 特殊标志是负整数表示永远不会用作diff,只需检查 patchFlag === FLAG.  BAIL = -2 // 一个特殊的标志，指代差异算法（没懂）&#125;</code></pre><p>感兴趣的可以看源码：<code>packages/shared/src/patchFlags.ts</code></p><h3 id="Tree-shaking-support"><a href="#Tree-shaking-support" class="headerlink" title="Tree shaking support"></a>Tree shaking support</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719db10e9e06382?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Tree shaking support"></p><ul><li>可以将无用模块“剪辑”，仅打包需要的（比如<code>v-model</code>,<code>&lt;transition&gt;</code>，用不到就不会打包）。</li><li>一个简单“HelloWorld”大小仅为：13.5kb11.75kb，仅Composition API。</li><li>包含运行时完整功能：22.5kb,拥有更多的功能，却比Vue 2更迷你。</li></ul><p>很多时候，我们并不需要 vue提供的所有功能，在 vue 2 并没有方式排除掉，但是 3.0 都可能做成了按需引入。</p><h3 id="Composition-API"><a href="#Composition-API" class="headerlink" title="Composition API"></a>Composition API</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dc2469bd375c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Composition API"></p><p>与React Hooks 类似的东西，实现方式不同。</p><ul><li>可与现有的 Options API一起使用</li><li>灵活的逻辑组合与复用</li><li>vue 3的响应式模块可以和其他框架搭配使用</li></ul><p>混入<code>(mixin)</code> 将不再作为推荐使用， <code>Composition API</code>可以实现更灵活且无副作用的复用代码。</p><p>感兴趣的可以查看：<a href="https://composition-api.vuejs.org/#summary">composition-api.vuejs.org/#summary</a></p><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dc20717835c1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="omposition-api.vuejs.org"></p><p>Composition API包含了六个主要API</p><p><a href="https://composition-api.vuejs.org/api.html#setup">composition-api.vuejs.org/api.html#setup</a></p><p>Ps：其它的均为常见的工具函数，可先忽略不看。</p><h3 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dcd5c5f2b631?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Fragment"></p><p>Fragment翻译为：“碎片”</p><ul><li>不再限于模板中的单个根节点</li><li>render 函数也可以返回数组了，类似实现了 React.Fragments 的功能 。</li><li>‘Just works’</li></ul><h4 id=""><a href="#" class="headerlink" title=""></a><Teleport></h4><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dd2d18fe0d55?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Teleport"></p><ul><li>以前称为<code>&lt;Portal&gt;</code>，译作传送门。</li><li>更多细节将由@<code>Linusborg</code> 分享</li></ul><p><code>&lt;Teleport&gt;</code>原先是对标 <code>React Portal</code>（增加多个新功能，更强）</p><p>但因为Chrome有个提案，会增加一个名为<code>Portal</code>的原生<code>element</code>，为避免命名冲突，改为<code>Teleport</code></p><h4 id="-1"><a href="#-1" class="headerlink" title=""></a><Suspense></h4><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719ddbaf6d0f226?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Suspense"></p><p>Suspense翻译为：“悬念”</p><ul><li>可在嵌套层级中等待嵌套的异步依赖项</li><li>支持async setup()</li><li>支持异步组件</li></ul><p>虽然React 16引入了<code>Suspense</code>，但直至现在都不太能用。如何将其与异步数据结合，还没完整设计出来。<br>Vue 3 的<code>&lt;Suspense&gt;</code>更加轻量：<br><strong>仅5%应用能感知运行时的调度差异，综合考虑下，Vue3 的<code>&lt;Suspense&gt;</code> 没和React一样做运行调度处理</strong></p><h3 id="更好的TypeScript支持"><a href="#更好的TypeScript支持" class="headerlink" title="更好的TypeScript支持"></a>更好的TypeScript支持</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719de6ad581aa38?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="TypeScript"></p><ul><li>Vue 3是用TypeScript编写的库，可以享受到自动的类型定义提示</li><li>JavaScript和TypeScript中的API是相同的。事实上，代码也基本相同</li><li>支持TSX,class组件还会继续支持，但是需要引入<code>vue-class-component@next</code>，该模块目前还处在 alpha 阶段。</li></ul><p>还有<code>Vue 3 + TypeScript</code> 插件正在开发，有类型检查，自动补全等功能。目前进展可喜。</p><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719deb6563506b7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Vue 3 + TypeScript"></p><h3 id="Custom-Renderer-API：自定义渲染器API"><a href="#Custom-Renderer-API：自定义渲染器API" class="headerlink" title="Custom Renderer API：自定义渲染器API"></a>Custom Renderer API：自定义渲染器API</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719df0e878dbeb3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Custom Renderer API"></p><ul><li>正在进行NativeScript Vue集成</li><li>用户可以尝试WebGL自定义渲染器，与普通Vue应用程序一起使用（Vugel）。</li></ul><p>意味着以后可以通过 <code>vue</code>， <code>Dom</code> 编程的方式来进行 <code>webgl</code> 编程 。感兴趣可以看这里：<a href="https://vugel.planning.nl/#application">Getting started vugel</a></p><h2 id="剩余工作"><a href="#剩余工作" class="headerlink" title="剩余工作"></a>剩余工作</h2><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719df667b34919f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="剩余工作"></p><h3 id="Docs-amp-Migration-Guides"><a href="#Docs-amp-Migration-Guides" class="headerlink" title="Docs &amp; Migration Guides"></a>Docs &amp; Migration Guides</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719df8c7c95f9b9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Docs &amp; Migration Guides"></p><ul><li>新的文档编写交由<code>@NataliaTepluhina, @sdras, @bencodezen &amp; @phanan</code> 负责</li><li><code>@sdras</code> 正在做自动升级迁移工具</li><li><code>@sodatea</code> 已经开始研究<code>CodeMods</code></li></ul><h3 id="Router"><a href="#Router" class="headerlink" title="Router"></a>Router</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dfcab0e73db6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Router"></p><ul><li>下一代 Router：<code>vue-router@next</code>已在alpha阶段，感谢<code>@posva</code></li></ul><p>有部分的<code>API</code>变动，可到<code>RFC</code>上看。</p><h3 id="Vuex"><a href="#Vuex" class="headerlink" title="Vuex"></a>Vuex</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719dfed3afd961b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Vuex"></p><ul><li>下一代Vuex：，<code>vuex@next</code>（与Vue 3 compat相同的API），已在alpha阶段，感谢<code>@KiaKing</code>。</li><li>团队正在为下一次迭代试验Vuex API的简化</li></ul><p>目前以兼容Vue 3为主，基本上没有API变动，莫慌。</p><h3 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e043616c018f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="CLI"></p><ul><li>CLI插件：<code>vue-cli-plugin-vue-next</code> by <code>@sodatea</code></li><li>（wip）CodeMods支持升级Vue 2应用</li></ul><h3 id="新工具：vite（法语-“快”）"><a href="#新工具：vite（法语-“快”）" class="headerlink" title="新工具：vite（法语 “快”）"></a>新工具：vite（法语 “快”）</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e0c133c3367f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="vite"></p><p>地址：<a href="https://github.com/vuejs/vite">github.com/vuejs/vite</a></p><p>一个简易的http服务器，无需<code>webpack</code>编译打包，根据请求的Vue文件，直接发回渲染，且支持热更新（非常快）</p><h3 id="vue-test-utils"><a href="#vue-test-utils" class="headerlink" title="vue-test-utils"></a>vue-test-utils</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e0d602d57dc6?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="vue-test-utils"></p><h3 id="DevTools"><a href="#DevTools" class="headerlink" title="DevTools"></a>DevTools</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e0d0e479ec8b?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="devtools"></p><h3 id="IDE-Support-Vetur"><a href="#IDE-Support-Vetur" class="headerlink" title="IDE Support (Vetur)"></a>IDE Support (Vetur)</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e12c5bfa38e3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="IDE"></p><h3 id="Nuxt"><a href="#Nuxt" class="headerlink" title="Nuxt"></a>Nuxt</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e15306126103?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Nuxt"></p><h3 id="Vue-2-x还有2-7版本"><a href="#Vue-2-x还有2-7版本" class="headerlink" title="Vue 2.x还有2.7版本"></a>Vue 2.x还有2.7版本</h3><p><img src="https://user-gold-cdn.xitu.io/2020/4/22/1719e16b0eaabdd2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Vue 2.x还有2.7版本"></p><ul><li>将有最后一个小版本（2.7）</li><li>从Vue 3向后移植兼容的改进(不损坏兼容性前提下)</li><li>加上在Vue 3中删除的功能的弃用警告</li><li>LTS1 18个月。</li></ul><p><strong>最后建议：Vue 3虽好，如果你的项目很稳定，且对新功能无过多的要求或者迁移成本过高，则不建议升级。</strong></p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://juejin.im/post/5e9f6b3251882573a855cd52?utm_source=gold_browser_extension#heading-15&quot;&gt;原文地址(https://juejin.im/post/5e9f6b3251882573a855cd52?utm_source=gold_browser_extension#heading-15)&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;4月21日晚，Vue作者尤雨溪在哔哩哔哩直播分享了Vue.js 3.0 Beta最新进展。 以下是直播内容整理&lt;/p&gt;
-&lt;h2 id=&quot;全新文档RFCs&quot;&gt;&lt;a href=&quot;#全新文档RFCs&quot; class=&quot;headerlink&quot; title=&quot;全新文档RFCs&quot;&gt;&lt;/a&gt;全新文档RFCs&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719da838e76e8c7?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;全新文档RFCs&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Vue.js 3.0 Beta&lt;/code&gt;发布后的工作重点是保证稳定性和推进各类库集成&lt;/p&gt;
-&lt;p&gt;所有的进度和文档都将在全新&lt;code&gt;RFCs&lt;/code&gt;文档可以看到。&lt;/p&gt;
-&lt;h2 id=&quot;六大亮点&quot;&gt;&lt;a href=&quot;#六大亮点&quot; class=&quot;headerlink&quot; title=&quot;六大亮点&quot;&gt;&lt;/a&gt;六大亮点&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719daca80f3b7c2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;六大亮点&quot;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;Performance：性能更比Vue 2.0强。&lt;/li&gt;
-&lt;li&gt;Tree shaking support：可以将无用模块“剪辑”，仅打包需要的。&lt;/li&gt;
-&lt;li&gt;Composition API：组合API&lt;/li&gt;
-&lt;li&gt;Fragment, Teleport, Suspense：“碎片”，Teleport即Protal传送门，“悬念”&lt;/li&gt;
-&lt;li&gt;Better TypeScript support：更优秀的Ts支持&lt;/li&gt;
-&lt;li&gt;Custom Renderer API：暴露了自定义渲染API&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;Performance&quot;&gt;&lt;a href=&quot;#Performance&quot; class=&quot;headerlink&quot; title=&quot;Performance&quot;&gt;&lt;/a&gt;Performance&lt;/h3&gt;&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/21/1719d6747e723d03?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;Performance&quot;&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;ol&gt;
-&lt;li&gt;重写了虚拟Dom的实现（且保证了兼容性，脱离模版的渲染需求旺盛）。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol start=&quot;2&quot;&gt;
-&lt;li&gt;编译模板的优化。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol start=&quot;3&quot;&gt;
-&lt;li&gt;更高效的组件初始化。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol start=&quot;4&quot;&gt;
-&lt;li&gt;update性能提高1.3~2倍。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;ol start=&quot;5&quot;&gt;
-&lt;li&gt;SSR速度提高了2~3倍。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下面是各项性能对比&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719db04999e3890?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;性能对比&quot;&gt;&lt;/p&gt;
-&lt;h4 id=&quot;要点1：编译模板的优化&quot;&gt;&lt;a href=&quot;#要点1：编译模板的优化&quot; class=&quot;headerlink&quot; title=&quot;要点1：编译模板的优化&quot;&gt;&lt;/a&gt;要点1：编译模板的优化&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719e59cd0f2b668?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;编译模板的优化&quot;&gt;&lt;/p&gt;
-&lt;p&gt;假设要编译以下代码&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;&amp;lt;div&amp;gt;
-  &amp;lt;span/&amp;gt;
-  &amp;lt;span&amp;gt;&amp;#123;&amp;#123; msg &amp;#125;&amp;#125;&amp;lt;/span&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;import &amp;#123; createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock &amp;#125; from &amp;quot;vue&amp;quot;
-
-export function render(_ctx, _cache) &amp;#123;
-  return (_openBlock(), _createBlock(&amp;quot;div&amp;quot;, null, [
-    _createVNode(&amp;quot;span&amp;quot;, null, &amp;quot;static&amp;quot;),
-    _createVNode(&amp;quot;span&amp;quot;, null, _toDisplayString(_ctx.msg), 1 /* TEXT */)
-  ]))
-&amp;#125;
-
-// Check the console for the AST&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;注意看第二个&lt;code&gt;_createVNode&lt;/code&gt;结尾的“1”：&lt;/p&gt;
-&lt;p&gt;Vue在运行时会生成number（大于0）值的&lt;code&gt;PatchFlag&lt;/code&gt;，用作标记。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719e69419edbc4d?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;标记&quot;&gt;&lt;/p&gt;
-&lt;p&gt;仅带有&lt;code&gt;PatchFlag&lt;/code&gt;标记的节点会被真正追踪，且无论层级嵌套多深，它的动态节点都直接与&lt;code&gt;Block&lt;/code&gt;根节点绑定，无需再去遍历静态节点&lt;/p&gt;
-&lt;p&gt;再看以下例子：&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://user-gold-cdn.xitu.io/2020/4/22/1719e6d7d3efe7f1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1&quot; alt=&quot;例子2&quot;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;&amp;lt;div&amp;gt;
-  &amp;lt;span&amp;gt;static&amp;lt;/span&amp;gt;
-  &amp;lt;span :id=&amp;quot;hello&amp;quot; class=&amp;quot;bar&amp;quot;&amp;gt;&amp;#123;&amp;#123; msg &amp;#125;&amp;#125;   &amp;lt;/span&amp;gt;
-&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;import &amp;#123; createVNode as _createVNode, toDisplayString as _toDisplayString, openBlock as _openBlock, createBlock as _createBlock &amp;#125; from &amp;quot;vue&amp;quot;
-
-export function render(_ctx, _cache) &amp;#123;
-  return (_openBlock(), _createBlock(&amp;quot;div&amp;quot;, null, [
-    _createVNode(&amp;quot;span&amp;quot;, null, &amp;quot;static&amp;quot;),
-    _createVNode(&amp;quot;span&amp;quot;, &amp;#123;
-      id: _ctx.hello,
-      class: &amp;quot;bar&amp;quot;
-    &amp;#125;, _toDisplayString(_ctx.msg), 9 /* TEXT, PROPS */, [&amp;quot;id&amp;quot;])
-  ]))
-&amp;#125;&lt;/code&gt;&lt;/pre&gt;</summary>
-    
-    
-    
-    <category term="Vue" scheme="https://shinichikudo-fe.github.io/categories/Vue/"/>
-    
-    
-    <category term="Vue3.x" scheme="https://shinichikudo-fe.github.io/tags/Vue3-x/"/>
     
   </entry>
   
