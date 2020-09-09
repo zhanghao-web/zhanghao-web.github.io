@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2020-09-09T09:07:58.481Z</updated>
+  <updated>2020-09-09T09:39:42.559Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://shinichikudo-fe.github.io/2020/09/09/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B/"/>
     <id>https://shinichikudo-fe.github.io/2020/09/09/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%8E%9F%E5%A7%8B%E7%B1%BB%E5%9E%8B/</id>
     <published>2020-09-09T08:16:55.000Z</published>
-    <updated>2020-09-09T09:07:58.481Z</updated>
+    <updated>2020-09-09T09:39:42.559Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>根据最新的ECMAScript的标准定义； </p>]]></content>
     
@@ -30,6 +30,31 @@
       
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;根据最新的ECMAScript的标准定义； &lt;/p&gt;
 </summary>
+      
+    
+    
+    
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习Javascript应懂得33个概念之调用堆栈</title>
+    <link href="https://shinichikudo-fe.github.io/2020/09/08/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88/"/>
+    <id>https://shinichikudo-fe.github.io/2020/09/08/Js/33/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%B0%83%E7%94%A8%E5%A0%86%E6%A0%88/</id>
+    <published>2020-09-08T05:53:13.000Z</published>
+    <updated>2020-09-09T09:39:40.536Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.oschina.net/translate/how-does-javascript-actually-work-part-1">原文学习地址</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>堆栈的概念对于我来说是熟悉又陌生的感觉，之前看过很多相关的文章及写过一些demo可后面用不到后，就慢慢淡忘了，今天要好好理解并记录下</p><h2 id="JavaScript-引擎"><a href="#JavaScript-引擎" class="headerlink" title="JavaScript 引擎"></a>JavaScript 引擎</h2><p>Google V8引擎是一个比较流行的javascript引擎示例，该引擎包括两个主要组件：</p><ul><li><ol><li>Memory Heap内存堆 — 这是内存分配的地方</li></ol></li><li><ol start="2"><li>call stack调用堆栈 — 这是你代码执行时栈帧存放的位置</li></ol></li></ul><h2 id="RunTime-运行时"><a href="#RunTime-运行时" class="headerlink" title="RunTime 运行时"></a>RunTime 运行时</h2><p><img src="https://static.oschina.net/uploads/space/2017/1213/104047_yNc9_2896879.png" alt="runtime"></p><h2 id="Call-Stack-调用堆栈"><a href="#Call-Stack-调用堆栈" class="headerlink" title="Call Stack 调用堆栈"></a>Call Stack 调用堆栈</h2><p>JavaScript 是一种<strong>单线程编程语言</strong>，这意味着它只有一个 <code>Call Stack</code> 。因此，它一次仅能做一件事。</p><p><code>Call Stack</code> 是一个数据结构，它基本上记录了我们在程序中的所处的位置。如果我们进入一个函数，我们把它放在堆栈的顶部。如果我们从一个函数中返回，我们弹出堆栈的顶部。这是所有的堆栈可以做的东西。</p><p>我们看一个示例：</p><pre><code class="js">function multiply(x,y)&#123;  return x * y&#125;function printSqure(x)&#123;  var s = multiply(x,x)  console.log(s)&#125;printSqure(5)</code></pre><p>当引擎开始执行这个代码时，Call Stack 将会变成空的。之后，执行的步骤如下：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104147_KJwy_2896879.png" alt="call stack"></p><p>Call Stack 的每个入口被称为 <strong>Stack Frame（栈帧）</strong>。</p><p>这正是在抛出异常时如何构建 <code>stack trace</code> 的方法 - 这基本上是在异常发生时的 <code>Call Stack</code> 的状态。看看下面的代码：</p><pre><code class="js">function foo()&#123;  throw new Error(&#39;SessionStack will help you resolve crashes :)&#39;);&#125;function bar()&#123;  foo()&#125;function start() &#123;  bar();&#125;start();</code></pre><p>如果这是在 Chrome 中执行的（假设这个代码在一个名为 foo.js 的文件中），那么会产生下面的 <code>stack trace</code>:</p><p><code>Blowing the stack</code>—当达到最大调用堆栈大小时，会发生这种情况。这可能会很容易发生，特别是如果你使用递归，而不是非常广泛地测试你的代码。看看这个示例代码：</p><pre><code class="js">function foo() &#123;    foo();&#125;foo();</code></pre><p>当引擎开始执行这个代码时，它首先调用函数“foo”。然而，这个函数是递归的，并且开始调用自己而没有任何终止条件。所以在执行的每个步骤中，同一个函数会一次又一次地添加到调用堆栈中。它看起来像这样：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104326_4B9u_2896879.png" alt="call stack 递归"></p><p>然而，在某些情况下，调用堆栈中函数调用的数量超出了调用堆栈的实际大小，浏览器通过抛出一个错误（如下所示）来决定采取行动：</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104350_JCtB_2896879.png" alt="max stack"></p><p>在单线程上运行代码可能非常容易，因为你不必处理多线程环境中出现的复杂场景，例如<strong>死锁</strong>。</p><p>但是在单线程上运行也是非常有限的。由于<code>JavaScript</code>只有一个调用堆栈，所以当事情很慢时会发生什么？</p><h2 id="并发与事件循环"><a href="#并发与事件循环" class="headerlink" title="并发与事件循环"></a>并发与事件循环</h2><p>如果在调用堆栈中执行的函数调用需要花费大量时间才能进行处理，会发生什么？ 例如，假设你想在浏览器中使用 <code>JavaScript</code> 进行一些复杂的图像转换。</p><p>你可能会问 - 为什么这会是一个问题？问题是，虽然调用堆栈有要执行的函数，浏览器实际上不能做任何事情 - 它被阻塞了。这意味着浏览器无法渲染，它不能运行任何其他代码，它就是被卡住了。如果你想在你的应用程序中使用流畅的 UI ，这就会产生问题。</p><p>而且这并不是唯一的问题。一旦你的浏览器开始在 Call Stack 中处理过多的任务，它可能会停止响应相当长的时间。大多数浏览器会通过触发错误来采取行动，询问你是否要终止网页。</p><p><img src="https://static.oschina.net/uploads/space/2017/1213/104412_G1jc_2896879.png" alt="阻塞"></p><p>所以，这并不是最好的用户体验，对吗？</p><p>那么，我们如何执行大量代码而不阻塞 UI 使得浏览器无法响应？ <strong>解决方案就是异步回调</strong>。</p><p>这将在“ JavaScript 工作原理”教程的第2部分中更详细地解释：<a href="https://www.oschina.net/translate/how-does-javascript-actually-work-part-2">“V8 引擎内部+关于如何编写优化代码的5个技巧”</a>。</p><p>同时，如果你在 JavaScript 应用程序中难以复现和理解问题，请查看 <code>SessionStack</code> 。 <code>SessionStack</code> 会记录你的 Web 应用中的所有东西：所有的 DOM 更改、用户交互、JavaScript 异常、堆栈跟踪、网络请求失败、调试消息等。</p><p>通过 SessionStack ，你可以以视频的方式重现问题，并查看发生在用户身上的所有事情。</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然JavaScript是单线程，但Event Loop是javascript的执行机制，可以很好的处理事件，它也分为同步与异步，当为同步时JavaScript的顺序必须一个完成之后才会完成下一个，如果前面出现无限循环后就会出现爆栈，导致后面的无法执行；而异步时又分为宏观任务（script，setTimeout，setInterval）及微观任务（Promise，process.nextTick）进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.oschina.net/translate/how-does-javascript-actually-work-part-1&quot;&gt;原文学习地址&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;head</summary>
       
     
     
@@ -550,31 +575,6 @@
     
     
     <category term="React/Vue" scheme="https://shinichikudo-fe.github.io/tags/React-Vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>强大的CSS:文字下波浪线动画效果</title>
-    <link href="https://shinichikudo-fe.github.io/2020/04/23/CSS3/%E5%BC%BA%E5%A4%A7%E7%9A%84CSS-%E6%96%87%E5%AD%97%E4%B8%8B%E6%B3%A2%E6%B5%AA%E7%BA%BF%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/"/>
-    <id>https://shinichikudo-fe.github.io/2020/04/23/CSS3/%E5%BC%BA%E5%A4%A7%E7%9A%84CSS-%E6%96%87%E5%AD%97%E4%B8%8B%E6%B3%A2%E6%B5%AA%E7%BA%BF%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/</id>
-    <published>2020-04-23T05:01:46.000Z</published>
-    <updated>2020-09-04T02:18:38.380Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.imooc.com/article/286988">原文地址</a></p><p><img src="http://upload-images.jianshu.io/upload_images/13133049-963e2b89fb9da2ad.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="wave"></p><p>类似下面这种效果<br><img src="http://upload-images.jianshu.io/upload_images/13133049-03fa0c4c990af8f1.gif?imageMogr2/auto-orient/strip" alt="text wave"></p><p>有以下几种方式可以实现这种效果</p><h2 id="径向渐变纯CSS的方式"><a href="#径向渐变纯CSS的方式" class="headerlink" title="径向渐变纯CSS的方式"></a>径向渐变纯CSS的方式</h2><p>就是使用径向渐变绘制我们的波浪线效果，一个波浪线循环段是有一个朝上的半个圆弧和一个朝下的半个圆弧组合而成的。</p><p>所以，我们只要使用径向渐变绘制圆弧，再通过<code>background-position</code>控制两个圆弧的位置，让其前后拼接在一起就可以实现波浪线效果。</p><p>相关CSS代码</p><pre><code class="css">.flow-wave &#123;    background: radial-gradient(circle at 10px -7px, transparent 8px, currentColor 8px, currentColor 9px, transparent 9px) repeat-x,        radial-gradient(circle at 10px 27px, transparent 8px, currentColor 8px, currentColor 9px, transparent 9px) repeat-x;    background-size: 20px 20px;    background-position: -10px calc(100% + 16px), 0 calc(100% - 4px);&#125;</code></pre><p>实时效果如下：<br>有了静态的波浪线效果，剩下的就像这个波浪线动起来，用<code>CSS3 animation</code>动画控制<code>background-position</code>位置即可。</p><pre><code class="css">.flow-wave &#123;    animation: waveFlow 1s infinite linear;&#125;@keyframes waveFlow &#123;    from &#123; background-position-x: -10px, 0; &#125;    to &#123; background-position-x: -30px, -20px; &#125;&#125;</code></pre><p>于是波浪线动画效果就实现了。</p><p>这种方法实现的优点是颜色控制非常方便，例如，我们修改文字颜色为原谅绿，弯弯水波的颜色也变成了原谅绿：</p><p>此方法实现的不足就是：理解成本有点高，如何使用CSS radial-gradient模拟波浪线效果是需要相当的CSS功力积累的，上手不太容易，以后要修改个尺寸什么的也不太好维护。同时，在普通屏幕密度屏幕下的Chrome浏览器上，线条并不平滑，吹毛求疵的设计师不一定会接受。</p><p>此时，可以试试下面这种更利于理解的方法。</p><h2 id="使用SVG波形矢量图作为背景"><a href="#使用SVG波形矢量图作为背景" class="headerlink" title="使用SVG波形矢量图作为背景"></a>使用SVG波形矢量图作为背景</h2><p>就是我们直接使用一个使用SVG波形矢量图作为背景，不用自己去手动CSS绘制，代码量差不多，还更容易理解。CSS代码示意：</p><pre><code class="css">svg-wave &#123;    background: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 20 4&#39;%3E%3Cpath fill=&#39;none&#39; stroke=&#39;%23333&#39; d=&#39;M0 3.5c5 0 5-3 10-3s5 3 10 3 5-3 10-3 5 3 10 3&#39;/%3E%3C/svg%3E&quot;) repeat-x 0 100%;     background-size: 20px auto;&#125;</code></pre><p>实时效果如下：</p><p>有了静态的波浪线效果，剩下的就像这个波浪线动起来，用<code>CSS3 animation</code>动画控制<code>background-position</code>位置即可。</p><pre><code class="css">.svg-wave &#123;    animation: waveMove 1s infinite linear;&#125;@keyframes waveMove &#123;    from &#123; background-position: 0 100%; &#125;    to   &#123; background-position: -20px 100%; &#125;&#125;</code></pre><p>优点是线条边缘平滑，效果细腻，易理解，易上手，易维护。</p><p>缺点也很明显，就是波浪线的颜色无法实时跟着文字的颜色发生变化，适用于文字颜色不会多变的场景。</p><p>如果我们想要改变波浪线的颜色也很简单，修改<code>background</code>代码中的<code>stroke=&#39;%23333&#39;</code>这部分，’%23’就是就是#，因此，<code>stroke=&#39;%23333&#39;</code>其实就是<code>stroke=&#39;#333&#39;</code>的意思。例如，我们需要改成红色略带橙色，可以<code>stroke=&#39;%23F30&#39;</code>，也可以写完整<code>stroke=&#39;%23FF3300&#39;</code>。</p><h2 id="text-decoration"><a href="#text-decoration" class="headerlink" title="text-decoration"></a>text-decoration</h2><p><code>text-decoration</code>属性早已支持波浪线下划线：</p><pre><code class="css">text-decoration-style: wavy;</code></pre><p>效果如下截图：</p><p><img src="http://upload-images.jianshu.io/upload_images/13133049-0b1b797b8f9d40aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="text-decoration-style"></p><p>可以看到，线好粗好不协调，而且字符和装饰线发生重叠的时候，装饰线直接消失了，结果波浪线变成了一截一截的，还需要使用text-decoration-skip进行额外控制。因此，实际开发，不建议在实际项目中使用。</p><p>而且你无法预知每个波浪线重复片段的宽度，想要无限运动理论上就不太可行。</p><p>因此，文字或者图形的波浪线动画效果不能使用text-decoration的波浪线。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://www.imooc.com/article/286988&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://upload-images.jianshu.io/upload_images/13133049-963e2b89f</summary>
-      
-    
-    
-    
-    <category term="CSS" scheme="https://shinichikudo-fe.github.io/categories/CSS/"/>
-    
-    
-    <category term="CSS" scheme="https://shinichikudo-fe.github.io/tags/CSS/"/>
     
   </entry>
   
