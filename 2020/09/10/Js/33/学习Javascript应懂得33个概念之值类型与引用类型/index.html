@@ -229,7 +229,7 @@ alert(person.name); //&quot;Nicholas&quot; </code></pre>
 <p>这说明即使在函数内部修改了参数的值，但原始的引用仍然保持未变。实际上，当在函数内部重写 obj 时，这个变量引用的就是一个局部对象了。而这个局部对象会在函数执行完毕后立即被销毁。</p>
 <h2 id="变量计算–强制类型转换"><a href="#变量计算–强制类型转换" class="headerlink" title="变量计算–强制类型转换"></a>变量计算–强制类型转换</h2><pre><code class="js">// 字符串拼接
 var a = 100 + 10 //100
-var b = 100 + &#39;10&#39; //10010
+var b = 100 + &#39;10&#39; // &#39;10010&#39;
 // == 运算符
 100 == &#39;100&#39; //true
 0 == &#39;&#39; //true
@@ -296,7 +296,7 @@ console.log(!!a); // true</code></pre>
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">175 <p>Articles</p></a></li>
+                    <li><a href="/">176 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>
