@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之==与===，typeof与intanceof - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,前言通过js中判断类型是否相等及检测数据类型的方法，来更深入的了解js的奥秘
+==与===
+严格相等比较 (也被称作”strict equality”, “identity”, “triple eq,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之==与===，typeof与intanceof</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                September 14, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/09/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B-%E4%B8%8E-%EF%BC%8Ctypeof%E4%B8%8Eintanceof/" title="学习Javascript应懂得33个概念之&#x3D;&#x3D;与&#x3D;&#x3D;&#x3D;，typeof与intanceof" class="">学习Javascript应懂得33个概念之&#x3D;&#x3D;与&#x3D;&#x3D;&#x3D;，typeof与intanceof</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    5.9k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    5 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>通过js中判断类型是否相等及检测数据类型的方法，来更深入的了解js的奥秘</p>
+<h2 id="与"><a href="#与" class="headerlink" title="==与==="></a>==与===</h2><ul>
+<li>严格相等比较 (也被称作”strict equality”, “identity”, “triple equals”)，使用 <code>===</code> ,</li>
+<li>抽象相等比较 (“loose equality”，”double equals”) ，使用 <code>==</code></li>
+<li><code>Object.is</code> （ECMAScript 2015/ ES6 新特性）</li>
+</ul>
+<p>简而言之，在比较两件事情时，双等号将执行<strong>类型转换</strong>; 三等号将进行相同的比较，而<strong>不进行类型转换</strong> (如果类型不同, 只是总会返回 false );  而Object.is的行为方式与三等号相同，但是对于<code>NaN和-0和+0</code>进行特殊处理，所以最后两个不相同，而Object.is（NaN，NaN）将为 true。</p>
+<h3 id=""><a href="#" class="headerlink" title="==="></a>===</h3><p>全等操作符比较两个值是否相等，两个被比较的值在比较前都不进行隐式转换。如果两个被比较的值具有不同的类型，这两个值是不全等的。否则，如果两个被比较的值类型相同，值也相同，并且都不是 number 类型时，两个值全等。最后，如果两个值都是 number 类型，当两个都不是 NaN，并且数值相同，或是两个值分别为 +0 和 -0 时，两个值被认为是全等的。</p>
+<pre><code class="js">var num = 0;
+var obj = new String(&quot;0&quot;);
+var str = &quot;0&quot;;
+var b = false;
+
+console.log(num === num); // true
+console.log(obj === obj); // true
+console.log(str === str); // true
+
+console.log(num === obj); // false
+console.log(num === str); // false
+console.log(obj === str); // false
+console.log(null === undefined); // false
+console.log(obj === null); // false
+console.log(obj === undefined); // false</code></pre>
+<h2 id="-1"><a href="#-1" class="headerlink" title="=="></a>==</h2><p><code>相等操作符</code>比较两个值是否相等，在比较前将两个被比较的值转换为相同类型。在转换后（<strong>等式的一边或两边都可能被转换</strong>），最终的比较方式等同于全等操作符 === 的比较方式。 相等操作符满足交换律。</p>
+<p>相等操作符对于不同类型的值，进行的比较如下图所示：</p>
+<p><img src="https://github.com/ShinichiKudo-FE/PictureBed/blob/master/blogImg/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20200914155706.png" alt="非严格相等"></p>
+<pre><code class="js">var num = 0;
+var obj = new String(&quot;0&quot;);
+var str = &quot;0&quot;;
+var b = false;
+
+console.log(num == num); // true
+console.log(obj == obj); // true
+console.log(str == str); // true
+
+console.log(num == obj); // true
+console.log(num == str); // true
+console.log(obj == str); // true
+console.log(null == undefined); // true
+
+// both false, except in rare cases
+console.log(obj == null);
+console.log(obj == undefined)</code></pre>
+<p><img src="" alt="判等"></p>
+<h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p><strong>typeof 实现原理</strong></p>
+<p><code>typeof</code> 一般被用于判断一个变量的类型，我们可以利用 <code>typeof</code> 来判断<code>number,  string,  object,  boolean,  function, undefined,  symbol</code> 这七种类型，这种判断能帮助我们搞定一些问题，比如在判断不是 <code>object</code> 类型的数据的时候，<code>typeof</code>能比较清楚的告诉我们具体是哪一类的类型。但是，很遗憾的一点是，typeof 在判断一个 <code>object</code>的数据的时候只能告诉我们这个数据是 <code>object</code>, 而不能细致的具体到是哪一种 <code>object</code>, 比如</p>
+<pre><code class="js">let s = new String(&#39;abc&#39;);
+typeof s === &#39;object&#39;// true
+s instanceof String // true</code></pre>
+<p>要想判断一个数据具体是哪一种 <code>object</code> 的时候，我们需要利用 <strong><code>instanceof</code></strong> 这个操作符来判断，这个我们后面会说到。</p>
+<p>其实，js 在底层存储变量的时候，会在变量的机器码的低位<code>1-3</code>位存储其类型信息</p>
+<ul>
+<li>000：对象</li>
+<li>010：浮点数</li>
+<li>100：字符串</li>
+<li>110：布尔</li>
+<li>1：整数</li>
+</ul>
+<p>but, 对于 <code>undefined</code> 和 <code>null</code> 来说，这两个值的信息存储是有点特殊的。<br><code>null</code>：所有机器码均为<strong>0</strong><br><code>undefined</code>：用 −2^30 整数来表示</p>
+<p>所以，typeof 在判断 <code>null</code> 的时候就出现问题了，由于 <code>null</code> 的所有机器码均为<strong>0</strong>，因此直接被当做了对象来看待。;</p>
+<p>然而用 <code>instanceof</code> 来判断的话</p>
+<pre><code class="js">null instanceof null // TypeError: Right-hand side of &#39;instanceof&#39; is not an object</code></pre>
+<p><strong>null 直接被判断为不是 object，这也是 JavaScript 的历史遗留bug</strong></p>
+<p>因此在用 <code>typeof</code> 来判断变量类型的时候，我们需要注意，最好是用 <code>typeof</code> 来判断基本数据类型（包括symbol），避免对 null 的判断。</p>
+<p>还有一个不错的判断类型的方法，就是 **<code>Object.prototype.toString.call</code>**，我们可以利用这个方法来对一个变量的类型来进行比较准确的判断</p>
+<pre><code class="js">Object.prototype.toString.call(1) // &quot;[object Number]&quot;
+
+Object.prototype.toString.call(&#39;hi&#39;) // &quot;[object String]&quot;
+
+Object.prototype.toString.call(&#123;a:&#39;hi&#39;&#125;) // &quot;[object Object]&quot;
+
+Object.prototype.toString.call([1,&#39;a&#39;]) // &quot;[object Array]&quot;
+
+Object.prototype.toString.call(true) // &quot;[object Boolean]&quot;
+
+Object.prototype.toString.call(() =&gt; &#123;&#125;) // &quot;[object Function]&quot;
+
+Object.prototype.toString.call(null) // &quot;[object Null]&quot;
+
+Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;
+
+Object.prototype.toString.call(Symbol(1)) // &quot;[object Symbol]&quot;
+
+Object.prototype.toString.call(BigInt(9)) // &quot;[object BigInt]&quot;</code></pre>
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><p><strong>instanceof</strong> 主要的作用就是判断一个实例是否属于某种类型,也可以判断一个实例是否是其父类型或者祖先类型的实例</p>
+<pre><code class="js">let person = function () &#123;
+&#125;
+let nicole = new person()
+nicole instanceof person // true
+
+let person = function () &#123;
+&#125;
+let programmer = function () &#123;
+&#125;
+programmer.prototype = new person()
+let nicole = new programmer()
+nicole instanceof person // true
+nicole instanceof programmer // true</code></pre>
+<h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><pre><code class="js">function new_instance_of(leftVaule, rightVaule) &#123; 
+    let rightProto = rightVaule.prototype; // 取右表达式的 prototype 值
+    leftVaule = leftVaule.__proto__; // 取左表达式的__proto__值
+    while (true) &#123;
+        if (leftVaule === null) &#123;
+            return false;    
+        &#125;
+        if (leftVaule === rightProto) &#123;
+            return true;    
+        &#125; 
+        leftVaule = leftVaule.__proto__ 
+    &#125;
+&#125;</code></pre>
+<p>其实 instanceof 主要的实现原理就是<strong>只要右边变量的 prototype 在左边变量的原型链上</strong>即可。因此，instanceof 在查找的过程中会遍历左边变量的原型链，直到找到右边变量的 prototype，如果查找失败，则会返回 false，告诉我们左边变量并非是右边变量的实例。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">179 <p>Articles</p></a></li>
+                    <li><a href="/categories">27 <p>Categories</p></a></li>
+                    <li><a href="/tags">55 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E"><span class="toc-number">1.1.</span> <span class="toc-text">&#x3D;&#x3D;与&#x3D;&#x3D;&#x3D;</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.1.</span> <span class="toc-text">&#x3D;&#x3D;&#x3D;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.2.</span> <span class="toc-text">&#x3D;&#x3D;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typeof"><span class="toc-number">1.3.</span> <span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#instanceof"><span class="toc-number">1.4.</span> <span class="toc-text">instanceof</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">原理分析</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
