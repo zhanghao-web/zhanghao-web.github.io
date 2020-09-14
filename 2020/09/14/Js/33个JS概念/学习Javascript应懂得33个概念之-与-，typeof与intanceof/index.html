@@ -101,7 +101,7 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    5.9k
+                    6k
                 </span>
                 
                 
@@ -184,7 +184,7 @@ console.log(null == undefined); // true
 // both false, except in rare cases
 console.log(obj == null);
 console.log(obj == undefined)</code></pre>
-<p><img src="" alt="判等"></p>
+<p><img src="https://github.com/ShinichiKudo-FE/PictureBed/blob/master/blogImg/%E5%88%A4%E6%96%AD%E7%9B%B8%E7%AD%89.png" alt="判等"></p>
 <h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><p><strong>typeof 实现原理</strong></p>
 <p><code>typeof</code> 一般被用于判断一个变量的类型，我们可以利用 <code>typeof</code> 来判断<code>number,  string,  object,  boolean,  function, undefined,  symbol</code> 这七种类型，这种判断能帮助我们搞定一些问题，比如在判断不是 <code>object</code> 类型的数据的时候，<code>typeof</code>能比较清楚的告诉我们具体是哪一类的类型。但是，很遗憾的一点是，typeof 在判断一个 <code>object</code>的数据的时候只能告诉我们这个数据是 <code>object</code>, 而不能细致的具体到是哪一种 <code>object</code>, 比如</p>
 <pre><code class="js">let s = new String(&#39;abc&#39;);
