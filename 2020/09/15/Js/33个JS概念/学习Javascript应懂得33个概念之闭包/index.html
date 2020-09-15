@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之闭包 - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,前言MDN上对闭包的解释是：函数和对其周围状态（lexical environment，词法环境）的引用捆绑在一起构成闭包（closure）。也就是说，闭包可以让你从内部函数访问外部函数作用域。在 ,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之闭包</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                September 15, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/09/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%AD%E5%8C%85/" title="学习Javascript应懂得33个概念之闭包" class="">学习Javascript应懂得33个概念之闭包</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    5.5k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    5 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>MDN上对闭包的解释是：函数和对其周围状态（<strong>lexical environment，词法环境</strong>）的引用捆绑在一起构成<strong>闭包（closure）</strong>。也就是说，闭包可以<strong>让你从内部函数访问外部函数作用域</strong>。在 JavaScript 中，每当函数被创建，就会<strong>在函数生成时生成闭包</strong>。</p>
+<p>JavaScript中的函数会形成了闭包。 闭包是由<strong>函数以及声明该函数的词法环境组合而成的</strong>。该环境包含了这个闭包创建时作用域内的任何局部变量</p>
+<h2 id="产生闭包"><a href="#产生闭包" class="headerlink" title="产生闭包"></a>产生闭包</h2><p>创建闭包最常见方式，就是在<strong>一个函数内部创建另一个函数</strong>。下面例子中的 <code>closure</code> 就是一个闭包：</p>
+<pre><code class="js">function func()&#123;
+  var a = 1,b = 2;
+
+  function closure()&#123;
+    return a+b;
+  &#125;
+  return closure;
+&#125;</code></pre>
+<p><strong>闭包的作用域链包含着它自己的作用域，以及包含它的函数的作用域和全局作用域</strong>。</p>
+<h2 id="闭包的注意事项"><a href="#闭包的注意事项" class="headerlink" title="闭包的注意事项"></a>闭包的注意事项</h2><blockquote>
+<p>通常，函数的作用域及其所有变量都会在函数执行结束后被销毁。但是，在创建了一个闭包以后，这个函数的作用域就会<strong>一直保存到闭包不存在为止</strong>。</p>
+</blockquote>
+<pre><code class="js">function makeAdder(x) &#123;
+  return function(y) &#123;
+    return x + y;
+  &#125;;
+&#125;
+
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+
+console.log(add5(2));  // 7
+console.log(add10(2)); // 12
+
+// 释放对闭包的引用
+add5 = null;
+add10 = null;</code></pre>
+<p><code>add5</code> 和 <code>add10</code> 都是闭包。它们共享相同的函数定义，但是保存了不同的环境。在 <code>add5</code> 的环境中，x 为 5。而在 <code>add10</code> 中，x 则为 10。最后通过 null 释放了 <code>add5</code> 和 <code>add10</code> 对闭包的引用。</p>
+<blockquote>
+<p>在javascript中，如果一个对象不再被引用，那么这个对象就会被垃圾回收机制回收；<br>如果两个对象互相引用，而不再被第3者所引用，那么这两个互相引用的对象也会被回收。</p>
+</blockquote>
+<ul>
+<li>闭包只能取得包含函数中任何变量的最后一个值，这是因为闭包所保存的是整个变量对象，而不是某个特殊的变量。</li>
+</ul>
+<pre><code class="js">function test()&#123;
+  var arr = [];
+  for(var i = 0;i &lt; 10;i++)&#123;
+    arr[i] = function()&#123;
+      return i;
+    &#125;;
+  &#125;
+  for(var a = 0;a &lt; 10;a++)&#123;
+    console.log(arr[a]());
+  &#125;
+&#125;
+test(); // 连续打印 10 个 10</code></pre>
+<p>对于上面的情况，如果我们改变代码如下：</p>
+<pre><code class="js">function test()&#123;
+  var arr = [];
+  for(let i = 0;i &lt; 10;i++)&#123;  // 仅在这里作出了改动
+    arr[i] = function()&#123;
+      return i;
+    &#125;;
+  &#125;
+  for(var a = 0;a &lt; 10;a++)&#123;
+    console.log(arr[a]());
+  &#125;
+&#125;
+test(); // 打印 0 到 9</code></pre>
+<ul>
+<li>闭包中的 this 对象</li>
+</ul>
+<pre><code class="js">var name = &quot;The Window&quot;;
+
+var obj = &#123;
+  name: &quot;My Object&quot;,
+
+  getName: function()&#123;
+    return function()&#123;
+      return this.name;
+    &#125;;
+  &#125;
+&#125;;
+
+console.log(obj.getName()());  // The Window</code></pre>
+<p><code>obj.getName()()</code>实际上是<strong>在全局作用域中调用了匿名函数，this指向了window</strong>。这里要理解函数名与函数功能（或者称函数值）是分割开的，不要认为函数在哪里，其内部的this就指向哪里。<strong>匿名函数的执行环境具有全局性，因此其 this 对象通常指向 window</strong>。</p>
+<pre><code class="js">var name = &quot;The Window&quot;;
+
+var obj = &#123;
+  name: &quot;My Object&quot;,
+
+  getName: function()&#123;
+    var that = this;
+    return function()&#123;
+      return that.name;
+    &#125;;
+  &#125;
+&#125;;
+
+console.log(obj.getName()());  // My Object</code></pre>
+<h2 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a>闭包的应用</h2><h3 id="应用闭包的主要场合是：设计私有的方法和变量。"><a href="#应用闭包的主要场合是：设计私有的方法和变量。" class="headerlink" title="应用闭包的主要场合是：设计私有的方法和变量。"></a>应用闭包的主要场合是：设计私有的方法和变量。</h3><p>任何在函数中定义的变量，都可以认为是私有变量，因为不能在函数外部访问这些变量。私有变量包括函数的参数、局部变量和函数内定义的其他函数。</p>
+<p>把有权访问私有变量的公有方法称为<code>特权方法（privileged method）</code>。</p>
+<pre><code class="js">function Animal()&#123;
+
+  // 私有变量
+  var series = &quot;哺乳动物&quot;;
+  function run()&#123;
+    console.log(&quot;Run!!!&quot;);
+  &#125;
+
+  // 特权方法
+  this.getSeries = function()&#123;
+    return series;
+  &#125;;
+&#125;</code></pre>
+<blockquote>
+<p><code>模块模式（The Module Pattern）</code>：为单例创建私有变量和方法。</p>
+</blockquote>
+<blockquote>
+<p><code>单例（singleton）</code>：指的是只有一个实例的对象。JavaScript 一般以对象字面量的方式来创建一个单例对象。</p>
+</blockquote>
+<pre><code class="js">var singleton = &#123;
+  name: &quot;percy&quot;,
+  speak:function()&#123;
+    console.log(&quot;speaking!!!&quot;);
+  &#125;,
+  getName: function()&#123;
+    return this.name;
+  &#125;
+&#125;;</code></pre>
+<p>上面是普通模式创建的单例，下面使用模块模式创建单例：</p>
+<pre><code class="js">var singleton = (function()&#123;
+
+  // 私有变量
+  var age = 22;
+  var speak = function()&#123;
+    console.log(&quot;speaking!!!&quot;);
+  &#125;;
+
+  // 特权（或公有）属性和方法
+  return &#123;
+    name: &quot;percy&quot;,
+    getAge: function()&#123;
+      return age;
+    &#125;
+  &#125;;
+&#125;)();</code></pre>
+<h2 id="匿名函数最大的用途是创建闭包"><a href="#匿名函数最大的用途是创建闭包" class="headerlink" title="匿名函数最大的用途是创建闭包"></a>匿名函数最大的用途是创建闭包</h2><p>并且还可以构建命名空间，以减少全局变量的使用。从而使用闭包模块化代码，减少全局变量的污染。</p>
+<pre><code class="js">var objEvent = objEvent || &#123;&#125;;
+(function()&#123; 
+    var addEvent = function()&#123; 
+      // some code
+    &#125;;
+    function removeEvent()&#123;
+      // some code
+    &#125;
+
+    objEvent.addEvent = addEvent;
+    objEvent.removeEvent = removeEvent;
+&#125;)();</code></pre>
+<p>在这段代码中函数 <code>addEvent</code> 和 <code>removeEvent</code> 都是局部变量，但我们可以通过全局变量 <code>objEvent</code> 使用它，这就大大减少了全局变量的使用，增强了网页的安全性</p>
+<h3 id="一个闭包计数器"><a href="#一个闭包计数器" class="headerlink" title="一个闭包计数器"></a>一个闭包计数器</h3><pre><code class="js">var countNumber = (function()&#123;
+  var num = 0;
+  return function()&#123;
+    return ++num;
+  &#125;;
+&#125;)();</code></pre>
+<h2 id="闭包的缺陷"><a href="#闭包的缺陷" class="headerlink" title="闭包的缺陷"></a>闭包的缺陷</h2><ul>
+<li>闭包的缺点就是<strong>常驻内存会增大内存使用量，并且使用不当很容易造成内存泄露</strong>。</li>
+<li>如果不是因为某些特殊任务而需要闭包，在没有必要的情况下，在其它函数中创建函数是不明智的，因为闭包对脚本性能具有负面影响，包括处理速度和内存消耗。</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">180 <p>Articles</p></a></li>
+                    <li><a href="/categories">27 <p>Categories</p></a></li>
+                    <li><a href="/tags">55 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E9%97%AD%E5%8C%85"><span class="toc-number">1.1.</span> <span class="toc-text">产生闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.2.</span> <span class="toc-text">闭包的注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">闭包的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E9%97%AD%E5%8C%85%E7%9A%84%E4%B8%BB%E8%A6%81%E5%9C%BA%E5%90%88%E6%98%AF%EF%BC%9A%E8%AE%BE%E8%AE%A1%E7%A7%81%E6%9C%89%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E5%8F%98%E9%87%8F%E3%80%82"><span class="toc-number">1.3.1.</span> <span class="toc-text">应用闭包的主要场合是：设计私有的方法和变量。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0%E6%9C%80%E5%A4%A7%E7%9A%84%E7%94%A8%E9%80%94%E6%98%AF%E5%88%9B%E5%BB%BA%E9%97%AD%E5%8C%85"><span class="toc-number">1.4.</span> <span class="toc-text">匿名函数最大的用途是创建闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E9%97%AD%E5%8C%85%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">1.4.1.</span> <span class="toc-text">一个闭包计数器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="toc-number">1.5.</span> <span class="toc-text">闭包的缺陷</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

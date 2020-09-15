@@ -140,37 +140,36 @@
             <a href="/categories/Js"><b>「
                 </b>JS<b> 」</b></a>
             
-            July 17, 2018
+            July 25, 2018
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2018/07/17/Js/%E9%80%9A%E8%BF%87%E7%A4%BA%E4%BE%8B%E6%9D%A5%E5%AD%A6%E4%B9%A0ES2016-2017-2018%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" title="通过示例来学习ES2016, 2017, 2018的新特性" class="posttitle">通过示例来学习ES2016, 2017, 2018的新特性</a></h3>
+            <a href="/2018/07/25/study/JavaScript%E6%A8%A1%E5%9D%97%E5%8C%96-Commonjs%E3%80%81AMD%E3%80%81CMD%E3%80%81ES6-modules/" title="JavaScript模块化 --- Commonjs、AMD、CMD、ES6 modules" class="posttitle">JavaScript模块化 --- Commonjs、AMD、CMD、ES6 modules</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                6.7k
+                9.4k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                6 mins.
+                9 mins.
             </span>
             
             
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/ES6/" rel="tag">ES6</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <p></p>
-<p>本文会辅以有用的例子来讲述TC39中的18个特性，它们分别在ES2016, ES2017和ES2018中加入。<br>鉴于本文内容很长，我们将分为两个部分来介绍，此为第一部分。</p>
-<h3 id="Array-prototype-includes"><a href="#Array-prototype-includes" class="headerlink" title="Array.prototype.includes"></a>Array.prototype...</h3>
+            <p>随着前端js代码复杂度的提高，<code>JavaScript模块化</code>这个概念便被提出来，前端社区也不断地实现前端模块化，直到es6对其进行了规范，下面就介绍JavaScript模块化。</p>
+<p><code>JavaScript模块化...</code></p>
             
-            <span class="read-more"><a href="/2018/07/17/Js/%E9%80%9A%E8%BF%87%E7%A4%BA%E4%BE%8B%E6%9D%A5%E5%AD%A6%E4%B9%A0ES2016-2017-2018%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2018/07/25/study/JavaScript%E6%A8%A1%E5%9D%97%E5%8C%96-Commonjs%E3%80%81AMD%E3%80%81CMD%E3%80%81ES6-modules/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -191,6 +190,55 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Js">
+                  <b>「 </b>JS<b> 」</b>
+                </a>
+            
+            July 25, 2018
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2018/07/25/study/JavaScript%E6%A8%A1%E5%9D%97%E5%8C%96-Commonjs%E3%80%81AMD%E3%80%81CMD%E3%80%81ES6-modules/" title="JavaScript模块化 --- Commonjs、AMD、CMD、ES6 modules" class="posttitle">JavaScript模块化 --- Commonjs、AMD、CMD、ES6 modules</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        9.4k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        9 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>随着前端js代码复杂度的提高，<code>JavaScript模块化</code>这个概念便被提出来，前端社区也不断地实现前端模块化，直到es6对其进行了规范，下面就介绍JavaScript模块化。</p>
+<p><code>JavaScript模块化</code>是如何一步一步地发展起来的，并且也会主要对这些模块化方式做一个简单的比较。</p>
+<p>JavaScript最初的作用仅仅是验证表单，后来会添加一些动画，但是这些js代码很多在一个文件中就可以完成了，所以，我们只需要在html文件中添加一个<code>script</code>标签。</p>
+<p>后来，随着前端复杂度提高，为了能够提高项目代码的可读...</p>
+            
+            <span class="read-more"><a href="/2018/07/25/study/JavaScript%E6%A8%A1%E5%9D%97%E5%8C%96-Commonjs%E3%80%81AMD%E3%80%81CMD%E3%80%81ES6-modules/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -401,66 +449,9 @@
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Js">
-                  <b>「 </b>JS<b> 」</b>
-                </a>
-            
-            May 20, 2018
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2018/05/20/Js/%E5%85%AB%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BD%BB%E5%BA%95%E6%8E%8C%E6%8F%A1-Promise/" title="八段代码彻底掌握 Promise" class="posttitle">八段代码彻底掌握 Promise</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        10k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        9 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Promise/" rel="tag">Promise</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <pre><code class="js">//1
-var p = new Promise(function(resolve, reject)&#123;
-  console.log(&quot;create a promise&quot;);
-  resolve(&quot;success&quot;);
-&#125;);
-//2
-console.log(&quot;after new Promise&quot;);
-//3
-p.then(function(value)&#123;
-  console.log(value);
-&#125;);</code></pre>
-<p>控制...</p>
-            
-            <span class="read-more"><a href="/2018/05/20/Js/%E5%85%AB%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BD%BB%E5%BA%95%E6%8E%8C%E6%8F%A1-Promise/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
     </div>
     
-    <div id="pager"><a href="/categories/Js/page/8/" class="more" data-loading="加载中..." data-load-more="Load more">Load more</a></div>
+    <div id="pager"><a href="/categories/Js/page/8/" class="more" data-loading="Loading..." data-load-more="Load more">Load more</a></div>
     
 </div>
 <div id="preview"></div>
