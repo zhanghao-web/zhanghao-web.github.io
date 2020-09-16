@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习Javascript应懂得33个概念之map,reduce,filter等高阶函数</title>
+      <link href="/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
+      <url>/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">原文地址来自MDN</a><br>跟着写一遍，加强下记录</p><h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p><code>map()</code> 方法<strong>创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值</strong>。</p><pre><code class="js">const array1 = [1, 4, 9, 16];// pass a function to mapconst map1 = array1.map(x =&gt; x * 2);console.log(map1);// expected output: Array [2, 8, 18, 32]</code></pre><h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><pre><code class="js">var new_array = arr.map(function callback(currentValue[, index[, array]]) &#123; // Return element for new_array &#125;[, thisArg])</code></pre><p><strong>callback</strong><br>生成新数组元素的函数，使用三个参数：<br><strong>currentValue</strong><br>callback 数组中正在处理的当前元素。<br><strong>index可选</strong><br>callback 数组中正在处理的当前元素的索引。</p><p><strong>array可选</strong><br>map 方法调用的数组。<br>thisArg可选<br>执行 callback 函数时值被用作this。</p><h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><blockquote><p>一个由原数组每个元素执行回调函数的结果成的新数组</p></blockquote><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>通常情况下，<code>map</code> 方法中的 <code>callback</code> 函数只需要接受一个参数，就是正在被遍历的数组元素本身。但这并不意味着 <code>map</code> 只给 <code>callback</code> 传了一个参数。这个思维惯性可能会让我们犯一个很容易犯的错误。</p><pre><code class="js">[&quot;1&quot;, &quot;2&quot;, &quot;3&quot;].map(parseInt); // [1,NaN,NaN]</code></pre><p>我们期望输出 <code>[1, 2, 3]</code>, 而实际结果是 <code>[1, NaN, NaN]</code>.</p><p><code>parseInt</code> 经常被带着一个参数使用, 但是这里接受两个。第一个参数是一个表达式而第二个是<code>callback function</code>的基, <code>Array.prototype.map</code> 传递3个参数:</p><ul><li>the element</li><li>the index</li><li>the array</li></ul><pre><code class="js">// parseInt(string, radix) -&gt; map(parseInt(value, index))/*  first iteration (index is 0): */ parseInt(&quot;1&quot;, 0); // 1/* second iteration (index is 1): */ parseInt(&quot;2&quot;, 1); // NaN/*  third iteration (index is 2): */ parseInt(&quot;3&quot;, 2); // NaN</code></pre><h1 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h1><p><code>filter</code> 为数组中的每个元素<strong>调用一次 callback 函数，并利用所有使得 callback 返回 true 或等价于 true 的值</strong>的元素创建一个新数组。</p><p><strong>filter() 方法创建一个新数组, 其包含通过所提供函数实现的测试的所有元素。</strong></p><pre><code class="js">const words = [&#39;spray&#39;, &#39;limit&#39;, &#39;elite&#39;, &#39;exuberant&#39;, &#39;destruction&#39;, &#39;present&#39;];const result = words.filter(word =&gt; word.length &gt; 6);console.log(result);// expected output: Array [&quot;exuberant&quot;, &quot;destruction&quot;, &quot;present&quot;]</code></pre><h2 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h2><pre><code class="js">var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])</code></pre><p><strong>callback</strong><br>用来测试数组的每个元素的函数。返回 true 表示该元素通过测试，保留该元素，false 则不保留。它接受以下三个参数：<br>element<br>数组中当前正在处理的元素。<br><strong>index可选</strong><br>正在处理的元素在数组中的索引。<br><strong>array可选</strong><br>调用了 filter 的数组本身。<br><strong>thisArg可选</strong><br>执行 callback 时，用于 this 的值。</p><h2 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h2><p>一个新的、由通过测试的元素组成的数组，如果没有任何数组元素通过测试，则返回空数组。</p><p>filter 不会改变原数组，它返回过滤后的新数组。</p><h2 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h2><pre><code class="js">var fruits = [&#39;apple&#39;, &#39;banana&#39;, &#39;grapes&#39;, &#39;mango&#39;, &#39;orange&#39;];/** * Array filters items based on search criteria (query) */function filterItems(query) &#123;  return fruits.filter(function(el) &#123;      return el.toLowerCase().indexOf(query.toLowerCase()) &gt; -1;  &#125;)&#125;console.log(filterItems(&#39;ap&#39;)); // [&#39;apple&#39;, &#39;grapes&#39;]console.log(filterItems(&#39;an&#39;)); // [&#39;banana&#39;, &#39;mango&#39;, &#39;orange&#39;]</code></pre><h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><p><code>reduce()</code> 方法对**数组中的每个元素执行一个由您提供的reducer函数(升序执行)**，将其结果汇总为单个返回值。</p><pre><code class="js">const array1 = [1, 2, 3, 4];const reducer = (accumulator, currentValue) =&gt; accumulator + currentValue;// 1 + 2 + 3 + 4console.log(array1.reduce(reducer));// expected output: 10// 5 + 1 + 2 + 3 + 4console.log(array1.reduce(reducer, 5));// expected output: 15</code></pre><blockquote><p>reducer 函数接收4个参数:</p></blockquote><ul><li>Accumulator (acc) (累计器)</li><li>Current Value (cur) (当前值)</li><li>Current Index (idx) (当前索引)</li><li>Source Array (src) (源数组)</li></ul><h2 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h2><p>函数累计处理的结果</p><h2 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h2><p>数组里所有值的和</p><pre><code class="js">var sum = [0, 1, 2, 3].reduce(function (accumulator, currentValue) &#123;  return accumulator + currentValue;&#125;, 0);// 和为 6</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>学习Javascript应懂得33个概念之闭包</title>
       <link href="/2020/09/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%AD%E5%8C%85/"/>
       <url>/2020/09/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%AD%E5%8C%85/</url>
