@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习Javascript应懂得33个概念之表达式和语句</title>
+      <link href="/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/"/>
+      <url>/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="表达式与语句的区分"><a href="#表达式与语句的区分" class="headerlink" title="表达式与语句的区分"></a>表达式与语句的区分</h1><p>引子：表达式和语句很基础，但是有时会犯错，比如：</p><pre><code class="js">function()&#123;&#125;//报错(function()&#123;&#125;)//不报错function f(x)&#123; return x + 1 &#125;()//报错function f(x)&#123; return x + 1 &#125;(1)//不报错，为什么返回 1</code></pre><p>能明白为什么？</p><ul><li><p>第一行代码：因为<code>JavaScript</code> 将 <code>function</code> 关键字当作一个 <strong>函数声明语句</strong> 的开始，而函数声明语句 <code>function</code> 关键字后面应该是 函数名，这里后面跟圆括号，当然会报错。</p></li><li><p>第二行代码：给它加上一对圆括号，解析器会把()里的当做表达式去解析，在这里就会当做匿名函数表达式解析，所以不会报错。</p></li><li><p>第三行代码：在一条语句后面加上()会被当做分组操作符，分组操作符里必须要有表达式，所以这里报错；</p></li><li><p>第四行代码：在一条函数声明语句后面加上(1)，仅仅是相当于在声明语句之后又跟了一条毫无关系的表达式，等价于下面代码：</p></li></ul><pre><code class="js">function f(x)&#123; return x + 1 &#125;(1)//1</code></pre><p>所以返回了无关紧要的答案；</p><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="表达式（expression）"><a href="#表达式（expression）" class="headerlink" title="表达式（expression）"></a>表达式（expression）</h3><p>js 中的一个短语，js 解释器会将其计算出一个结果。程序中的常量是最简单的一类表达式。</p><p><strong>变量名也是一种简单的表达式</strong>，它的值就是赋值给变量的值。<br>复杂表达式是由简单表达式组成的。</p><p>比如，数据访问表达式是由一个表示数组的表达式、左方括号、一个整数表达式和右方括号构成。它们所组成的新的表达式的运算结果是该数组的特定位置的元素值。</p><p>同样的，函数调用表达式由一个表示函数对象的表达式和0个或多个参数表达式构成。</p><p>将简单表达式组合成复杂表达式最常用的方法就是使用运算符（opetator）。</p><p>运算符按照特定的运算规则对操作数（通常是两个）进行运算，并计算出新值。</p><p>乘法运算符<code>*</code>是比较简单的例子。表达式<code>x*y</code>是对两个变量表达式x和y进行运算并得出结果。有时我们更愿意说运算符返回了一个值而不是“计算”出了一个值。</p><h3 id="语句（statement）"><a href="#语句（statement）" class="headerlink" title="语句（statement）"></a>语句（statement）</h3><p><strong>js 整句或命令。js 语句是以分号结束；表达式计算出一个值，但语句用来自行以使某件事发生。</strong><br><strong>“使某件事发生”的一个方法是计算带有副作用的表达式。</strong></p><p>诸如赋值和函数调用这些有副作用的表达式，是可以作为单独的语句的，这种把表达式当做语句的用法也称作表达式语句（expression statement）。类似的语句还有声明语句（declaration statement），声明语句用来声明新变量或定义新函数。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>学习Javascript应懂得33个概念之map,reduce,filter等高阶函数</title>
       <link href="/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/"/>
       <url>/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/</url>
