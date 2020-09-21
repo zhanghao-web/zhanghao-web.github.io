@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之promise - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,前言promise是一个对象，它代表了一个异步操作的最终完成或者失败。本质上Promise是个函数返回的对象，我们可以在它上面绑定回调函数，这样我们就不需要在一开始把回调函数作为参数传入这个函数了。,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之promise</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                September 21, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/09/21/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bpromise/" title="学习Javascript应懂得33个概念之promise" class="">学习Javascript应懂得33个概念之promise</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    9.8k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    9 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>promise</code>是一个对象，它代表了一个异步操作的最终完成或者失败。本质上<code>Promise</code>是个函数返回的对象，我们可以在它上面绑定回调函数，这样我们就不需要在一开始把回调函数作为参数传入这个函数了。</p>
+<pre><code class="js">const promise1 = new Promise((resolve, reject) =&gt; &#123;
+  setTimeout(() =&gt; &#123;
+    resolve(&#39;foo&#39;);
+  &#125;, 3000);
+&#125;);
+
+promise1.then((value) =&gt; &#123;
+  console.log(value);
+  // expected output: &quot;foo&quot;
+&#125;);
+
+console.log(promise1);
+// expected output: [object Promise]
+</code></pre>
+<h2 id="promise-约定"><a href="#promise-约定" class="headerlink" title="promise 约定"></a>promise 约定</h2><p>在使用<code>Promise</code>时会有以下约定：</p>
+<ul>
+<li>1.在本轮 事件循环 运行完成之前，回调函数是不会被调用的。</li>
+<li>2.即使异步操作已经完成（成功或失败），在这之后通过 <code>then()</code> 添加的回调函数也会被调用。</li>
+<li>3.通过多次调用 <code>then()</code> 可以添加多个回调函数，它们会按照插入顺序进行执行。</li>
+</ul>
+<p><code>Promise</code>的另一个好处就是<strong>链式调用(chaining)</strong></p>
+<p>原有的回调地狱：</p>
+<pre><code class="js">doSomething(function(result) &#123;
+  doSomethingElse(result, function(newResult) &#123;
+    doThirdThing(newResult, function(finalResult) &#123;
+      console.log(&#39;Got the final result: &#39; + finalResult);
+    &#125;, failureCallback);
+  &#125;, failureCallback);
+&#125;, failureCallback);</code></pre>
+<p>Promise链：</p>
+<pre><code class="js">doSomething().then(function(result) &#123;
+  return doSomethingElse(result);
+&#125;)
+.then(function(newResult) &#123;
+  return doThirdThing(newResult);
+&#125;)
+.then(function(finalResult) &#123;
+  console.log(&#39;Got the final result: &#39; + finalResult);
+&#125;)
+.catch(failureCallback);</code></pre>
+<p>通常，一遇到异常抛出，浏览器就会顺着 <code>Promise</code> 链寻找下一个 <code>onRejected</code> 失败回调函数或者由 <code>.catch()</code> 指定的回调函数。这和以下同步代码的工作原理（执行过程）非常相似。</p>
+<pre><code class="js">try &#123;
+  let result = syncDoSomething();
+  let newResult = syncDoSomethingElse(result);
+  let finalResult = syncDoThirdThing(newResult);
+  console.log(`Got the final result: $&#123;finalResult&#125;`);
+&#125; catch(error) &#123;
+  failureCallback(error);
+&#125;</code></pre>
+<p>在 ECMAScript 2017 标准的 <code>async/await</code> 语法糖中，这种异步代码的对称性得到了极致的体现：</p>
+<pre><code class="js">async function foo() &#123;
+  try &#123;
+    const result = await doSomething();
+    const newResult = await doSomethingElse(result);
+    const finalResult = await doThirdThing(newResult);
+    console.log(`Got the final result: $&#123;finalResult&#125;`);
+  &#125; catch(error) &#123;
+    failureCallback(error);
+  &#125;
+&#125;</code></pre>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>Promise</code> 对象是<strong>一个代理对象（代理一个值），被代理的值在Promise对象创建时可能是未知的</strong>。它允许你为异步操作的成功和失败分别绑定相应的处理方法（handlers）。 这让异步方法可以像同步方法那样返回值，但并不是立即返回最终执行结果，而是一个能代表未来出现的结果的<code>promise</code>对象&gt; </p>
+<blockquote>
+<p>一个 <code>Promise</code>有以下几种状态:<br><code>pending</code>: 初始状态，既不是成功，也不是失败状态。<br><code>fulfilled</code>: 意味着操作成功完成。<br><code>rejected</code>: 意味着操作失败。</p>
+</blockquote>
+<p><img src="https://mdn.mozillademos.org/files/8633/.png" alt="promise"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a>Promise.all(iterable)</h3><p>这个方法返回一个新的<code>promise</code>对象，该<code>promise</code>对象在<code>iterable</code>参数对象里所有的<code>promise</code>对象都成功的时候才会触发成功，一旦有任何一个iterable里面的<code>promise</code>对象失败则立即触发该<code>promise</code>对象的失败</p>
+<pre><code class="js">const arr = [1,2,3,4];
+
+const promiseArr = arr.map(arg =&gt; &#123;
+    return new Promise((resolve,reject) =&gt; &#123;
+        if(arg) &#123;
+            resolve(arg*2);
+        &#125;else&#123;
+            reject(&#39;no value&#39;);
+        &#125;
+    &#125;)
+&#125;);
+
+Promise.all(promiseArr).then(data =&gt; &#123;
+    console.log(data);  // [2,4,6,8]
+&#125;).catch(err =&gt; &#123;
+    console.log(err); 
+&#125;)</code></pre>
+<h3 id="Promise-allSettled-iterable"><a href="#Promise-allSettled-iterable" class="headerlink" title="Promise.allSettled(iterable)"></a>Promise.allSettled(iterable)</h3><p>等到所有<code>promise</code>都完成（每个<code>promise</code>返回成功或失败）。<br>返回一个<code>promise</code>，该<code>promise</code>在所有<code>promise</code>完成后完成。并带有一个对象数组，每个对象对应每个<code>promise</code>的结果。</p>
+<pre><code class="js">const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve, reject) =&gt; setTimeout(reject, 100, &#39;foo&#39;));
+const promises = [promise1, promise2];
+
+Promise.allSettled(promises).
+  then((results) =&gt; results.forEach((result) =&gt; console.log(result.status)));
+
+// expected output:
+// &quot;fulfilled&quot;
+// &quot;rejected&quot;</code></pre>
+<h3 id="Promise-any-iterable"><a href="#Promise-any-iterable" class="headerlink" title="Promise.any(iterable)"></a>Promise.any(iterable)</h3><p>接收一个<code>Promise</code>对象的集合，当其中的一个<code>promise</code> 成功，就返回那个成功的<code>promise</code>的值。(谁成功返回谁,用于返回第一个成功的 promise)</p>
+<pre><code class="js">// 显示第一张已加载的图片
+function fetchAndDecode(url) &#123;
+  return fetch(url).then(response =&gt; &#123;
+    if(!response.ok) &#123;
+      throw new Error(`HTTP error! status: $&#123;response.status&#125;`);
+    &#125; else &#123;
+      return response.blob();
+    &#125;
+  &#125;)
+&#125;
+
+let coffee = fetchAndDecode(&#39;coffee.jpg&#39;);
+let tea = fetchAndDecode(&#39;tea.jpg&#39;);
+
+Promise.any([coffee, tea]).then(value =&gt; &#123;
+  let objectURL = URL.createObjectURL(value);
+  let image = document.createElement(&#39;img&#39;);
+  image.src = objectURL;
+  document.body.appendChild(image);
+&#125;)
+.catch(e =&gt; &#123;
+  console.log(e.message);
+&#125;);</code></pre>
+<h3 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a>Promise.race(iterable)</h3><p>执行顺序是按照谁快 谁先输出</p>
+<p>当<code>iterable</code>参数里的任意一个子<code>promise</code>被成功或失败后，父<code>promise</code>马上也会用子<code>promise</code>的成功返回值或失败详情作为参数调用父<code>promise</code>绑定的相应句柄，并返回该<code>promise</code>对象。</p>
+<pre><code class="js">const pro1 = new Promise((resolve,reject) =&gt; &#123;
+    setTimeout(resolve,100,&#39;1&#39;);
+&#125;);
+
+const pro2 = new Promise((resolve,reject) =&gt; &#123;
+    setTimeout(resolve,200,&#39;2&#39;);
+&#125;);
+
+const pro3 = new Promise((resolve,reject) =&gt; &#123;
+    setTimeout(resolve,300,&#39;3&#39;);
+&#125;);
+
+const pro4 = new Promise((resolve,reject) =&gt; &#123;
+    setTimeout(resolve,10,&#39;4&#39;);
+&#125;);
+
+
+Promise.race([pro4,pro1,pro2,pro3]).then(data =&gt; &#123;
+    console.log(data);  // 1   输出最快的那个
+&#125;).catch(err =&gt; &#123;
+    console.log(err);
+&#125;)</code></pre>
+<h3 id="Promise-reject-reason"><a href="#Promise-reject-reason" class="headerlink" title="Promise.reject(reason)"></a>Promise.reject(reason)</h3><p>返回一个状态为失败的<code>Promise</code>对象，并将给定的失败信息传递给对应的处理方法</p>
+<pre><code class="js">const p_2 = Promise.reject(&#39;err&#39;);
+
+p_2.then(data =&gt; &#123;
+    console.log(data);  
+&#125;).catch(err =&gt; &#123;
+    console.log(err);  // err
+&#125;)</code></pre>
+<h3 id="Promise-resolve-value"><a href="#Promise-resolve-value" class="headerlink" title="Promise.resolve(value)"></a>Promise.resolve(value)</h3><p>返回一个状态由给定<code>value</code>决定的<code>Promise</code>对象。<br>通常而言，如果你不知道一个值是否是<code>Promise</code>对象，使用<code>Promise.resolve(value)</code> 来返回一个<code>Promise</code>对象,这样就能将该value以<code>Promise</code>对象形式使用。</p>
+<pre><code class="js">const p_1 = Promise.resolve(&#39;success&#39;);
+
+p_1.then(data =&gt; &#123;
+    console.log(data);   // success
+&#125;)2</code></pre>
+<h2 id="原型方法"><a href="#原型方法" class="headerlink" title="原型方法"></a>原型方法</h2><h3 id="Promise-prototype-catch"><a href="#Promise-prototype-catch" class="headerlink" title="Promise.prototype.catch()"></a>Promise.prototype.catch()</h3><p><code>catch()</code> 方法返回一个<code>Promise</code>，并且处理拒绝的情况。</p>
+<pre><code class="js">//创建一个新的 Promise ，且已决议
+var p1 = Promise.resolve(&quot;calling next&quot;);
+
+var p2 = p1.catch(function (reason) &#123;
+    //这个方法永远不会调用
+    console.log(&quot;catch p1!&quot;);
+    console.log(reason);
+&#125;);
+
+p2.then(function (value) &#123;
+    console.log(&quot;next promise&#39;s onFulfilled&quot;); /* next promise&#39;s onFulfilled */
+    console.log(value); /* calling next */
+&#125;, function (reason) &#123;
+    console.log(&quot;next promise&#39;s onRejected&quot;);
+    console.log(reason);
+&#125;);</code></pre>
+<h3 id="Promise-prototype-finally"><a href="#Promise-prototype-finally" class="headerlink" title="Promise.prototype.finally()"></a>Promise.prototype.finally()</h3><p><code>finally()</code> 方法返回一个<code>Promise</code>。在<code>promise</code>结束时，无论结果是<code>fulfilled</code>或者是<code>rejected</code>，都会执行指定的回调函数。这为在<code>Promise</code>是否成功完成后都需要执行的代码提供了一种方式。</p>
+<pre><code class="js">let isLoading = true;
+
+fetch(myRequest).then(function(response) &#123;
+    var contentType = response.headers.get(&quot;content-type&quot;);
+    if(contentType &amp;&amp; contentType.includes(&quot;application/json&quot;)) &#123;
+      return response.json();
+    &#125;
+    throw new TypeError(&quot;Oops, we haven&#39;t got JSON!&quot;);
+  &#125;)
+  .then(function(json) &#123; /* process your JSON further */ &#125;)
+  .catch(function(error) &#123; console.log(error); &#125;)
+  .finally(function() &#123; isLoading = false; &#125;);</code></pre>
+<h3 id="Promise-prototype-then"><a href="#Promise-prototype-then" class="headerlink" title="Promise.prototype.then()"></a>Promise.prototype.then()</h3><p><code>then()</code> 方法返回一个 <code>Promise</code>。它最多需要有两个参数：<code>Promise</code> 的成功和失败情况的回调函数。</p>
+<pre><code class="js">var p1 = new Promise((resolve, reject) =&gt; &#123;
+  resolve(&#39;成功！&#39;);
+  // or
+  // reject(new Error(&quot;出错了！&quot;));
+&#125;);
+
+p1.then(value =&gt; &#123;
+  console.log(value); // 成功！
+&#125;, reason =&gt; &#123;
+  console.error(reason); // 出错了！
+&#125;);</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">184 <p>Articles</p></a></li>
+                    <li><a href="/categories">27 <p>Categories</p></a></li>
+                    <li><a href="/tags">55 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#promise-%E7%BA%A6%E5%AE%9A"><span class="toc-number">1.1.</span> <span class="toc-text">promise 约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-all-iterable"><span class="toc-number">1.3.1.</span> <span class="toc-text">Promise.all(iterable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-allSettled-iterable"><span class="toc-number">1.3.2.</span> <span class="toc-text">Promise.allSettled(iterable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-any-iterable"><span class="toc-number">1.3.3.</span> <span class="toc-text">Promise.any(iterable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-race-iterable"><span class="toc-number">1.3.4.</span> <span class="toc-text">Promise.race(iterable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-reject-reason"><span class="toc-number">1.3.5.</span> <span class="toc-text">Promise.reject(reason)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-resolve-value"><span class="toc-number">1.3.6.</span> <span class="toc-text">Promise.resolve(value)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">原型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-prototype-catch"><span class="toc-number">1.4.1.</span> <span class="toc-text">Promise.prototype.catch()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-prototype-finally"><span class="toc-number">1.4.2.</span> <span class="toc-text">Promise.prototype.finally()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-prototype-then"><span class="toc-number">1.4.3.</span> <span class="toc-text">Promise.prototype.then()</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
