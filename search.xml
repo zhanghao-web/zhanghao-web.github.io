@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习Javascript应懂得33个概念之立即执行函数, 模块化, 命名空间</title>
+      <link href="/2020/09/22/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0-%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/"/>
+      <url>/2020/09/22/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0-%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/</url>
+      
+        <content type="html"><![CDATA[<p><a href="https://segmentfault.com/a/1190000006966358">原文地址</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>立即执行函数, 模块化, 命名空间 ，主要是解决两个问题——“<strong>命名空间冲突”，“文件依赖管理</strong>”。</p><p>坑：<br>1.命名空间冲突</p><ul><li>(1)我自己测试好的代码和大家合并后怎么起冲突了？</li><li>(2)页面脚本的变量或函数覆盖了公有脚本的。                                                 </li></ul><p>2.文件依赖管理</p><ul><li>(1)明明项目需要引入的包都引进来了怎么还报缺少包？</li><li>(2)手动管理依赖，有天要更换某个插件，要深入代码内部进行修改</li><li>(3)如下图，显示的代码加载，依赖关系复杂。在F.js中，分不清某个变量是来自C.js，还是E.js</li><li>(4)两次加载同一个模块。比如引入了两遍JQ</li></ul><p><img src="https://segmentfault.com/img/bVDlA5?w=398&h=183" alt="keng"></p><p>3.其他的</p><ul><li>(1)为了实现脚本复用，将一个很大的公用public文件引入各个页面中，其中的某些函数，只有个别页面用到。</li><li>(2)某个功能的函数群函数，与另一个功能的函数群摆在一起，使用注释来分隔。</li></ul><p><strong>目前解决的方法是:模块化</strong></p><p>1.<em>命名空间</em>：各个模块的命名空间独立。A模块的变量x不会覆盖B模块的变量x。<br>2.<em>模块的依赖关系</em>:通过模块管理工具如<code>webpack/requireJS/browserify</code>等进行管理。</p><h2 id="模块化的基本原理——解决命名空间冲突"><a href="#模块化的基本原理——解决命名空间冲突" class="headerlink" title="模块化的基本原理——解决命名空间冲突"></a>模块化的基本原理——解决命名空间冲突</h2><p>JavaScript的缺陷，首当其冲就是全局变量。这使得每想命名一个变量的时候都要三思又三思，生怕上方无穷远的地方有一个同事些的代码和自己冲突。以下是一些防范方法</p><h3 id="一、使用命名空间"><a href="#一、使用命名空间" class="headerlink" title="一、使用命名空间"></a>一、使用命名空间</h3><p>代码如下：</p><pre><code class="js">//定义var module = &#123;    name: &#39;rouwan&#39;,    sayName:function()&#123;        console.log(this.name)    &#125;&#125;//使用var a = module.name;console.log(a)</code></pre><p><strong>总结</strong>：直接修改name不会影响<code>module.name</code>，一定程度保护了命名空间。<br>有两个缺点，一，外部还是可以修改module的属性和方法。二，命名空间有时长起来超乎你的想象。适合一些小型的封装，如一些配置。</p><h3 id="二、立即执行函数-闭包（实现模块的基本方法）"><a href="#二、立即执行函数-闭包（实现模块的基本方法）" class="headerlink" title="二、立即执行函数 + 闭包（实现模块的基本方法）"></a>二、立即执行函数 + 闭包（实现模块的基本方法）</h3><p>立即函数可以创建作用域，闭包则可以形成私有变量和函数</p><pre><code class="js">//创建var module = (function()&#123;  var privateName = &#39;inner&#39;;            //私有变量  var privateFunc = function()&#123;        //私有函数      console.log(&#39;私有函数&#39;)  &#125;  return &#123;                                  name: &#39;rouwan&#39;,                    //公有属性      sayName:function()&#123;                //公有函数          console.log(this.name)      &#125;  &#125;&#125;)()//使用module.sayName();    //&#39;rouwan&#39;</code></pre><p>总结：这是目前比较常用的模块定义方式，<strong>可以区分私有成员和公有成员</strong>。<br>公有变量和方法，和之前一样可以直接通过<code>module.name</code>的方式修改。私有变量和方法，是无法访问的，除非给你个修改私有成员的公有方法。</p><h3 id="三、在上述基础上，引入其他模块"><a href="#三、在上述基础上，引入其他模块" class="headerlink" title="三、在上述基础上，引入其他模块"></a>三、在上述基础上，引入其他模块</h3><pre><code class="js">//定义var module1 = (function(mod)&#123;  var privateName = &#39;inner1&#39;;  var privateFunc = function()&#123;    console.log(&#39;私有函数1&#39;)  &#125;  return &#123;    name : &#39;rouwan1&#39;,    sayName: function()&#123;        console.log(this.name)    &#125;,    anotherName:mod.name,            //另一个模块上的公有参数    sayAnotherName:mod.sayName       //另一个模块上的公有方法  &#125;&#125;)(anotherModule) //引入了另一个模块//使用module1.sayOtherName()</code></pre><h3 id="四、其他的方式"><a href="#四、其他的方式" class="headerlink" title="四、其他的方式"></a>四、其他的方式</h3><p>放大模式等是以往用来管理大型模块，进行文件拆分的方法。现在<code>webpack</code>等模块化工具都很完善的情况下，已经显得有点落后了。就不介绍了。</p><h2 id="告别刀耕火种的时代——模块化构建工具（解决依赖管理）"><a href="#告别刀耕火种的时代——模块化构建工具（解决依赖管理）" class="headerlink" title="告别刀耕火种的时代——模块化构建工具（解决依赖管理）"></a>告别刀耕火种的时代——模块化构建工具（解决依赖管理）</h2><p>我了解js模块是从<strong>立即执行函数</strong>开始的。但是等到真正使用构建工具的时候，却发现业界采用的模块化方案，却并非是<strong>一个一个由立即函数+闭包</strong>形成的集群。</p><p>而是用了诸如<strong>AMD/CMD/CommonJS/ES6</strong>模块等等模块化实现。</p><p>这里面的原因可能有这几个，<br>一，闭包的性能问题。<br>二，当模块增多的时候，需要解决模块间的依赖管理问题。</p><p>关于依赖管理，目前项目里碰到了几个不舒服的地方：</p><p>1.引用多个不同的文件<br>2.HTML中引入了两遍的jq，导致脚本报错。<br>3.有一个公用脚本，包含了N多的公用模块。有些页面明明只用到了一个模块，也必须全部加载一遍。</p><p>因此，必须使用模块化管理工具!</p><p>webpack和requireJS比较：<br><img src="https://segmentfault.com/img/bVDm01?w=746&h=254" alt="webpack和requireJS"></p><p>几种模块化规范比较：<br><img src="https://segmentfault.com/img/bVDm2P?w=890&h=316" alt="模块化"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>学习Javascript应懂得33个概念之promise</title>
       <link href="/2020/09/21/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bpromise/"/>
       <url>/2020/09/21/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bpromise/</url>
