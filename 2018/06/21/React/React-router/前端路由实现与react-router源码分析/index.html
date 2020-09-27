@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,前言在单页应用上，前端路由并不陌生。很多前端框架也会有独立开发或推荐配套使用的路由系统。那么，当我们在谈前端路由的时候，还可以谈些什么？本文将简要分析并实现一个的前端路由，并对 react-rout,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+前言在单页应用上，前端路由并不陌生。很多前端框架也会有独立开发或推荐配套使用的路由系统。那么，当我们在谈前端路由的时候，还可以谈些什么？本文将简要分析并实现一个的前端路由，并对 react-ro,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -139,7 +141,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在单页应用上，前端路由并不陌生。很多前端框架也会有独立开发或推荐配套使用的路由系统。那么，当我们在谈前端路由的时候，还可以谈些什么？本文将简要分析并实现一个的前端路由，并对 react-router 进行分析。</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在单页应用上，前端路由并不陌生。很多前端框架也会有独立开发或推荐配套使用的路由系统。那么，当我们在谈前端路由的时候，还可以谈些什么？本文将简要分析并实现一个的前端路由，并对 react-router 进行分析。</p>
 <h2 id="一个极简前端路由实现"><a href="#一个极简前端路由实现" class="headerlink" title="一个极简前端路由实现"></a>一个极简前端路由实现</h2><p>谈一下前端路由的简要原理，以hash形式（也可以使用History API做处理）为例，当url的hash发生变化时，触发hashchange注册的回调，在回调中进行不同的操作，展示不同的页面。直接看代码比较直观。</p>
 <pre><code class="js">    function Router()&#123;
         this.routes = &#123;&#125;;
@@ -380,7 +384,7 @@ function listen(listener) &#123;
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

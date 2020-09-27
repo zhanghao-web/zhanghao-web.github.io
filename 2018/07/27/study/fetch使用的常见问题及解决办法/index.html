@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,前言说道fetch就不得不提XMLHttpRequest了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致配置,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+前言说道fetch就不得不提XMLHttpRequest了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -138,7 +140,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说道fetch就不得不提<code>XMLHttpRequest</code>了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致配置和调用比较混乱，也不符合关注分离的原则；fetch的出现正是为了解决XHR存在的这些问题。例如下面代码：</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>说道fetch就不得不提<code>XMLHttpRequest</code>了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致配置和调用比较混乱，也不符合关注分离的原则；fetch的出现正是为了解决XHR存在的这些问题。例如下面代码：</p>
 <pre><code class="js">fetch(url).then(function(response)&#123;
     return response.json();
 &#125;).then(function(data)&#123;
@@ -416,7 +420,7 @@ fetchProgress(&#39;/upload&#39;).then(console.log)</code></pre>
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

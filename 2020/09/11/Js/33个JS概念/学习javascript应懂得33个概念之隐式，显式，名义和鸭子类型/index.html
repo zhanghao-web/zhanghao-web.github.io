@@ -10,8 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,前言javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。
-隐式类型转换在 JavaScript 中，当我们进行比较操,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+前言javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。
+隐式类型转换在 JavaScript 中，当我们进行比,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -140,7 +142,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。</p>
 <h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><p>在 JavaScript 中，当我们进行比较操作或者加减乘除四则运算操作时，常常会触发 JavaScript 的隐式类型转换机制；而这部分也往往是令人迷惑的地方。譬如浏览器中的 <code>console.log</code> 操作常常会将<strong>任何值都转化为字符串</strong>然后展示，而数学运算则会首先将值<strong>转化为数值类型</strong>（除了 <code>Date</code> 类型对象）然后进行操作。</p>
 <h3 id="关系操作符（-lt-gt-lt-gt-）"><a href="#关系操作符（-lt-gt-lt-gt-）" class="headerlink" title="关系操作符（&lt;, &gt;, &lt;=, &gt;=）"></a>关系操作符（&lt;, &gt;, &lt;=, &gt;=）</h3><p>与上述操作符一样，<code>关系操作符</code>的操作值也可以是任意类型的，所以使用<code>非数值类型</code>参与比较时也需要系统进行<code>隐式类型转换</code>：<br>（1）如果两个操作值都是数值，则进行数值比较<br>（2）如果两个操作值都是字符串，则比较字符串对应的字符编码值<br>（3）如果只有一个操作值是数值，则将另一个操作值转换为数值，进行数值比较<br>（4）如果一个操作数是对象，则调用valueOf()方法（如果对象没有valueOf()方法则调用toString()方法），得到的结果按照前面的规则执行比较<br>（5）如果一个操作值是布尔值，则将其转换为数值，再进行比较<br>注：NaN是非常特殊的值，它不和任何类型的值相等，包括它自己，同时它与任何类型的值比较大小时都返回false。</p>
 <h3 id="相等操作符（-）"><a href="#相等操作符（-）" class="headerlink" title="相等操作符（==）"></a>相等操作符（==）</h3><p><code>相等操作符</code>会对操作值进行隐式转换后进行比较：<br>（1）如果一个操作值为布尔值，则在比较之前先将其转换为数值<br>（2）如果一个操作值为字符串，另一个操作值为数值，则通过Number()函数将字符串转换为数值<br>（3）如果一个操作值是对象，另一个不是，则调用对象的valueOf()方法，得到的结果按照前面的规则进行比较<br>（4）null与undefined是相等的<br>（5）如果一个操作值为NaN，则相等比较返回false<br>（6）如果两个操作值都是对象，则比较它们是不是指向同一个对象</p>
@@ -279,7 +283,7 @@ joinChoir( chicken );    // 恭喜加入合唱团 </code></pre>
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

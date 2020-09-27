@@ -10,11 +10,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,原文地址
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+原文地址
 区分进程与线程线程和进程区分不清，是很多新手都会犯的错误，没有关系。这很正常。先看看下面这个形象的比喻：
 - 工厂的资源 -&amp;gt; 系统分配的内存（独立的一块内存）
 
-- 工厂之间的相互,"> 
+- 工厂之间的,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -103,7 +105,7 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    18k
+                    19k
                 </span>
                 
                 
@@ -143,7 +145,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p><a target="_blank" rel="noopener" href="http://www.dailichun.com/2018/01/21/js_singlethread_eventloop.html">原文地址</a></p>
+            <meta name="referrer" content="no-referrer"/>
+
+<p><a target="_blank" rel="noopener" href="http://www.dailichun.com/2018/01/21/js_singlethread_eventloop.html">原文地址</a></p>
 <h2 id="区分进程与线程"><a href="#区分进程与线程" class="headerlink" title="区分进程与线程"></a>区分进程与线程</h2><p>线程和进程区分不清，是很多新手都会犯的错误，没有关系。这很正常。先看看下面这个形象的比喻：</p>
 <pre><code class="html">- 工厂的资源 -&gt; 系统分配的内存（独立的一块内存）
 
@@ -156,7 +160,7 @@
 - 工人之间共享空间 -&gt; 同一进程下的各个线程之间共享程序的内存空间（包括代码段、数据集、堆等）</code></pre>
 <p>然后再巩固下：</p>
 <p>如果是windows电脑中，可以打开任务管理器，可以看到有一个后台进程列表。对，那里就是查看进程的地方，而且可以看到每个进程的内存资源信息以及cpu占有率。</p>
-<p><img src="https://segmentfault.com/img/remote/1460000012925877" alt="cpu"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/process_list.png" alt="cpu"></p>
 <p>所以，应该更容易理解了：<strong>进程是cpu资源分配的最小单位（系统会给它分配内存）</strong></p>
 <blockquote>
 <p>最后，再用较为官方的术语描述一遍：</p>
@@ -219,7 +223,7 @@
 <h4 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h4><p>传说中的<code>setInterval</code>与<code>setTimeout</code>所在线程<br>浏览器定时计数器并不是由JavaScript引擎计数的,（因为JavaScript引擎是单线程的, 如果处于阻塞线程状态就会影响记计时的准确）<br>因此通过单独线程来计时并触发定时（计时完毕后，添加到事件队列中，等待JS引擎空闲后执行）</p>
 <p><strong>注意</strong>，W3C在HTML标准中规定，规定要求<code>setTimeout</code>中低于4ms的时间间隔算为4ms。</p>
 <h4 id="异步http请求线程"><a href="#异步http请求线程" class="headerlink" title="异步http请求线程"></a>异步http请求线程</h4><p>在<code>XMLHttpRequest</code>在连接后是通过浏览器新开一个线程请求<br>将检测到状态变更时，如果设置有回调函数，异步线程就产生状态变更事件，将这个回调再放入事件队列中。再由JavaScript引擎执行。</p>
-<p><img src="https://segmentfault.com/img/remote/1460000012925880" alt="浏览器内核"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/browser_inner_thread.png" alt="浏览器内核"></p>
 <p><strong>为什么JS引擎是单线程的？</strong> 这个问题其实应该没有标准答案，譬如，可能仅仅是因为由于多线程的复杂性，譬如多线程操作一般要加锁，因此最初设计时选择了单线程。。。</p>
 <h3 id="Browser进程和浏览器内核（Renderer进程）的通信过程"><a href="#Browser进程和浏览器内核（Renderer进程）的通信过程" class="headerlink" title="Browser进程和浏览器内核（Renderer进程）的通信过程"></a>Browser进程和浏览器内核（Renderer进程）的通信过程</h3><p>看到这里，首先，应该对浏览器内的进程和线程都有一定理解了，那么接下来，再谈谈浏览器的Browser进程（控制进程）是如何和内核通信的，<br>这点也理解后，就可以将这部分的知识串联起来，从头到尾有一个完整的概念。</p>
 <p>如果自己打开任务管理器，然后打开一个浏览器，就可以看到：任务管理器中出现了两个进程（一个是主控进程，一个则是打开Tab页的渲染进程），<br>然后在这前提下，看下整个的过程：(简化了很多)</p>
@@ -237,7 +241,7 @@
 <ul>
 <li>Browser进程接收到结果并将结果绘制出来</li>
 </ul>
-<p><img src="https://segmentfault.com/img/remote/1460000012925881" alt="流程"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/browser_rending_interact.png" alt="流程"></p>
 <h2 id="梳理浏览器内核中线程之间的关系"><a href="#梳理浏览器内核中线程之间的关系" class="headerlink" title="梳理浏览器内核中线程之间的关系"></a>梳理浏览器内核中线程之间的关系</h2><h3 id="GUI渲染线程与JS引擎线程互斥"><a href="#GUI渲染线程与JS引擎线程互斥" class="headerlink" title="GUI渲染线程与JS引擎线程互斥"></a>GUI渲染线程与JS引擎线程互斥</h3><p>由于JavaScript是可操纵DOM的，如果在修改这些元素属性同时渲染界面（即JS线程和UI线程同时运行），那么渲染线程前后获得的元素数据就可能不一致了。</p>
 <p>因此为了防止渲染出现不可预期的结果，浏览器设置GUI渲染线程与JS引擎为互斥的关系，当JS引擎执行时GUI线程会被挂起，<br>GUI更新则会被保存在一个队列中等到JS引擎线程空闲时立即被执行。</p>
 <h3 id="JS阻塞页面加载"><a href="#JS阻塞页面加载" class="headerlink" title="JS阻塞页面加载"></a>JS阻塞页面加载</h3><p>从上述的互斥关系，可以推导出，JS如果执行时间过长就会阻塞页面。</p>
@@ -280,7 +284,7 @@
 5.浏览器会将各层的信息发送给GPU，GPU会将各层合成（composite），显示在屏幕上。</code></pre>
 <p>所有详细步骤都已经略去，渲染完毕后就是load事件了，之后就是自己的JS逻辑处理了</p>
 <p>既然略去了一些详细的步骤，那么就提一些可能需要注意的细节把。</p>
-<p><img src="https://segmentfault.com/img/remote/1460000012934765" alt="渲染过程"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/browser_rending.png" alt="渲染过程"></p>
 <h3 id="load事件与DOMContentLoaded事件的先后"><a href="#load事件与DOMContentLoaded事件的先后" class="headerlink" title="load事件与DOMContentLoaded事件的先后"></a>load事件与DOMContentLoaded事件的先后</h3><p>上面提到，渲染完毕后会触发load事件，那么你能分清楚load事件与DOMContentLoaded事件的先后么？</p>
 <p>很简单，知道它们的定义就可以了：</p>
 <blockquote>
@@ -317,10 +321,10 @@
 <li>主线程之外，事件触发线程管理着一个任务队列，只要异步任务有了运行结果，就在任务队列之中放置一个事件。</li>
 <li>一旦执行栈中的所有同步任务执行完毕（此时JS引擎空闲），系统就会读取任务队列，将可运行的异步任务添加到可执行栈中，开始执行。</li>
 </ul>
-<p><img src="https://segmentfault.com/img/remote/1460000012925883" alt="图"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/js_event_loop.png" alt="图"></p>
 <p>看到这里，应该就可以理解了：为什么有时候setTimeout推入的事件不能准时执行？因为可能在<strong>它推入到事件列表时，主线程还不空闲，正在执行其它代码</strong>，<br>所以自然有误差。</p>
 <h3 id="事件循环机制进一步补充"><a href="#事件循环机制进一步补充" class="headerlink" title="事件循环机制进一步补充"></a>事件循环机制进一步补充</h3><p>这里就直接引用一张图片来协助理解：（参考自<a target="_blank" rel="noopener" href="http://vimeo.com/96425312">Philip Roberts的演讲《Help, I’m stuck in an event-loop》</a>）</p>
-<p><img src="https://segmentfault.com/img/remote/1460000012925884" alt="事件循环"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/js_event_loop2.png" alt="事件循环"></p>
 <blockquote>
 <p>上图大致描述就是：</p>
 </blockquote>
@@ -433,7 +437,7 @@ setTimeout */</code></pre>
 <li>当前宏任务执行完毕，开始检查渲染，然后GUI线程接管渲染</li>
 <li>渲染完毕后，JS线程继续接管，开始下一个宏任务（从事件队列中获取）</li>
 </ol>
-<p><img src="https://segmentfault.com/img/remote/1460000012925885" alt="如图"></p>
+<p><img src="https://dailc.github.io/staticResource/blog/basicKnowledge/singlethreadeventloop/js_macrotask_microtask.png" alt="如图"></p>
 <p>另外，请注意下<code>Promise</code>的<code>polyfill</code>与官方版本的区别：</p>
 <ul>
 <li>官方版本中，是标准的microtask形式</li>
@@ -508,7 +512,7 @@ timerFunc = () =&gt; &#123;
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

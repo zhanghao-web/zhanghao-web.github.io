@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,作用域首先我们说下作用域，简单地来说作用域指的是一个区域，里面包括变量，函数，常量等等定义信息和赋值信息，以及这个区域内代码书写的结构信息。作用域可以嵌套，我们通常知道js函数内是可以产生作用域的。,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+作用域首先我们说下作用域，简单地来说作用域指的是一个区域，里面包括变量，函数，常量等等定义信息和赋值信息，以及这个区域内代码书写的结构信息。作用域可以嵌套，我们通常知道js函数内是可以产生作用域,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -139,7 +141,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>首先我们说下作用域，简单地来说作用域指的是一个区域，里面包括变量，函数，常量等等定义信息和赋值信息，以及这个区域内代码书写的结构信息。作用域可以嵌套，我们通常知道js函数内是可以产生作用域的。<br>下面我们用具体代码来示例下：</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>首先我们说下作用域，简单地来说作用域指的是一个区域，里面包括变量，函数，常量等等定义信息和赋值信息，以及这个区域内代码书写的结构信息。作用域可以嵌套，我们通常知道js函数内是可以产生作用域的。<br>下面我们用具体代码来示例下：</p>
 <p><img src="https://image-static.segmentfault.com/114/508/1145089023-5923b87dde95f_articlex" alt="scope"></p>
 <p><code>全局作用域</code>（global scope）里面定义了两个变量，一个函数。walk 函数生成的作用域里面定义了一个变量，两个函数。innerFunc 和 anotherInnerFunc 这两个函数生成的作用域里面分别定义了一个变量。在规范中作用域更官方的叫法是词法环境（Lexical Environments）。什么意思？就是作用域包含哪些内容取决于你代码怎么写，你把定义 go 变量写在了 walk 函数里面，那么 go 变量就属于<code> walk 函数作用域</code>。</p>
 <blockquote>
@@ -269,7 +273,7 @@ console.log( blockFunc ); // ReferenceError: blockFunc is not defined</code></pr
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

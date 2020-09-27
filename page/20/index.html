@@ -384,12 +384,14 @@
         
         <div class="md-content animated fadeIn">
             
-                <p></p>
+                <meta name="referrer" content="no-referrer">
+
+<p></p>
 <p>延迟加载图片的目的在于，在发出对应的网络请求之前你要一直等到用户滚动页面让图片进入可见区域。如果你的网页包括了多张图片，但你只在每张图片滚动到视区时才加载，你将最终会节省带宽并确保你的网页加载的更快。</p>
 <p>为了让你在实际中了解这一点，让我们想象下面这个页面，他有三张图片。</p>
 <p></p>
 <p>如果用户访问页面时仅看到了第一张图，我们并不想加载网页底部的比萨图片，除非用户向下滚动直到图片真正进入视区。如果我们延迟加载图片，这意味着用户只在他们需要时下载他们需要的东西，这让你的网页更加精简。</p>
-<p>对于更有经验的开发者，你也...</p>
+<p>对于更有经验的开发者，你...</p>
             
             <span class="read-more"><a href="/2018/08/01/HTTP/%E4%BD%BF%E7%94%A8-Intersection-Observer-%E5%AE%9E%E7%8E%B0%E5%9B%BE%E7%89%87%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
@@ -433,11 +435,13 @@
         
         <div class="md-content animated fadeIn">
             
-                <p>说道fetch就不得不提<code>XMLHttpRequest</code>了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致配置和调用比较混乱，也不符合关注分离的原则；fetch的出现正是为了解决XHR存在的这些问题。例如下面代码：</p>
+                <meta name="referrer" content="no-referrer">
+
+<p>说道fetch就不得不提<code>XMLHttpRequest</code>了，XHR在发送web请求时需要开发者配置相关请求信息和成功后的回调，尽管开发者只关心请求成功后的业务处理，但是也要配置其他繁琐内容，导致配置和调用比较混乱，也不符合关注分离的原则；fetch的出现正是为了解决XHR存在的这些问题。例如下面代码：</p>
 <pre><code class="js">fetch(url).then(function(response)&#123;
     return response.json();
 &#125;).then(function(data)&#123;
-    console...</code></pre>
+    ...</code></pre>
             
             <span class="read-more"><a href="/2018/07/27/study/fetch%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>

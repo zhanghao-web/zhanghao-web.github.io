@@ -10,9 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,前言有时候我们需要在用户离开页面的时候，做一些上报来记录用户行为。又或者是发送服务器ajax请求，通知服务器用户已经离开，比如直播间内的退房操作。
-本文主要分两部分来讲解怎么完成退出行为的上报。
-事,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+前言有时候我们需要在用户离开页面的时候，做一些上报来记录用户行为。又或者是发送服务器ajax请求，通知服务器用户已经离开，比如直播间内的退房操作。
+本文主要分两部分来讲解怎么完成退出行为的上报。,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -141,7 +142,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有时候我们需要在用户离开页面的时候，做一些上报来记录用户行为。又或者是发送服务器ajax请求，通知服务器用户已经离开，比如直播间内的退房操作。</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有时候我们需要在用户离开页面的时候，做一些上报来记录用户行为。又或者是发送服务器ajax请求，通知服务器用户已经离开，比如直播间内的退房操作。</p>
 <p>本文主要分两部分来讲解怎么完成退出行为的上报。</p>
 <h2 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h2><p>浏览器有两个事件可以用来监听页面关闭，<code>beforeunload</code>和<code>unload</code>。<br><code>beforeunload</code>是在文档和资源将要关闭的时候调用的， 这时候文档还是可见的，并且在这个关闭的事件还是可以取消的。比如下面这种写法就会让用户导致在刷新或者关闭页面时候，有个弹窗提醒用户是否关闭。</p>
 <pre><code class="js">window.addEventListener(&quot;beforeunload&quot;, function (event) &#123;
@@ -242,7 +245,7 @@ navigator.sendBeacon(&quot;/cgi-bin/leave_room&quot;, params);</code></pre>
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

@@ -10,7 +10,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,React生命周期流程调用流程可以参看上图。分为实例化，存在期和销毁三个不同阶段。介绍生命周期流程的文章很多，相信大部分同学也有所了解，我们就不详细分析了。很多同学肯定有疑问，这些方法在React内,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+React生命周期流程调用流程可以参看上图。分为实例化，存在期和销毁三个不同阶段。介绍生命周期流程的文章很多，相信大部分同学也有所了解，我们就不详细分析了。很多同学肯定有疑问，这些方法在Reac,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -139,7 +141,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="React生命周期流程"><a href="#React生命周期流程" class="headerlink" title="React生命周期流程"></a>React生命周期流程</h1><p><img src="http://img.colabug.com/2017/10/965595492cafc7b07b8340cdc9b4441d.png" alt="react"><br>调用流程可以参看上图。分为实例化，存在期和销毁三个不同阶段。介绍生命周期流程的文章很多，相信大部分同学也有所了解，我们就不详细分析了。很多同学肯定有疑问，这些方法在React内部是在哪些方法中被调用的呢，他们触发的时机又是什么时候呢。下面我们来详细分析。</p>
+            <meta name="referrer" content="no-referrer"/>
+
+<h1 id="React生命周期流程"><a href="#React生命周期流程" class="headerlink" title="React生命周期流程"></a>React生命周期流程</h1><p><img src="http://img.colabug.com/2017/10/965595492cafc7b07b8340cdc9b4441d.png" alt="react"><br>调用流程可以参看上图。分为实例化，存在期和销毁三个不同阶段。介绍生命周期流程的文章很多，相信大部分同学也有所了解，我们就不详细分析了。很多同学肯定有疑问，这些方法在React内部是在哪些方法中被调用的呢，他们触发的时机又是什么时候呢。下面我们来详细分析。</p>
 <h1 id="实例化生命周期"><a href="#实例化生命周期" class="headerlink" title="实例化生命周期"></a>实例化生命周期</h1><h2 id="getDefaultProps"><a href="#getDefaultProps" class="headerlink" title="getDefaultProps"></a>getDefaultProps</h2><p>在React.creatClass()初始化组件类时，会调用getDefaultProps()，将返回的默认属性挂载到defaultProps变量下</p>
 <p>这里要提的一点是，初始化组件类只运行一次。可以把它简单类比为Java中的Class对象。初始化组件类就是ClassLoader加载Class对象的过程。类对象的初始化不要错误理解成了实例对象的初始化。一个React组件类可能会在JSX中被多次调用，产生多个组件对象，但它只有一个类对象，也就是类加载后getDefaultProps就不会再调用了。</p>
 <h2 id="getlnitialState"><a href="#getlnitialState" class="headerlink" title="getlnitialState"></a>getlnitialState</h2><p>这个方法在创建组件实例对象的时候被调用，具体代码位于React.creatClass()的Constructor函数中。</p>
@@ -572,7 +576,7 @@ _renderValidatedComponentWithoutOwnerOrContext: function() &#123;
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>

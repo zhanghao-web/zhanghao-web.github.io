@@ -10,8 +10,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="TriDiamond Obsidian,"> 
-    <meta name="description" content="一枚前端搬砖队队员的记录册,原文地址
-前言在不同作用域下变量与函数的提升表现也是不一致的。在 JavaScript 中，所有绑定的声明会在控制流到达它们出现的作用域时被初始化；这里的作用域其实就是所谓的执行上下文（Execut,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+原文地址
+前言在不同作用域下变量与函数的提升表现也是不一致的。在 JavaScript 中，所有绑定的声明会在控制流到达它们出现的作用域时被初始化；这里的作用域其实就是所谓的执行上下文（Exec,"> 
     <meta name="author" content="张白告丶"> 
     <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -140,7 +142,9 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903490989342728">原文地址</a></p>
+            <meta name="referrer" content="no-referrer"/>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903490989342728">原文地址</a></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在不同作用域下变量与函数的提升表现也是不一致的。在 <code>JavaScript</code> 中，所有绑定的声明会在控制流到达它们出现的作用域时被初始化；这里的作用域其实就是所谓的<code>执行上下文（Execution Context）</code>，每个执行上下文分为<code>内存分配（Memory Creation Phase）</code>与<code>执行（Execution）</code>这两个阶段。在执行上下文的内存分配阶段会进行变量创建，即开始进入了变量的生命周期；变量的生命周期包含了<code>声明（Declaration phase）</code>、<code>初始化（Initialization phase）</code>与<code>赋值（Assignment phase）</code>过程这三个过程。</p>
 <p>传统的 <code>var</code> 关键字声明的变量允许在声明之前使用，此时该变量被赋值为 <code>undefined</code>；而函数作用域中声明的函数同样可以在声明前使用，其函数体也被<strong>提升到了头部</strong>。这种特性表现也就是所谓的<code>提升（Hoisting）</code>；</p>
 <p>虽然在 <code>ES6</code> 中以 <code>let 与 const</code> 关键字声明的变量同样会在作用域头部被初始化，不过这些变量仅允许在实际声明之后使用。在作用域头部与变量实际声明处之间的区域就称为所谓的<code>暂时死域（Temporal Dead Zone）</code>，，TDZ 能够避免传统的提升引发的潜在问题。</p>
@@ -446,7 +450,7 @@ require([&quot;parsing&quot;], function(Parsing) &#123;
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">189 <p>Articles</p></a></li>
+                    <li><a href="/">188 <p>Articles</p></a></li>
                     <li><a href="/categories">27 <p>Categories</p></a></li>
                     <li><a href="/tags">55 <p>Tags</p></a></li>
                 </ul>
