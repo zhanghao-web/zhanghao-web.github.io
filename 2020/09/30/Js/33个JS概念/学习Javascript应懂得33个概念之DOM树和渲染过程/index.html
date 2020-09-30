@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之DOM树和渲染过程 - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+DOM操作平时中因为有各个框架的API使用，使我们对DOM的操作，慢慢变得淡忘，但是我们要知道的是各个框架也是操作dom的，只是将方法暴露出来，方便我们使用。通过学习DOM操作，加深对Javas,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之DOM树和渲染过程</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                September 30, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/09/30/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BDOM%E6%A0%91%E5%92%8C%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/" title="学习Javascript应懂得33个概念之DOM树和渲染过程" class="">学习Javascript应懂得33个概念之DOM树和渲染过程</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    6.8k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    6 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<h2 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h2><p>平时中因为有各个框架的API使用，使我们对DOM的操作，慢慢变得淡忘，但是我们要知道的是各个框架也是操作dom的，只是将方法暴露出来，方便我们使用。通过学习DOM操作，加深对Javascript的理解</p>
+<p>DOM操作并没有你想象的那么难。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2016/11/29/8d195c29c5f16f86e390d4c6f26084da?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="dom操作"></p>
+<h3 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h3><p>让我们开始创建HTML元素，为了创建元素，你需要用<code>document.createElement(tagName) </code>方法：</p>
+<pre><code class="js">const h1 = document.createElement(&#39;h1&#39;)
+//</code></pre>
+<h3 id="修改文本内容"><a href="#修改文本内容" class="headerlink" title="修改文本内容"></a>修改文本内容</h3><pre><code class="js">h1.textContent = &#39;hello world&#39;</code></pre>
+<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><pre><code class="js">h1.setAttributes(&#39;class&#39;,&#39;hello&#39;)</code></pre>
+<p>为了管理类，用<code>element.className</code>属性</p>
+<pre><code class="js">h1.className = &#39;world&#39;</code></pre>
+<p>然而，最好的办法还是用<code>classList</code></p>
+<pre><code class="js">h1.classList.add(&#39;hello&#39;)
+h1.classList.remove(&#39;hello&#39;)</code></pre>
+<p>要设置元素的ID,你可以用attribute或者直接设置id属性</p>
+<pre><code class="js">h1.setAttribute(&#39;id&#39;, &#39;hello-world&#39;)
+h1.id = &#39;hello-world&#39;</code></pre>
+<blockquote>
+<p>如果你不确定是用attributes还是properties，那就用attributes，除了表单元素的状态，像value和checked</p>
+</blockquote>
+<p>除了下面这些，你不能用<code>element.setAttribute(someBoolean, false)</code>来设置bool值：</p>
+<pre><code class="js">input.checked = true
+// 
+input.checked = false
+// 
+input.setAttribute(‘checked’, ‘’)
+// 
+input.removeAttribute(&#39;checked&#39;)
+// </code></pre>
+<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><pre><code class="js">document.body.appendChild(h1)</code></pre>
+<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><pre><code class="js">document.body.removeChild(h1)</code></pre>
+<h3 id="查找元素"><a href="#查找元素" class="headerlink" title="查找元素"></a>查找元素</h3><pre><code class="js">document.getElementById(id)
+element.childNodes[i]
+element.firstChild === element.childNodes[0]
+element.lastChild === element.childNodes[element.childNodes.length - 1]
+element.getElementsByTagName(tagName)
+element.getElementsByClassName(className)
+element.querySelector(query)
+element.querySelectorAll(query)</code></pre>
+<p><strong>注意</strong>：<code>getElementsByTagName, getElementsByClassName 和 querySelectorAll</code>返回的不是数组，而是一个<code>NodeList</code>，所以不能用ES5的数组迭代器迭代，这里有一些关于<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/NodeList#Workarounds">NodeList的介绍</a></p>
+<h3 id="元素之间插入元素"><a href="#元素之间插入元素" class="headerlink" title="元素之间插入元素"></a>元素之间插入元素</h3><pre><code class="js"> document.body.insertBefore(h1, document.body.firstChild)</code></pre>
+<h3 id="创建很多元素"><a href="#创建很多元素" class="headerlink" title="创建很多元素"></a>创建很多元素</h3><pre><code class="js">const data = [
+  [ 1, 2, 3 ],
+  [ 4, 5, 6 ],
+  [ 7, 8, 9 ]
+  ]
+const table = document.createElement(&#39;table&#39;)
+data.forEach(row =&gt; &#123;
+  const tr = document.createElement(&#39;tr&#39;)
+  row.forEach(cell =&gt; &#123;
+    const td = document.createElement(&#39;td&#39;)
+
+    td.textContent = cell
+    tr.appendChild(td)
+  &#125;)
+  table.appendChild(tr)
+&#125;)
+document.body.appendChild(table)</code></pre>
+<h3 id="更新一系列元素"><a href="#更新一系列元素" class="headerlink" title="更新一系列元素"></a>更新一系列元素</h3><pre><code class="js">const table = document.createElement(&#39;table&#39;)
+document.body.appendChild(table)
+updateTable(table, [
+  [ 1, 2 ],
+  [ 3, 4, 5 ],
+  [ 6, 7, 8, 9 ]
+  ])
+setTimeout(() =&gt; &#123;
+  updateTable(table, [
+    [ 1, 2, 3, 4 ],
+    [ 5, 6, 7 ],
+    [ 8, 9 ]
+  ])  
+&#125;, 1000)
+function updateTable (table, data) &#123;
+  const rowLookup = table._lookup || (table._lookup = [])
+
+  setChildren(table, updateRows(rowLookup, data))
+&#125;
+function updateRows (rowLookup, rows) &#123;
+  return rows.map((row, y) =&gt; &#123;
+    const tr = rowLookup[y] || (rowLookup[y] = document.createElement(&#39;tr&#39;))
+    const cellLookup = tr._lookup || (tr._lookup = [])
+    setChildren(tr, updateCells(cellLookup, row))
+    return tr
+  &#125;)
+&#125;
+function updateCells (cellLookup, cells) &#123;
+  return cells.map((cell, x) =&gt; &#123;
+      const td = cellLookup[x] || (cellLookup[x] = document.createElement(&#39;td&#39;))
+      td.textContent = cell
+      return td
+    &#125;)
+&#125;
+function setChildren (parent, children) &#123;
+  let traverse = parent.firstChild
+  for (let i = 0; i &lt; children.length; i++) &#123;
+    const child = children[i]
+
+    if (child == null) &#123;
+      return
+    &#125;
+
+    if (child === traverse) &#123;
+      traverse = traverse.nextSibling
+    &#125; else if (traverse) &#123;
+      parent.insertBefore(child, traverse)
+    &#125; else &#123;
+      parent.appendChild(child)
+    &#125;
+  &#125;
+
+  while (traverse) &#123;
+    const next = traverse.nextSibling
+    parent.removeChild(traverse)
+
+    traverse = next
+  &#125;
+&#125;</code></pre>
+<p>这里发生了两件事：</p>
+<ul>
+<li>1.这里有一个隐藏的元素<code>element._lookup = []</code>，用来查找子元素（可能是一个有id的元素），用这个方法我们可以重复利用已经存在的dom，更新他们</li>
+<li>2.<code>setChildren(parent, children)</code>方法里有包含子元素的列表</li>
+</ul>
+<p>你还可以用<code>setChildren</code>方法来<code>mount/unmount</code>子元素</p>
+<pre><code class="js">setChildren(login, [
+  email,
+  !forgot &amp;&amp; pass
+])</code></pre>
+<h2 id="DOM树的渲染"><a href="#DOM树的渲染" class="headerlink" title="DOM树的渲染"></a>DOM树的渲染</h2><h3 id="CSS-不会阻塞-DOM-的解析"><a href="#CSS-不会阻塞-DOM-的解析" class="headerlink" title="CSS 不会阻塞 DOM 的解析"></a>CSS 不会阻塞 DOM 的解析</h3><p>首先在头部插入<code>&lt;script defer src=&quot;/js/logDiv.js&quot;&gt;&lt;/script&gt;</code>，JS文件的内容是：</p>
+<pre><code class="js">const div = document.querySelector(&#39;div&#39;);
+console.log(div);</code></pre>
+<p><code>defer</code>属性相信大家也很熟悉了，MDN对此的描述是用来通知浏览器该脚本将在文档完成解析后，触发 <code>DOMContentLoaded</code> 事件前执行。设置这个属性，能保证DOM解析后马上打印出div。</p>
+<p>浏览器是解析DOM生成<code>DOM Tree</code>，结合CSS生成的<code>CSS Tree</code>，最终组成<code>render tree</code>，再渲染页面。由此可见，在此过程中CSS完全无法影响<code>DOM Tree</code>，因而无需阻塞DOM解析。然而，<code>DOM Tree</code>和<code>CSS Tree</code>会组合成<code>render tree</code>，那CSS会不会页面阻塞渲染呢？</p>
+<h3 id="CSS-阻塞页面渲染"><a href="#CSS-阻塞页面渲染" class="headerlink" title="CSS 阻塞页面渲染"></a>CSS 阻塞页面渲染</h3><p>如果脚本的内容是获取元素的样式，宽高等CSS控制的属性，浏览器是需要计算的，也就是依赖于CSS。浏览器也无法感知脚本内容到底是什么，为避免样式获取，因而只好等前面所有的样式下载完后，再执行JS。因而造成了之前例子的情况。</p>
+<h3 id="JS-阻塞-DOM-解析"><a href="#JS-阻塞-DOM-解析" class="headerlink" title="JS 阻塞 DOM 解析"></a>JS 阻塞 DOM 解析</h3><p>浏览器遇到<code> &lt;script&gt;</code> 标签时，会触发页面渲染</p>
+<p>每次碰到<code>&lt;script&gt;</code>标签时，浏览器都会渲染一次页面。这是基于同样的理由，浏览器不知道脚本的内容，因而碰到脚本时，只好先渲染页面，确保脚本能获取到最新的DOM元素信息，尽管脚本可能不需要这些信息。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">192 <p>Articles</p></a></li>
+                    <li><a href="/categories">27 <p>Categories</p></a></li>
+                    <li><a href="/tags">55 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">DOM操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%85%83%E7%B4%A0"><span class="toc-number">1.1.</span> <span class="toc-text">创建元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="toc-number">1.2.</span> <span class="toc-text">修改文本内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attributes"><span class="toc-number">1.3.</span> <span class="toc-text">Attributes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0"><span class="toc-number">1.4.</span> <span class="toc-text">添加元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%85%83%E7%B4%A0"><span class="toc-number">1.5.</span> <span class="toc-text">删除元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0"><span class="toc-number">1.6.</span> <span class="toc-text">查找元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%B4%A0%E4%B9%8B%E9%97%B4%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0"><span class="toc-number">1.7.</span> <span class="toc-text">元素之间插入元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%BE%88%E5%A4%9A%E5%85%83%E7%B4%A0"><span class="toc-number">1.8.</span> <span class="toc-text">创建很多元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E4%B8%80%E7%B3%BB%E5%88%97%E5%85%83%E7%B4%A0"><span class="toc-number">1.9.</span> <span class="toc-text">更新一系列元素</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM%E6%A0%91%E7%9A%84%E6%B8%B2%E6%9F%93"><span class="toc-number">2.</span> <span class="toc-text">DOM树的渲染</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E4%B8%8D%E4%BC%9A%E9%98%BB%E5%A1%9E-DOM-%E7%9A%84%E8%A7%A3%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">CSS 不会阻塞 DOM 的解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-%E9%98%BB%E5%A1%9E%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93"><span class="toc-number">2.2.</span> <span class="toc-text">CSS 阻塞页面渲染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS-%E9%98%BB%E5%A1%9E-DOM-%E8%A7%A3%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text">JS 阻塞 DOM 解析</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
