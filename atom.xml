@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2020-11-11T08:07:34.956Z</updated>
+  <updated>2020-11-18T09:41:55.881Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GraphQL vs Restful Api</title>
+    <link href="https://shinichikudo-fe.github.io/2020/11/18/GraphQL/GraphQL-vs-Restful-Api/"/>
+    <id>https://shinichikudo-fe.github.io/2020/11/18/GraphQL/GraphQL-vs-Restful-Api/</id>
+    <published>2020-11-18T09:07:34.000Z</published>
+    <updated>2020-11-18T09:41:55.881Z</updated>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p><a href="https://cloud.tencent.com/developer/news/572892">原文地址</a></p><h2 id="与传统-REST-API-相比，GraphQL-提供了哪些优势？"><a href="#与传统-REST-API-相比，GraphQL-提供了哪些优势？" class="headerlink" title="与传统 REST API 相比，GraphQL 提供了哪些优势？"></a>与传统 REST API 相比，GraphQL 提供了哪些优势？</h2><p>我们将讨论 GraphQL 的设计原则，比较 GraphQL 与 REST 中的相同请求，并深入探讨 GraphQL 相对其他架构的优点。</p><p>为理解 GraphQL 作为 API 架构的好处，我们要讨论 API 在<code>客户端 - 服务器</code>结构中的作用。<strong>API（应用程序编程接口）是一个中间层，它允许服务器从客户端接收结构化数据请求，并针对请求的数据发送结构化的响应</strong>。设计 API 架构的方法有很多种。</p><p>让我们来研究一下促使 GraphQL 适合现代化 Web 应用程序的重要基本设计原则。</p><h2 id="GraphQL-服务器的设计原则"><a href="#GraphQL-服务器的设计原则" class="headerlink" title="GraphQL 服务器的设计原则"></a>GraphQL 服务器的设计原则</h2><p> 1.<strong>查询为分层结构</strong>，使用将查询与响应数据1对1匹配的分层和嵌套字段格式。查询和响应的形状类似于树，可查询每个项的其他嵌套字段。在 Facebook 的新闻推送中，这种结构允许一个查询返回一个帖子列表、每个特定帖子的评论，以及每个评论的点赞。</p><p> 2.<strong>该结构以产品为中心，关注前端希望如何接收数据，并构建交付所需的运行时</strong>。这使得 Facebook 的新闻推送可通过一次请求从后端获取需要的所有数据，使服务器按照 GraphQL 的规范从不同的端点获取数据。</p><p> 3.<strong>它使用特定于应用程序的类型系统，该系统使开发人员能在执行前确保查询使用了有效类型，并且语法正确</strong>。例如，新闻推送的 GraphQL 模式要求字段“<code>user</code>”必须包含一个字符串，而“<code>likes</code>”必须包含一个数字。如果查询试图添加不同类型的输入，GraphQL 将在执行查询前抛出一个错误。</p><p> 4.<strong>GraphQL 查询是在客户端指定的，因此，客户端确切知道它将以何种格式接收数据</strong>。这意味着，如果前端请求的格式是包含用户名、评论和点赞的 post 数据，那么来自 Facebook 新闻推送的请求会构建在一个对象中，而不是像其他架构那样构建多个单独的数据块。</p><p> 5.<strong>使用 GraphQL 的服务器结构必须是内省的，或者可由 GraphQL 自己查询</strong>。于是才有了像 <a href="https://github.com/graphql/graphiql">GraphiQL</a> 或 <a href="https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/">GraphQL playground</a> 这样的强大工具。这两种工具都可以让 Facebook 开发人员准确地看到在他们的服务器上使用了哪些查询和字段。</p><h2 id="传统的-RESTful-架构"><a href="#传统的-RESTful-架构" class="headerlink" title="传统的 RESTful 架构"></a>传统的 RESTful 架构</h2><p>REST 架构的设计范式侧重于分配 HTTP 请求方法（<code>GET、POST、PUT、PATCH、DELETE</code>）和 URL 端点之间的关系。</p><p><img src="https://ask.qcloudimg.com/http-save/yehe-7350649/gmtfcrky41.png?imageView2/2/w/1620" alt="restful"></p><p><strong>在 REST 架构中，方法和端点的每个组合得到不同的封装功能</strong>。如果客户端需要的数据特定端点 / 方法不提供，则可能需要额外请求。从 REST 请求返回的数据格式依赖于端点—不能保证这些数据会按照前端需要的方式进行格式化。为使用来自响应的数据（格式与缺省情况下从端点返回的格式不同），必须在客户端编写数据解析和数据操作。</p><p>接下来，让我们看看 GraphQL 规范与 REST 的不同之处，以及它的优点。这些优点使这个新架构成为特别适合解决客户端和服务器之间数据交付问题的解决方案。</p><h2 id="GraphQL-架构"><a href="#GraphQL-架构" class="headerlink" title="GraphQL 架构"></a>GraphQL 架构</h2><p>与 RESTful API 一样，GraphQL API 设计用于处理 HTTP 请求并对这些请求提供响应。无论如何，这就是相似之处。**REST API 构建在请求方法和端点之间的连接上，而 GraphQL API 被设计为只通过一个端点，始终使用 POST 请求进行查询，其 URL 通常是 <code>yourdomain.com/graphql</code>**。</p><p><img src="https://ask.qcloudimg.com/http-save/yehe-7350649/yvuf86kzg2.jpeg?imageView2/2/w/1620" alt="graphql"></p><p>请求到达 GraphQL 端点后，客户端请求的载荷完全在请求体中处理。这个请求体必须遵循 GraphQL 规范，API 必须<strong>有适当的服务器端逻辑来处理这些请求并提供适当的响应</strong>。</p><p>这提供了比 RESTful API 更流畅的客户端体验，后者可能要求客户端针对多个数据块发出多个请求，并在数据返回后进行操作。</p><p>为了阐明 GraphQL 是如何实现这一点的，让我们分解一下 GraphQL 服务器的结构。</p><h2 id="GraphQL-服务器"><a href="#GraphQL-服务器" class="headerlink" title="GraphQL 服务器"></a>GraphQL 服务器</h2><p>启用 GraphQL 逻辑的服务器端逻辑由定义了服务器功能的 <code>Documents</code> 组成。这些 <code>Documents</code> 包含可执行文件和类型系统定义。顾名思义，类型系统定义为每个数据字段定义可接受的类型和格式输入及结果。</p><p>可执行文件包含要处理的可能的操作列表，其中包括操作类型（查询、修改或订阅）、操作名称、要查询或写入的字段和一个选择集，该选择集准确定义了将从操作返回的数据。选择集是 GraphQL 的最大价值所在——它们允许客户端查询特定的数据集并接收包含所请求信息的响应：不多不少。</p><p>有关 GraphQL 规范的结构和语法的更多信息，请参阅 <a href="http://spec.graphql.org/June2018/#sec-Overview">GraphQL 的文档</a>。</p><p>接下来，我们将看下 GraphQL 中查询的结构。</p><h2 id="GraphQL-查询解析"><a href="#GraphQL-查询解析" class="headerlink" title="GraphQL 查询解析"></a>GraphQL 查询解析</h2><p>下面是一个结构化的 GraphQL 查询，用于获取特定书籍的数据，包括作者的姓和名。</p><pre><code class="js">GET /graphql?query=&#123; books(id:12) &#123; authors &#123; firstName, lastName &#125; title, yearPublished, length &#125; &#123;   Query &#123;                 //  operation type  books (id:12) &#123;         //  operation endpoint     authors &#123;            //  requested fields        firstName        lastName     &#125;      title     yearPublished        &#125;  &#125;&#125;</code></pre><p>这一切都可以通过一个查询由 GraphQL 服务器逻辑解析和处理完成。当把它与 REST 架构中相同结构的请求进行比较时，GraphQL 的优势就开始显现出来了。</p><p>让我们看看下面的 REST 请求结构，然后重点讨论其中的一些差异！</p><h2 id="REST-请求解析"><a href="#REST-请求解析" class="headerlink" title="REST 请求解析"></a>REST 请求解析</h2><p>要向 REST API 发出相同的请求，客户端首先需要向能够返回图书数据的端点发送一个请求，并将图书 id 作为参数传入：</p><pre><code class="js">GET /books/12</code></pre><p>这个请求可能会返回一个包含特定图书所有数据的对象，例如：</p><pre><code class="js">&#123;   “title” : “The Hitchhiker&#39;s Guide to the Galaxy”,  “authorID”: 42,  “yearPublished” : 1978,  “length”: 208,  “genre”: “Science Fiction”&#125;</code></pre><p>在我们的例子里，与相同的 GraphQL 查询相比，该响应有两个缺点：</p><ul><li>1.REST 响应包含类似 genre 这样的额外数据，返回的信息超出了我们的需求。</li><li>2.REST 需要再发送一个请求来获得我们实际上正在查找的数据：这个特定作者的所有书籍。</li></ul><p>为了获得这些数据，我们需要使用我们的 <code>authorID</code> 发出一个额外的请求：</p><pre><code class="js">GET /authors/42</code></pre><p>这个请求的响应应该包含我们正在查找的所有数据：</p><pre><code class="js">&#123;   “firstName” : “Douglas”,  “lastName”: “Adams”&#125;</code></pre><p>现在我们已经有了需要的所有书籍和作者数据，响应解析由客户端完成。现在，前端应用程序必须将来自不同端点的数据组合在一起，用于实现期望的功能。总的来说，与 REST API 相比，GraphQL 提供的性能优势可以为前端开发人员带来回报。使用 GraphQL 规范创建服务器可能需要更多的设置以及编写预测性的服务器端逻辑来解析和处理请求。</p><p>虽然 GraphQL 的设置成本可能比传统的 REST 架构要高，但是，更易于维护的代码、健壮的开发工具和精简的客户端查询所带来的好处通常会超过成本。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cloud.tencent.com/developer/news/572892&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;与传统-REST-AP</summary>
+      
+    
+    
+    
+    <category term="GraphQL" scheme="https://shinichikudo-fe.github.io/categories/GraphQL/"/>
+    
+    
+    <category term="GraphQL" scheme="https://shinichikudo-fe.github.io/tags/GraphQL/"/>
+    
+  </entry>
   
   <entry>
     <title>GraphQL 基础实践</title>
@@ -491,32 +518,6 @@
     <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
 
 &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;通过js中判断类型是否相等及检测数据类型的方法</summary>
-      
-    
-    
-    
-    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
-    
-    
-    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习javascript应懂得33个概念之隐式，显式，名义和鸭子类型</title>
-    <link href="https://shinichikudo-fe.github.io/2020/09/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%9A%90%E5%BC%8F%EF%BC%8C%E6%98%BE%E5%BC%8F%EF%BC%8C%E5%90%8D%E4%B9%89%E5%92%8C%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/"/>
-    <id>https://shinichikudo-fe.github.io/2020/09/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%9A%90%E5%BC%8F%EF%BC%8C%E6%98%BE%E5%BC%8F%EF%BC%8C%E5%90%8D%E4%B9%89%E5%92%8C%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</id>
-    <published>2020-09-11T06:12:55.000Z</published>
-    <updated>2020-09-27T08:44:19.030Z</updated>
-    
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。</p><h2 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h2><p>在 JavaScript 中，当我们进行比较操作或者加减乘除四则运算操作时，常常会触发 JavaScript 的隐式类型转换机制；而这部分也往往是令人迷惑的地方。譬如浏览器中的 <code>console.log</code> 操作常常会将<strong>任何值都转化为字符串</strong>然后展示，而数学运算则会首先将值<strong>转化为数值类型</strong>（除了 <code>Date</code> 类型对象）然后进行操作。</p><h3 id="关系操作符（-lt-gt-lt-gt-）"><a href="#关系操作符（-lt-gt-lt-gt-）" class="headerlink" title="关系操作符（&lt;, &gt;, &lt;=, &gt;=）"></a>关系操作符（&lt;, &gt;, &lt;=, &gt;=）</h3><p>与上述操作符一样，<code>关系操作符</code>的操作值也可以是任意类型的，所以使用<code>非数值类型</code>参与比较时也需要系统进行<code>隐式类型转换</code>：<br>（1）如果两个操作值都是数值，则进行数值比较<br>（2）如果两个操作值都是字符串，则比较字符串对应的字符编码值<br>（3）如果只有一个操作值是数值，则将另一个操作值转换为数值，进行数值比较<br>（4）如果一个操作数是对象，则调用valueOf()方法（如果对象没有valueOf()方法则调用toString()方法），得到的结果按照前面的规则执行比较<br>（5）如果一个操作值是布尔值，则将其转换为数值，再进行比较<br>注：NaN是非常特殊的值，它不和任何类型的值相等，包括它自己，同时它与任何类型的值比较大小时都返回false。</p><h3 id="相等操作符（-）"><a href="#相等操作符（-）" class="headerlink" title="相等操作符（==）"></a>相等操作符（==）</h3><p><code>相等操作符</code>会对操作值进行隐式转换后进行比较：<br>（1）如果一个操作值为布尔值，则在比较之前先将其转换为数值<br>（2）如果一个操作值为字符串，另一个操作值为数值，则通过Number()函数将字符串转换为数值<br>（3）如果一个操作值是对象，另一个不是，则调用对象的valueOf()方法，得到的结果按照前面的规则进行比较<br>（4）null与undefined是相等的<br>（5）如果一个操作值为NaN，则相等比较返回false<br>（6）如果两个操作值都是对象，则比较它们是不是指向同一个对象</p><h3 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h3><pre><code class="js">function Person()&#123;&#125;Person.prototype = &#123;  toString() &#123; return &quot;ooo&quot;;&#125;,  valueOf() &#123; return 123;&#125;&#125;var p = new Person() ;// ️ result in chrome</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/2591556-6e772a8971dd0cef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/680/format/webp" alt="demo"></p><h3 id="date类型转换出现的问题"><a href="#date类型转换出现的问题" class="headerlink" title="date类型转换出现的问题"></a>date类型转换出现的问题</h3><pre><code class="js">var date = new Date(&quot;1970/1/2 8:00:00&quot;);date.valueOf() ; //console of Chrome : 86400000date.toString(); //console of Chrome : &quot;Fri Jan 02 1970 08:00:00 GMT+0800 (CST)&quot; // &#39;&lt;=&#39; &#39;&lt;&#39; &#39;==&#39; don&#39;t have self-consistentdate &lt;= 86400000 //console of Chrome : truedate &lt;  86400000 //console of Chrome : falsedate == 86400000 //console of Chrome : false // Oh! It&#39;s awesome!//This make sensedate == date.toString() //console of Chrome : truedate &lt;= date.toString() //console of Chrome : false// Oh! It really make sense because 864000 &lt;= &quot;string&quot; is equal to 864000 &lt;= 0</code></pre><p>date 在遇到<code>&#39;&lt;&#39; &#39;&lt;=&#39;</code>的时候会默认转换至<code>.valueOf()</code> ,<br>而它遇到<code> &#39;==&#39;</code> 的时候明明有<code>.valueOf()</code>却还是选择转换为<code> .toString()</code></p><p><a href="https://juejin.im/post/5a7172d9f265da3e3245cbca#heading-6">解决该疑惑可以看</a></p><h2 id="显示类型转换"><a href="#显示类型转换" class="headerlink" title="显示类型转换"></a>显示类型转换</h2><p>显示的转换数据类型主要通过JS定义的数据转换方法。</p><h3 id="转换为布尔值："><a href="#转换为布尔值：" class="headerlink" title="转换为布尔值："></a>转换为布尔值：</h3><p>Boolean() :将一个值转换为其对应的Boolean值</p><pre><code class="js">var message = “Hello world!”;var messageAsBoolean = Boolean(message)console.log(messageAsBoolean);   //true</code></pre><p>各种数据类型及其对应的转换规则。</p><table><thead><tr><th align="left">数据类型</th><th align="center">转换为true的值</th><th align="right">转换为false的值</th></tr></thead><tbody><tr><td align="left">Boolean</td><td align="center">true</td><td align="right">false</td></tr><tr><td align="left">String</td><td align="center">任何非空字符串</td><td align="right">“” (空字符串)</td></tr><tr><td align="left">Number</td><td align="center">任何非零数字值(包括无穷大)</td><td align="right">0和NaN</td></tr></tbody></table><p>Object                     任何对象                                    null</p><p>Underfined                   n/a                                    undefined</p><h3 id="转换为数字："><a href="#转换为数字：" class="headerlink" title="转换为数字："></a>转换为数字：</h3><p>有3个函数可以把非数值转换为数值：<code>Number()</code>、<code>parseInt()</code>、<code>parseFloat()</code>。第一个函数，即转型函数<code>Number()</code>可以用于任何数据类型，而另两个函数则专门用于把字符串转换成数值。这三个函数对于同样的输入会返回不同的结果。</p><h3 id="转换为字符串"><a href="#转换为字符串" class="headerlink" title="转换为字符串"></a>转换为字符串</h3><p>要把一个值转换为一个字符串有两种方式。第一种是使用几乎每个值都有的<code>toString()</code>方法，这个方法唯一要做的就是返回相应值的字符串表现。数值、布尔值、对象、和字符串值(没错，每个字符串也都有一个<code>toString()</code>方法，该方法返回字符串的一个副本)都有<code>toString()</code>方法。但<code>null</code>和<code>undefined</code>值没有这个方法。</p><h2 id="动态类型及鸭子类型"><a href="#动态类型及鸭子类型" class="headerlink" title="动态类型及鸭子类型"></a>动态类型及鸭子类型</h2><p>动态类型语言的优点是<strong>编写的代码数量更少，看起来也更加简洁，程序员可以把精力更多地放在业务逻辑上面</strong>。虽然不区分类型在某些情况下会让程序变得难以理解，但整体而言，代码量越少，越专注于逻辑表达，对阅读程序是越有帮助的。</p><p>动态类型语言的缺点是<strong>无法保证变量的类型，从而在程序的运行期有可能发生跟类型相关的错误</strong>。这好像在商店买了一包牛肉辣条，但是要真正吃到嘴里才知道是不是牛肉味。</p><p>在JavaScript中，当我们对一个变量赋值时，显然不需要考虑它的类型，因此，JavaScript是一门典型的<strong>动态类型</strong>语言</p><p>这一切都建立在<code>鸭子类型（duck typing）</code>的概念上，鸭子类型的通俗说法是：<strong>“如果它走起路来像鸭子，叫起来也是鸭子，那么它就是鸭子。”</strong></p><p><code>鸭子类型</code>指导我们<strong>只关注对象的行为，而不关注对象本身</strong>，也就是关注HAS-A, 而不是IS-A。</p><pre><code class="js">var duck = &#123;      duckSinging: function()&#123;          console.log( &#39;嘎嘎嘎&#39; );      &#125;  &#125;;  var chicken = &#123;      duckSinging: function()&#123;          console.log( &#39;嘎嘎嘎&#39; );      &#125;  &#125;;  var choir = [];    // 合唱团  var joinChoir = function( animal )&#123;      if ( animal &amp;&amp; typeof animal.duckSinging === &#39;function&#39; )&#123;          choir.push( animal );          console.log( &#39;恭喜加入合唱团&#39; );          console.log( &#39;合唱团已有成员数量:&#39; + choir.length );      &#125;  &#125;;  joinChoir( duck );    // 恭喜加入合唱团  joinChoir( chicken );    // 恭喜加入合唱团 </code></pre><p>在动态类型语言的面向对象设计中，鸭子类型的概念至关重要。利用<code>鸭子类型</code>的思想，我们不必借助超类型的帮助，就能轻松地在动态类型语言中实现一个原则：<strong>“面向接口编程，而不是面向实现编程”</strong>。例如，一个对象若有push和pop方法，并且这些方法提供了正确的实现，它就可以被当作栈来使用。一个对象如果有length属性，也可以依照下标来存取属性（最好还要拥有slice和splice等方法），这个对象就可以被当作数组来使用。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
-
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;javasciprt是属于弱类型的语言。灵活的</summary>
       
     
     
