@@ -181,72 +181,70 @@ token是一种身份验证的机制，初始时用户提交账号数据给服务
 <h3 id="Token刷新"><a href="#Token刷新" class="headerlink" title="Token刷新"></a>Token刷新</h3><p>当token过期，用户需要刷新token。刷新token本质上是这样的：</p>
 <p>客户端需要把token、摘要、ua都传给服务端，服务端对token重新生成摘要，通过判断两个摘要是否相同来验证这次请求刷新token的客户端，是不是上次请求生成token的客户端。验证通过，服务端需要使用用户数据重新生成token，用户数据则来自用ua解析token的结果。</p>
 <h2 id="HTML-amp-JS等前端知识系列之Ajax-post请求带有token向Django请求"><a href="#HTML-amp-JS等前端知识系列之Ajax-post请求带有token向Django请求" class="headerlink" title="HTML&amp;JS等前端知识系列之Ajax post请求带有token向Django请求"></a>HTML&amp;JS等前端知识系列之Ajax post请求带有token向Django请求</h2><p>我们 在母板上写入这段代码：</p>
-<pre><code class="js">&lt;script type=&quot;text/javascript&quot;&gt;
-        // 个人定义大函数，不是重点，可以忽略
-        $(document).ready(function()&#123;
+<pre><code class="html">&lt;script type=&quot;text/javascript&quot;&gt;
+    // 个人定义大函数，不是重点，可以忽略
+    $(document).ready(function()&#123;
             get_sys_load();
             var csrftoken = getCookie(&#39;csrftoken&#39;);
             var active_node = $(&quot;#mainnav-menu a[href=&#39;&#123;&#123; request.path &#125;&#125;&#39;]&quot;);
             active_node.parent().addClass(&quot;active-link&quot;);
             if (active_node.parent().parent().hasClass(&quot;collapse&quot;))&#123;
-                active_node.parent().parent().addClass(&quot;in&quot;);
+                    active_node.parent().parent().addClass(&quot;in&quot;);
             &#125;
 
-        &#125;);//end doc ready
-        // 个人定义大函数，不是重点，可以忽略
-        function  get_sys_load()&#123;
+    &#125;);//end doc ready
+    // 个人定义大函数，不是重点，可以忽略
+    function  get_sys_load()&#123;
             $.ajax(&#123;
-                url: &quot;&#123;% url 'get_server_host_status' %&#125;&quot;,
-                type: &quot;GET&quot;,
-                dataType: &quot;json&quot;,
-                success: function(callback)&#123;
-                    for( i in callback)&#123;
-                            console.log(i,callback[i]);
-                            $(&#39;#&#39;+ i +&#39;_display&#39;).text(callback[i]);
-                            $(&#39;#&#39;+ i +&#39;_width&#39;).text(callback[i]);
-                            $(&#39;#&#39;+ i +&#39;_attr&#39;).css(&#39;width&#39;,callback[i]+&#39;%&#39;)
+                    url: &quot;&#123;% url 'get_server_host_status' %&#125;&quot;,
+                    type: &quot;GET&quot;,
+                    dataType: &quot;json&quot;,
+                    success: function(callback)&#123;
+                            for( i in callback)&#123;
+                                            console.log(i,callback[i]);
+                                            $(&#39;#&#39;+ i +&#39;_display&#39;).text(callback[i]);
+                                            $(&#39;#&#39;+ i +&#39;_width&#39;).text(callback[i]);
+                                            $(&#39;#&#39;+ i +&#39;_attr&#39;).css(&#39;width&#39;,callback[i]+&#39;%&#39;)
 
-                    &#125;// end for
-                &#125;,// end sucess func
-                error: function(callback)&#123;
-                    alert(callback)
-                &#125;// end error func
+                            &#125;// end for
+                    &#125;,// end sucess func
+                    error: function(callback)&#123;
+                            alert(callback)
+                    &#125;// end error func
             &#125;)
-        &#125;
-        // 这个才是重点的代码，必须写
-        function getCookie(name) &#123;
+    &#125;
+    // 这个才是重点的代码，必须写
+    function getCookie(name) &#123;
             var cookieValue = null;
             if (document.cookie &amp;&amp; document.cookie !== &#39;&#39;) &#123;
-                var cookies = document.cookie.split(&#39;;&#39;);
-                for (var i = 0; i &lt; cookies.length; i++) &#123;
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + &#39;=&#39;)) &#123;
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+                    var cookies = document.cookie.split(&#39;;&#39;);
+                    for (var i = 0; i &lt; cookies.length; i++) &#123;
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+                            if (cookie.substring(0, name.length + 1) === (name + &#39;=&#39;)) &#123;
+                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                    break;
+                            &#125;
                     &#125;
-                &#125;
             &#125;
             return cookieValue;
-        &#125;
+    &#125;
 
-        // 这个才是重点的代码，必须写
-        function csrfSafeMethod(method) &#123;
+    // 这个才是重点的代码，必须写
+    function csrfSafeMethod(method) &#123;
             // these HTTP methods do not require CSRF protection
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        &#125;
-        $.ajaxSetup(&#123;
+    &#125;
+    $.ajaxSetup(&#123;
             beforeSend: function(xhr, settings) &#123;
-                if (!csrfSafeMethod(settings.type) &amp;&amp; !this.crossDomain) &#123;
-                    xhr.setRequestHeader(&quot;X-CSRFToken&quot;, csrftoken);
-                &#125;
+                    if (!csrfSafeMethod(settings.type) &amp;&amp; !this.crossDomain) &#123;
+                            xhr.setRequestHeader(&quot;X-CSRFToken&quot;, csrftoken);
+                    &#125;
             &#125;
-        &#125;);
-    &lt;/script&gt;
-    &#123;% block  bottom-js %&#125;
-    &#123;% endblock %&#125;</code></pre>
+    &#125;);
+&lt;/script&gt;</code></pre>
 <p>我们在子板上调用这端js代码，调用的前提是子板的html页面必须嵌套了这个 csrf_token, 代码如下</p>
-<pre><code class="js">html页面的代码：
+<pre><code class="html">html页面的代码：
 ==================
 &lt;span&gt;&#123;% csrf_token %&#125;&lt;/span&gt;
 ==================
@@ -371,9 +369,9 @@ token是一种身份验证的机制，初始时用户提交账号数据给服务
                     </dl>
                 </div>
                 <ul>
-                    <li><a href="/">195 <p>Articles</p></a></li>
+                    <li><a href="/">196 <p>Articles</p></a></li>
                     <li><a href="/categories">29 <p>Categories</p></a></li>
-                    <li><a href="/tags">57 <p>Tags</p></a></li>
+                    <li><a href="/tags">58 <p>Tags</p></a></li>
                 </ul>
             </div>
             

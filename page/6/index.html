@@ -137,35 +137,39 @@
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+            <a href="/categories/Ts"><b>「
+                </b>TS<b> 」</b></a>
             
-            August 11, 2020
+            September 03, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/08/11/React/%E9%87%8D%E5%AD%A6React(%E4%B8%89)/" title="重学React(三)" class="posttitle">重学React(三)</a></h3>
+            <a href="/2020/09/03/Ts/%E6%B7%B1%E5%85%A5-TypeScript-%E4%B8%AD%E7%9A%84%E5%AD%90%E7%B1%BB%E5%9E%8B%E3%80%81%E9%80%86%E5%8F%98%E3%80%81%E5%8D%8F%E5%8F%98/" title="深入 TypeScript 中的子类型、逆变、协变" class="posttitle">深入 TypeScript 中的子类型、逆变、协变</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                4.1k
+                5.8k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                4 mins.
+                5 mins.
             </span>
             
             
         </p>
         
         
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ts/" rel="tag">Ts</a></li></ul>
+        
         <div class="md-content animated fadeIn">
             
-            <p>终于到了期盼已久的HOOK环节了，我最初学react的时候是版本为15.4.2(特地去看了react仓库看了<a target="_blank" rel="noopener" href="https://github.com/facebook/react/blob/master/CHANGELOG.md#1562-september-25-2017">更新日志</a>)算是很早的学习，可惜自己学的东西在工作中实践不了，当时也刚参加工作，又推动不了新技...</p>
+            <p><a target="_blank" rel="noopener" href="https://juejin.im/post/6855517117778198542">原文地址</a></p>
+<p>TypeScript 中有很多地方涉及到子类型 <code>subtype</code>、父类型 <code>supertype</code>、逆变和协变<code>covariance and contravariance</code>的概念，如果搞不清这些概念，那...</p>
             
-            <span class="read-more"><a href="/2020/08/11/React/%E9%87%8D%E5%AD%A6React(%E4%B8%89)/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/09/03/Ts/%E6%B7%B1%E5%85%A5-TypeScript-%E4%B8%AD%E7%9A%84%E5%AD%90%E7%B1%BB%E5%9E%8B%E3%80%81%E9%80%86%E5%8F%98%E3%80%81%E5%8D%8F%E5%8F%98/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -186,6 +190,60 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Ts">
+                  <b>「 </b>TS<b> 」</b>
+                </a>
+            
+            September 03, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/09/03/Ts/%E6%B7%B1%E5%85%A5-TypeScript-%E4%B8%AD%E7%9A%84%E5%AD%90%E7%B1%BB%E5%9E%8B%E3%80%81%E9%80%86%E5%8F%98%E3%80%81%E5%8D%8F%E5%8F%98/" title="深入 TypeScript 中的子类型、逆变、协变" class="posttitle">深入 TypeScript 中的子类型、逆变、协变</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        5.8k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        5 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ts/" rel="tag">Ts</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p><a target="_blank" rel="noopener" href="https://juejin.im/post/6855517117778198542">原文地址</a></p>
+<p>TypeScript 中有很多地方涉及到子类型 <code>subtype</code>、父类型 <code>supertype</code>、逆变和协变<code>covariance and contravariance</code>的概念，如果搞不清这些概念，那么很可能被报错搞的无从下手，或者在写一些复杂类型的时候看到别人可以这么写，但是不知道为什么他可以生效。</p>
+<p>比如考虑如下的接口：</p>
+<pre><code class="js">interface Animal &#123;
+  age: number
+&#125;
+
+interface Dog extends Animal &#123;
+  bark(): ...</code></pre>
+            
+            <span class="read-more"><a href="/2020/09/03/Ts/%E6%B7%B1%E5%85%A5-TypeScript-%E4%B8%AD%E7%9A%84%E5%AD%90%E7%B1%BB%E5%9E%8B%E3%80%81%E9%80%86%E5%8F%98%E3%80%81%E5%8D%8F%E5%8F%98/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -376,69 +434,9 @@
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/HTML5">
-                  <b>「 </b>HTML5<b> 」</b>
-                </a>
-            
-            July 30, 2020
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2020/07/30/HTML5/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E6%96%B0%E6%96%B9%E6%A1%88/" title="响应式布局新方案" class="posttitle">响应式布局新方案</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        9.9k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        9 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F/" rel="tag">响应式</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <meta name="referrer" content="no-referrer">
-
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg5ODA5NTM1Mw==&mid=2247488692&idx=1&sn=5296bb93e4fcec284fe8dfe858634e9b&chksm=c0669522f7111c345f71416e84d2a6a32fe730be9e7734eee71a8c1bd93d61467df3c4075257&mpshare=1&scene=1&srcid=0730IrQ52ONYNC8eirsY5vf6&sharer_sharetime=1596079115612&sharer_shareid=857ca04011f1cc878c5f0c9e8e947d57&key=3c1b79f4d2f73bee114f16dcdfd3b504678f8d95031f428469c7a393e3314e043cbfa073c22cc8b27fd6e46074839d9dc6941a9801bc8145315e56cc9849f39ebd3a36532aadb9630bbd9d2ba5e887a6&ascene=1&uin=MTA4OTc2NTY3Mg==&devicetype=Windows+10+x64&version=62090538&lang=zh_CN&exportkey=A597mrIlaQ+2fkuWhB0UYgw=&pass_ticket=KFo0GUOexWMIpxp6jEIHplHkIy/bm272lNRA4DRRf+xq5hWFuvoJ7oFj7xf+oyh6">原文地址</a></p>
-<p>概念：融合响应式设计</p>
-<p>本文中我们可以尝试得出一种新的解决方案，那就是利用 JavaScript 和 CSS 来进行媒体查询，是响应式设计与自适应设计结合的方案，我这里给起一个好记的名字叫做融合响应式设计（ <code>Fusion Web Design</code>，简称 FWD ）。</p>
-<p>技术原则：</p>
-<ul>
-<li>JavaScript 判断尽量少</li>
-<li>CSS 媒体查询的断点也尽量少</li>
-</ul>
-<p>UI效果</p>
-<ul>
-<li>在笔记本、平板电脑、智能手机上展示合适的 UI 效果</li>
-<li>PC UI：给笔记本等设备上看的大屏效果</li>
-<li>Mobile UI：给智能手机上看的...</li></ul>
-            
-            <span class="read-more"><a href="/2020/07/30/HTML5/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E6%96%B0%E6%96%B9%E6%A1%88/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
     </div>
     
-    <div id="pager"><a href="/page/7/" class="more" data-loading="Loading..." data-load-more="Load more">Load more</a></div>
+    <div id="pager"><a href="/page/7/" class="more" data-loading="加载中..." data-load-more="Load more">Load more</a></div>
     
 </div>
 <div id="preview"></div>
