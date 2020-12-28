@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>如何在React中完美运用？ - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+原文地址
+前言其实如果运用熟练的话，TS 只是在第一次开发的时候稍微多花一些时间去编写类型，后续维护、重构的时候就会发挥它神奇的作用了，还是非常推荐长期维护的项目使用它的。
+前置基础阅读本文的前,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">如何在React中完美运用？</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/React"><b>「
+                    </b>REACT<b> 」</b></a>
+                
+                December 28, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/12/28/React/%E5%A6%82%E4%BD%95%E5%9C%A8React%E4%B8%AD%E5%AE%8C%E7%BE%8E%E8%BF%90%E7%94%A8%EF%BC%9F/" title="如何在React中完美运用？" class="">如何在React中完美运用？</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    12k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    11 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6910863689260204039">原文地址</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其实如果运用熟练的话，TS 只是在第一次开发的时候稍微多花一些时间去编写类型，后续维护、重构的时候就会发挥它神奇的作用了，还是非常推荐长期维护的项目使用它的。</p>
+<h2 id="前置基础"><a href="#前置基础" class="headerlink" title="前置基础"></a>前置基础</h2><p>阅读本文的前提条件是：</p>
+<p>熟悉 React 的使用。<br>熟悉 TypeScript 中的类型知识。<br>本文会侧重使用 React Hook 作为示例，当然大部分类型知识都是通用的。</p>
+<p>也就是说，这篇文章侧重点在于 「<strong>React 和 TypeScript 的结合」</strong>，而不是基础知识，基础知识阅读文档即可学习。</p>
+<h2 id="组件-Props"><a href="#组件-Props" class="headerlink" title="组件 Props"></a>组件 Props</h2><p>先看几种定义 Props 经常用到的类型：</p>
+<h3 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h3><pre><code class="js">type BasicProps = &#123;
+  message: string;
+  count: number;
+  disabled: boolean;
+  /** 数组类型 */
+  names: string[];
+  /** 用「联合类型」限制为下面两种「字符串字面量」类型 */
+  status: &quot;waiting&quot; | &quot;success&quot;;
+&#125;;</code></pre>
+<h3 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h3><pre><code class="js">type ObjectOrArrayProps = &#123;
+  /** 如果你不需要用到具体的属性 可以这样模糊规定是个对象 ❌ 不推荐 */
+  obj: object;
+  obj2: &#123;&#125;; // 同上
+  /** 拥有具体属性的对象类型 ✅ 推荐 */
+  obj3: &#123;
+    id: string;
+    title: string;
+  &#125;;
+  /** 对象数组 😁 常用 */
+  objArr: &#123;
+    id: string;
+    title: string;
+  &#125;[];
+  /** key 可以为任意 string，值限制为 MyTypeHere 类型 */
+  dict1: &#123;
+    [key: string]: MyTypeHere;
+  &#125;;
+  dict2: Record&lt;string, MyTypeHere&gt;; // 基本上和 dict1 相同，用了 TS 内置的 Record 类型。
+&#125;</code></pre>
+<h3 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h3><pre><code class="js">type FunctionProps = &#123;
+  /** 任意的函数类型 ❌ 不推荐 不能规定参数以及返回值类型 */
+  onSomething: Function;
+  /** 没有参数的函数 不需要返回值 😁 常用 */
+  onClick: () =&gt; void;
+  /** 带函数的参数 😁 非常常用 */
+  onChange: (id: number) =&gt; void;
+  /** 另一种函数语法 参数是 React 的按钮事件 😁 非常常用 */
+  onClick(event: React.MouseEvent&lt;HTMLButtonElement&gt;): void;
+  /** 可选参数类型 😁 非常常用 */
+  optional?: OptionalType;
+&#125;</code></pre>
+<h3 id="React-相关类型"><a href="#React-相关类型" class="headerlink" title="React 相关类型"></a>React 相关类型</h3><pre><code class="js">export declare interface AppProps &#123;
+  children1: JSX.Element; // ❌ 不推荐 没有考虑数组
+  children2: JSX.Element | JSX.Element[]; // ❌ 不推荐 没有考虑字符串 children
+  children4: React.ReactChild[]; // 稍微好点 但是没考虑 null
+  children: React.ReactNode; // ✅ 包含所有 children 情况
+  functionChildren: (name: string) =&gt; React.ReactNode; // ✅ 返回 React 节点的函数
+  style?: React.CSSProperties; // ✅ 推荐 在内联 style 时使用
+  // ✅ 推荐原生 button 标签自带的所有 props 类型
+  // 也可以在泛型的位置传入组件 提取组件的 Props 类型
+  props: React.ComponentProps&lt;&quot;button&quot;&gt;;
+  // ✅ 推荐 利用上一步的做法 再进一步的提取出原生的 onClick 函数类型 
+  // 此时函数的第一个参数会自动推断为 React 的点击事件类型
+  onClickButton：React.ComponentProps&lt;&quot;button&quot;&gt;[&quot;onClick&quot;]
+&#125;</code></pre>
+<h3 id="函数式组件"><a href="#函数式组件" class="headerlink" title="函数式组件"></a>函数式组件</h3><p>最简单的：</p>
+<pre><code class="js">interface AppProps = &#123; message: string &#125;;
+
+const App = (&#123; message &#125;: AppProps) =&gt; &lt;div&gt;&#123;message&#125;&lt;/div&gt;;</code></pre>
+<p>包含 <code>children</code> 的：</p>
+<p>利用 <code>React.FC</code> 内置类型的话，不光会包含你定义的 <code>AppProps</code> 还会自动加上一个 <code>children</code> 类型，以及其他组件上会出现的类型：</p>
+<pre><code class="js">// 等同于
+AppProps &amp; &#123; 
+  children: React.ReactNode 
+  propTypes?: WeakValidationMap&lt;P&gt;;
+  contextTypes?: ValidationMap&lt;any&gt;;
+  defaultProps?: Partial&lt;P&gt;;
+  displayName?: string;
+&#125;
+
+// 使用
+interface AppProps = &#123; message: string &#125;;
+
+const App: React.FC&lt;AppProps&gt; = (&#123; message, children &#125;) =&gt; &#123;
+  return (
+    &lt;&gt;
+     &#123;children&#125;
+     &lt;div&gt;&#123;message&#125;&lt;/div&gt;
+    &lt;/&gt;
+  )
+&#125;;
+</code></pre>
+<h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><p><code>@types/react</code> 包在 16.8 以上的版本开始对 Hooks 的支持。</p>
+<h3 id="useState"><a href="#useState" class="headerlink" title="useState"></a>useState</h3><p>如果你的默认值已经可以说明类型，那么不用手动声明类型，交给 TS 自动推断即可：</p>
+<pre><code class="js">// val: boolean
+const [val, toggle] = React.useState(false);
+
+toggle(false)
+toggle(true)</code></pre>
+<p>如果初始值是 <code>null</code> 或 <code>undefined</code>，那就要通过泛型手动传入你期望的类型。</p>
+<pre><code class="js">const [user, setUser] = React.useState&lt;IUser | null&gt;(null);
+
+// later...
+setUser(newUser);</code></pre>
+<p>这样也可以保证在你直接访问 <code>user</code> 上的属性时，提示你它有可能是 <code>null</code>。</p>
+<p>通过 <code>optional-chaining</code> 语法（TS 3.7 以上支持），可以避免这个错误。</p>
+<pre><code class="js">// ✅ ok
+const name = user?.name</code></pre>
+<h3 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h3><p>需要用 <a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions">Discriminated Unions</a> 来标注 Action 的类型。</p>
+<pre><code class="js">const initialState = &#123; count: 0 &#125;;
+
+type ACTIONTYPE =
+  | &#123; type: &quot;increment&quot;; payload: number &#125;
+  | &#123; type: &quot;decrement&quot;; payload: string &#125;;
+
+function reducer(state: typeof initialState, action: ACTIONTYPE) &#123;
+  switch (action.type) &#123;
+    case &quot;increment&quot;:
+      return &#123; count: state.count + action.payload &#125;;
+    case &quot;decrement&quot;:
+      return &#123; count: state.count - Number(action.payload) &#125;;
+    default:
+      throw new Error();
+  &#125;
+&#125;
+
+function Counter() &#123;
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  return (
+    &lt;&gt;
+      Count: &#123;state.count&#125;
+      &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &quot;decrement&quot;, payload: &quot;5&quot; &#125;)&#125;&gt;
+        -
+      &lt;/button&gt;
+      &lt;button onClick=&#123;() =&gt; dispatch(&#123; type: &quot;increment&quot;, payload: 5 &#125;)&#125;&gt;
+        +
+      &lt;/button&gt;
+    &lt;/&gt;
+  );
+&#125;</code></pre>
+<p>「<code>Discriminated Unions</code>」一般是一个联合类型，其中每一个类型都需要通过类似 type 这种特定的字段来区分，当你传入特定的 type 时，剩下的类型 payload 就会自动匹配推断。</p>
+<p>这样：</p>
+<ul>
+<li>当你写入的 <code>type</code> 匹配到 <code>decrement</code> 的时候，TS 会自动推断出相应的 payload 应该是 string 类型。</li>
+<li>当你写入的 <code>type</code> 匹配到 <code>increment</code> 的时候，则 payload 应该是 number 类型。</li>
+</ul>
+<p>这样在你 dispatch 的时候，输入对应的 <code>type</code>，就自动提示你剩余的参数类型啦。</p>
+<h3 id="useEffect"><a href="#useEffect" class="headerlink" title="useEffect"></a>useEffect</h3><p>这里主要需要注意的是，<code>useEffect</code> 传入的函数，它的返回值要么是一个方法（清理函数），要么就是<code>undefined</code>，其他情况都会报错。</p>
+<p>比较常见的一个情况是，我们的 <code>useEffect</code> 需要执行一个 <code>async</code> 函数，比如：</p>
+<pre><code class="js">// ❌ 
+// Type &#39;Promise&lt;void&gt;&#39; provides no match 
+// for the signature &#39;(): void | undefined&#39;
+useEffect(async () =&gt; &#123;
+  const user = await getUser()
+  setUser(user)
+&#125;, [])</code></pre>
+<p>虽然没有在 <code>async</code> 函数里显式的返回值，但是 <code>async</code> 函数默认会返回一个 <code>Promise</code>，这会导致 TS 的报错。</p>
+<p>推荐这样改写：</p>
+<pre><code class="js">useEffect(() =&gt; &#123;
+  const getUser = async () =&gt; &#123;
+    const user = await getUser()
+    setUser(user)
+  &#125;
+  getUser()
+&#125;, [])</code></pre>
+<p>或者用自执行函数？不推荐，可读性不好。</p>
+<pre><code class="js">useEffect(() =&gt; &#123;
+  (async () =&gt; &#123;
+    const user = await getUser()
+    setUser(user)
+  &#125;)()
+&#125;, [])</code></pre>
+<h3 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h3><p>这个 <code>Hook</code> 在很多时候是没有初始值的，这样可以声明返回对象中 <code>current</code> 属性的类型：</p>
+<pre><code class="js">const ref2 = useRef&lt;HTMLElement&gt;(null);</code></pre>
+<p>以一个按钮场景为例：</p>
+<pre><code class="js">function TextInputWithFocusButton() &#123;
+  const inputEl = React.useRef&lt;HTMLInputElement&gt;(null);
+  const onButtonClick = () =&gt; &#123;
+    if (inputEl &amp;&amp; inputEl.current) &#123;
+      inputEl.current.focus();
+    &#125;
+  &#125;;
+  return (
+    &lt;&gt;
+      &lt;input ref=&#123;inputEl&#125; type=&quot;text&quot; /&gt;
+      &lt;button onClick=&#123;onButtonClick&#125;&gt;Focus the input&lt;/button&gt;
+    &lt;/&gt;
+  );
+&#125;</code></pre>
+<p>当 <code>onButtonClick</code> 事件触发时，可以肯定 <code>inputEl</code> 也是有值的，因为组件是同级别渲染的，但是还是依然要做冗余的非空判断。</p>
+<p><strong>有一种办法可以绕过去。</strong></p>
+<pre><code class="js">const ref1 = useRef&lt;HTMLElement&gt;(null!);</code></pre>
+<p>null! 这种语法是非空断言，跟在一个值后面表示你断定它是有值的，所以在你使用 <code>inputEl.current.focus()</code> 的时候，TS 不会给出报错。</p>
+<p>但是这种语法比较危险，需要尽量减少使用。</p>
+<p>在绝大部分情况下，<code>inputEl.current?.focus()</code> 是个更安全的选择，除非这个值真的不可能为空。（比如在使用之前就赋值了）</p>
+<h3 id="useImperativeHandle"><a href="#useImperativeHandle" class="headerlink" title="useImperativeHandle"></a>useImperativeHandle</h3><p>推荐使用一个自定义的 <code>innerRef</code> 来代替原生的 <code>ref</code>，否则要用到 <code>forwardRef</code> 会搞的类型很复杂。</p>
+<pre><code class="js">type ListProps = &#123;
+  innerRef?: React.Ref&lt;&#123; scrollToTop(): void &#125;&gt;
+&#125;
+
+function List(props: ListProps) &#123;
+  useImperativeHandle(props.innerRef, () =&gt; (&#123;
+    scrollToTop() &#123; &#125;
+  &#125;))
+  return null
+&#125;</code></pre>
+<p>结合刚刚 <code>useRef</code> 的知识，使用是这样的：</p>
+<pre><code class="js">function Use() &#123;
+  const listRef = useRef&lt;&#123; scrollToTop(): void &#125;&gt;(null!)
+
+  useEffect(() =&gt; &#123;
+    listRef.current.scrollToTop()
+  &#125;, [])
+
+  return (
+    &lt;List innerRef=&#123;listRef&#125; /&gt;
+  )
+&#125;</code></pre>
+<p>很完美，是不是？</p>
+<p>可以在线调试 <a target="_blank" rel="noopener" href="https://www.typescriptlang.org/play#code/JYWwDg9gTgLgBAKjgQwM5wEoFNkGN4BmUEIcA5FDvmQNwCwAUKJLHAN5wCuqWAyjMhhYANFx4BRAgSz5R3LNgJyeASXBYog4ADcsACWQA7ACYAbLHAC+cIiXKU8MWo0YwAnmAsAZYKhgAFYjB0AF52Rjg4YENDDUUAfgAuTCoYADpFAB4OVFxiU1MAFQhisAAKAEpk7QhgYysAPkZLFwYCTkN8YAhDOB8-MrAg1GT+gOGK8IZI+TVPTRgdfSMzLEHhtOjYqEVRSrgQhrgytgjIuFz8opKIcsmOFumrCoqzyhhOKF7DTgLm1vanUWPTgAFUePtTk9cD0-HBTL4YIoDmIFFgCNkLnkIAViqVKtVavVLA0yj8CgBCV4MM7ySTSfBlfaHKbneGIxRpXCfSiGdKXHHXfHUyKWUQAbQAutS3lgPl9jmdIpkxlEYnF0SE2Ai-IprAB6JpPamWIA">useImperativeHandle</a> 的例子。</p>
+<h3 id="自定义-Hook"><a href="#自定义-Hook" class="headerlink" title="自定义 Hook"></a>自定义 Hook</h3><p>如果你想仿照 useState 的形式，返回一个数组给用户使用，一定要记得在适当的时候使用 <code>as const</code>，标记这个返回值是个常量，告诉 TS 数组里的值不会删除，改变顺序等等……</p>
+<p>否则，你的每一项都会被推断成是「所有类型可能性的联合类型」，这会影响用户使用。</p>
+<pre><code class="js">export function useLoading() &#123;
+  const [isLoading, setState] = React.useState(false);
+  const load = (aPromise: Promise&lt;any&gt;) =&gt; &#123;
+    setState(true);
+    return aPromise.finally(() =&gt; setState(false));
+  &#125;;
+  // ✅ 加了 as const 会推断出 [boolean, typeof load]
+  // ❌ 否则会是 (boolean | typeof load)[]
+  return [isLoading, load] as const;[]
+&#125;</code></pre>
+<p>对了，如果你在用 <code>React Hook</code> 写一个库，别忘了把类型也导出给用户使用。</p>
+<h2 id="React-API"><a href="#React-API" class="headerlink" title="React API"></a>React API</h2><h3 id="forwardRef"><a href="#forwardRef" class="headerlink" title="forwardRef"></a>forwardRef</h3><p>函数式组件默认不可以加 ref，它不像类组件那样有自己的实例。这个 API 一般是函数式组件用来接收父组件传来的 ref。</p>
+<p>所以需要标注好实例类型，也就是父组件通过 ref 可以拿到什么样类型的值。</p>
+<pre><code class="js">type Props = &#123; &#125;;
+export type Ref = HTMLButtonElement;
+export const FancyButton = React.forwardRef&lt;Ref, Props&gt;((props, ref) =&gt; (
+  &lt;button ref=&#123;ref&#125; className=&quot;MyClassName&quot;&gt;
+    &#123;props.children&#125;
+  &lt;/button&gt;
+));</code></pre>
+<p>由于这个例子里直接把 ref 转发给 button 了，所以直接把类型标注为 <code>HTMLButtonElement</code> 即可。</p>
+<p>父组件这样调用，就可以拿到正确类型：</p>
+<pre><code class="js">export const App = () =&gt; &#123;
+  const ref = useRef&lt;HTMLButtonElement&gt;()
+  return (
+    &lt;FancyButton ref=&#123;ref&#125; /&gt;
+  )
+&#125;</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">197 <p>Articles</p></a></li>
+                    <li><a href="/categories">29 <p>Categories</p></a></li>
+                    <li><a href="/tags">58 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">前置基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6-Props"><span class="toc-number">1.2.</span> <span class="toc-text">组件 Props</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">基础类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">对象类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">函数类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E7%9B%B8%E5%85%B3%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.4.</span> <span class="toc-text">React 相关类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.5.</span> <span class="toc-text">函数式组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hooks"><span class="toc-number">1.3.</span> <span class="toc-text">Hooks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#useState"><span class="toc-number">1.3.1.</span> <span class="toc-text">useState</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useReducer"><span class="toc-number">1.3.2.</span> <span class="toc-text">useReducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useEffect"><span class="toc-number">1.3.3.</span> <span class="toc-text">useEffect</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useRef"><span class="toc-number">1.3.4.</span> <span class="toc-text">useRef</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#useImperativeHandle"><span class="toc-number">1.3.5.</span> <span class="toc-text">useImperativeHandle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Hook"><span class="toc-number">1.3.6.</span> <span class="toc-text">自定义 Hook</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-API"><span class="toc-number">1.4.</span> <span class="toc-text">React API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forwardRef"><span class="toc-number">1.4.1.</span> <span class="toc-text">forwardRef</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
