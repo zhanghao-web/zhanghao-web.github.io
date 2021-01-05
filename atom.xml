@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2020-12-28T10:12:52.391Z</updated>
+  <updated>2021-01-05T09:00:46.607Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习Javascript应懂得33个概念之new 与构造函数，instanceof 与实例</title>
+    <link href="https://shinichikudo-fe.github.io/2021/01/05/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bnew-%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%8Cinstanceof-%E4%B8%8E%E5%AE%9E%E4%BE%8B/"/>
+    <id>https://shinichikudo-fe.github.io/2021/01/05/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bnew-%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%8Cinstanceof-%E4%B8%8E%E5%AE%9E%E4%BE%8B/</id>
+    <published>2021-01-05T07:42:16.000Z</published>
+    <updated>2021-01-05T09:00:46.607Z</updated>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>在Javascript中，万物皆对象，如果需要在JavaScript中生成一个对象，而对象是单个实物的抽象，通常需要一个模版，表示某一类实物的共同特征，然后根据这个模板生成</p><p>在Javascript中构造函数就称为模板。一个构造函数可以生成多个实例对象，这些实例对象都有相同的结构,构造函数名字的<strong>第一个字母通常大写</strong></p><p>构造函数有两个特点：</p><blockquote><p>函数内部使用了this关键字，代表了所要生成的对象实例<br>生成对象的时候，必须使用new命令</p></blockquote><h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new命令的作用，就是执行构造函数，返回一个实例对象。</p><p>new命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。下面两行代码是等价的，但是为了表示这里是函数调用，推荐使用括号。</p><p>如果忘了使用new命令，直接调用构造函数会发生什么事？</p><p>这种情况下，<strong>构造函数就变成了普通函数，并不会生成实例对象。而且由于后面会说到的原因，this这时代表全局对象，将造成一些意想不到的结果</strong>。</p><h3 id="new的原理"><a href="#new的原理" class="headerlink" title="new的原理"></a>new的原理</h3><blockquote><ol><li>创建一个空对象，作为将要返回的对象实例。</li><li>将这个空对象的原型，指向构造函数的prototype属性。</li><li>将这个空对象赋值给函数内部的this关键字。</li><li>开始执行构造函数内部的代码。</li></ol></blockquote><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>实例就是通过构造函数创建出来的对象</p><pre><code class="js">var M = function()&#123;  this.name = &#39;Jane&#39;;&#125;var obj = new M();</code></pre><h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p><code>instanceof</code>表示的就是一种继承关系，或者原型链的结构。</p><p>由于所有的对象的原型链都会找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>的方法。这就是所谓的“继承”</p><h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><pre><code class="js">function instance_of(L, R) &#123;//L 表示左表达式，R 表示右表达式  var O = R.prototype;// 取 R 的显示原型  L = L.__proto__;// 取 L 的隐式原型  while (true) &#123;    if (L === null)      return false;    if (O === L)// 这里重点：当 O 严格等于 L 时，返回 true      return true;    L = L.__proto__;  &#125; &#125;</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>创建一个新的对象可以通过<code>new</code>关键字 + 构造函数 来生成新的实例对象，通过<code>instanceof</code> 可以找到实例的构造函数的原型</p><p><code>instanceof</code>找到的是实例在原型链中所有的构造函数，不容易找到直接创建实例的构造函数；</p><p><code>constructor</code>找到的是构造函数只有一个，就是直接创建这个实例的构造函数，所以用<code>constructor</code>找实例的构造函数更严谨。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
+
+&lt;h2 id=&quot;构造函数&quot;&gt;&lt;a href=&quot;#构造函数&quot; class=&quot;headerlink&quot; title=&quot;构造函数&quot;&gt;&lt;/a&gt;构造函数&lt;/h2&gt;&lt;p&gt;在Javascript中，万物</summary>
+      
+    
+    
+    
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>如何在React中完美运用？</title>
@@ -493,33 +519,6 @@
       
       
     <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;MDN上对闭包的解释是：函数和对其周围状态（&lt;strong&gt;lexical environment，词法环境&lt;/strong&gt;）的引用捆绑在</summary>
-      
-    
-    
-    
-    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
-    
-    
-    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习JavaScript应懂得33个概念之函数作用域,块级作用域和词法作用域</title>
-    <link href="https://shinichikudo-fe.github.io/2020/09/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0JavaScript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
-    <id>https://shinichikudo-fe.github.io/2020/09/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0JavaScript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F-%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/</id>
-    <published>2020-09-14T07:25:47.000Z</published>
-    <updated>2020-09-25T08:11:58.689Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><blockquote><p>作用域：作用域是程序源代码中定义变量的区域。</p></blockquote><blockquote><p>作用域目的：作用域规定了如何查找、在哪查找变量的规则，也就是确定了当前执行代码对变量的访问权限。</p></blockquote><blockquote><p>作用域（Scope）即代码执行过程中的变量、函数或者对象的可访问区域，作用域决定了变量或者其他资源的可见性</p></blockquote><p><code>ECMAScript6 之前只有全局作用域和函数作用域，let const 之后才有块级作用域</code></p><h3 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h3><blockquote><p>一个变量的作用域 (scope) 是程序源代码中定义这个变量的区域。</p></blockquote><p><strong>注意点</strong> : <strong>在函数体内，局部变量相对于同名全局变量拥有高优先级。</strong></p><h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>函数声明和变量声明总是被 <code>JavaScript</code> 解释器<strong>隐式地提升 (hoist) 到包含他们的作用域的最顶端</strong>。很明显的，语言自身定义和函数形参已经处于作用域顶端, 并被赋值为 <code>undefined</code></p><p>变量赋值不会被提升。</p><h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><blockquote><p>函数作用域：变量在声明他们的函数体以及这个函数体嵌套的任意函数体内都是有定义的。</p></blockquote><p>我的理解就是<strong>函数体的子嵌套函数可以访问父函数体的变量</strong>。这种关系是可以继承的，子嵌套函数可以访问父、爷函数体的变量。</p><pre><code class="js">function ()&#123;  function foo()&#123;    var tom = &#39;Tom&#39;    console.log(tom) // Tom  &#125;  foo()  console.log(tom) // ReferenceError Tom is not defined&#125;test()// 全局var name = &#39;zyc&#39;; // 全局变量function foo() &#123; // 全局变量    console.log(name);&#125;foo(); // zycfunction bar() &#123;    var name = 2;    foo(); // zyc 这里调用全局变量&#125;bar()</code></pre><blockquote><p>JavaScript 函数的执行用到了作用域链，这个作用域链是<strong>在函数定义的时候创建的</strong>。嵌套的函数 <code>f()</code> 定义在这个作用域链里，其中的变量 scope 一定是局部变量，不管何时何地执行函数 <code>f()</code> ，这种绑定在执行 <code>f()</code> 时依然有效。</p></blockquote><h2 id="词法作用域-静态作用域"><a href="#词法作用域-静态作用域" class="headerlink" title="词法作用域(静态作用域)"></a>词法作用域(静态作用域)</h2><p>全局变量在程序中始终都是有定义的。局部变量在声明它的函数体内以及所嵌套的函数内始终是有定义的。</p><h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>当 <code>JavaScript</code> 需要查找变量的值的时候，会从链中的第一个对象开始查找，如果有就会直接使用这个值，如果没有就会继续查找下一个对象，如果链上不存在就会抛出一个引用错误 (ReferenceError)。</p><p>在 <code>JavaScript</code> 的最顶层代码中 (不包含在任何函数定义内的代码)，作用域链是由一个全局对象组成。</p><h2 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h2><p>块级作用域：在一些类似 c 语言的编程语言中，{ 内的每一段代码都具有各自的作用域，而且变量在声明他们的代码段之外是不可见的。</p><p>块级作用非常严格，就是作用域之外无法访问作用域内的变量。</p><p>ECMAScript5 中规定了 let 和 const 来支持块级作用域(只是效果一样)。</p><p>同时 ECMAScript5 之前 for if switch 是不会产生作用域的</p><p>下面题目的答案是 <code>5</code> </p><pre><code class="js">var a = 5; // 全局变量function todo()&#123;  var a = 9  return function()&#123;      a = 7  &#125;&#125;todo()()console.log(a) // 指向的是window</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;作用域&quot;&gt;&lt;a href=&quot;#作用域&quot; class=&quot;headerlink&quot; title=&quot;作用域&quot;&gt;&lt;/a&gt;作用域&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;作用域：作用域是程序源代码中定义变量的区域。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;</summary>
       
     
     

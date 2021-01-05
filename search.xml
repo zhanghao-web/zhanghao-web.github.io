@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习Javascript应懂得33个概念之new 与构造函数，instanceof 与实例</title>
+      <link href="/2021/01/05/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bnew-%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%8Cinstanceof-%E4%B8%8E%E5%AE%9E%E4%BE%8B/"/>
+      <url>/2021/01/05/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bnew-%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%EF%BC%8Cinstanceof-%E4%B8%8E%E5%AE%9E%E4%BE%8B/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p>在Javascript中，万物皆对象，如果需要在JavaScript中生成一个对象，而对象是单个实物的抽象，通常需要一个模版，表示某一类实物的共同特征，然后根据这个模板生成</p><p>在Javascript中构造函数就称为模板。一个构造函数可以生成多个实例对象，这些实例对象都有相同的结构,构造函数名字的<strong>第一个字母通常大写</strong></p><p>构造函数有两个特点：</p><blockquote><p>函数内部使用了this关键字，代表了所要生成的对象实例<br>生成对象的时候，必须使用new命令</p></blockquote><h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>new命令的作用，就是执行构造函数，返回一个实例对象。</p><p>new命令本身就可以执行构造函数，所以后面的构造函数可以带括号，也可以不带括号。下面两行代码是等价的，但是为了表示这里是函数调用，推荐使用括号。</p><p>如果忘了使用new命令，直接调用构造函数会发生什么事？</p><p>这种情况下，<strong>构造函数就变成了普通函数，并不会生成实例对象。而且由于后面会说到的原因，this这时代表全局对象，将造成一些意想不到的结果</strong>。</p><h3 id="new的原理"><a href="#new的原理" class="headerlink" title="new的原理"></a>new的原理</h3><blockquote><ol><li>创建一个空对象，作为将要返回的对象实例。</li><li>将这个空对象的原型，指向构造函数的prototype属性。</li><li>将这个空对象赋值给函数内部的this关键字。</li><li>开始执行构造函数内部的代码。</li></ol></blockquote><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>实例就是通过构造函数创建出来的对象</p><pre><code class="js">var M = function()&#123;  this.name = &#39;Jane&#39;;&#125;var obj = new M();</code></pre><h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p><code>instanceof</code>表示的就是一种继承关系，或者原型链的结构。</p><p>由于所有的对象的原型链都会找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>的方法。这就是所谓的“继承”</p><h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><pre><code class="js">function instance_of(L, R) &#123;//L 表示左表达式，R 表示右表达式  var O = R.prototype;// 取 R 的显示原型  L = L.__proto__;// 取 L 的隐式原型  while (true) &#123;    if (L === null)      return false;    if (O === L)// 这里重点：当 O 严格等于 L 时，返回 true      return true;    L = L.__proto__;  &#125; &#125;</code></pre><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>创建一个新的对象可以通过<code>new</code>关键字 + 构造函数 来生成新的实例对象，通过<code>instanceof</code> 可以找到实例的构造函数的原型</p><p><code>instanceof</code>找到的是实例在原型链中所有的构造函数，不容易找到直接创建实例的构造函数；</p><p><code>constructor</code>找到的是构造函数只有一个，就是直接创建这个实例的构造函数，所以用<code>constructor</code>找实例的构造函数更严谨。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>如何在React中完美运用？</title>
       <link href="/2020/12/28/React/%E5%A6%82%E4%BD%95%E5%9C%A8React%E4%B8%AD%E5%AE%8C%E7%BE%8E%E8%BF%90%E7%94%A8%EF%BC%9F/"/>
       <url>/2020/12/28/React/%E5%A6%82%E4%BD%95%E5%9C%A8React%E4%B8%AD%E5%AE%8C%E7%BE%8E%E8%BF%90%E7%94%A8%EF%BC%9F/</url>
