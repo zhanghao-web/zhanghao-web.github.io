@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>学习Javascript应懂得的33个概念之Object.create和Object.assign</title>
+      <link href="/2021/01/07/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BObject-create%E5%92%8CObject-assign/"/>
+      <url>/2021/01/07/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BObject-create%E5%92%8CObject-assign/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p>来源<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">MDN</a></p><h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h2><p><code>Object.create()</code>方法创建一个新对象，使用现有的对象来提供新创建的对象的<code>__proto__</code>。</p><pre><code class="js">const person = &#123;  isHuman: false,  printIntroduction: function() &#123;    console.log(`My name is $&#123;this.name&#125;. Am I human? $&#123;this.isHuman&#125;`);  &#125;&#125;;const me = Object.create(person);me.name = &#39;Matthew&#39;; // &quot;name&quot; is a property set on &quot;me&quot;, but not on &quot;person&quot;me.isHuman = true; // inherited properties can be overwrittenme.printIntroduction();</code></pre><h2 id="Object-assign-target-…source"><a href="#Object-assign-target-…source" class="headerlink" title="Object.assign(target,…source)"></a>Object.assign(target,…source)</h2><p><code>Object.assign()</code> 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。如果目标对象中的属性具有相同的键，则属性将被源中的属性覆盖。后来的源的属性将类似地覆盖早先的属性。</p><p><code>null</code> 或 <code>undefined</code> 源被视为空对象一样对待，不会对目标对象产生任何影响。”</p><pre><code class="js">const target1 = &#123;a: 1, b: 2&#125;const target2 = &#123;c: 3, d: 4&#125;const returnTarget = Object.assign(target1, target2)console.log(target1)console.log(returnTarget)</code></pre><h3 id="深拷贝的问题"><a href="#深拷贝的问题" class="headerlink" title="深拷贝的问题"></a>深拷贝的问题</h3><p>针对深拷贝，需要使用其他办法，因为 <code>Object.assign()</code>拷贝的是（可枚举）属性值。</p><p>假如源值是一个对象的引用，它仅仅会复制其引用值。</p><pre><code class="js">const log = console.log;function test() &#123;  &#39;use strict&#39;;  let obj1 = &#123; a: 0 , b: &#123; c: 0&#125;&#125;;  let obj2 = Object.assign(&#123;&#125;, obj1);  log(JSON.stringify(obj2));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;  obj1.a = 1;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 0&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;  obj2.a = 2;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 0&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 2, b: &#123; c: 0&#125;&#125;  obj2.b.c = 3;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 3&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 2, b: &#123; c: 3&#125;&#125;  // Deep Clone  obj1 = &#123; a: 0 , b: &#123; c: 0&#125;&#125;;  let obj3 = JSON.parse(JSON.stringify(obj1));  obj1.a = 4;  obj1.b.c = 4;  log(JSON.stringify(obj3));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;&#125;test();</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>学习Javascript应懂得33个概念之原型继承及原型链</title>
       <link href="/2021/01/06/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E5%8F%8A%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
       <url>/2021/01/06/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF%E5%8F%8A%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
