@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2021-01-07T02:52:06.506Z</updated>
+  <updated>2021-01-08T02:47:42.489Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>学习Javascript应懂得33个概念之类和工厂模式</title>
+    <link href="https://shinichikudo-fe.github.io/2021/01/08/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%B1%BB%E5%92%8C%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"/>
+    <id>https://shinichikudo-fe.github.io/2021/01/08/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%B1%BB%E5%92%8C%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</id>
+    <published>2021-01-08T01:19:07.000Z</published>
+    <updated>2021-01-08T02:47:42.489Z</updated>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>类是用于创建对象的模板。他们用代码封装数据以处理该数据。 JS中的类建立在原型上，但也具有某些语法和语义未与ES5类相似语义共享。</p><h3 id="定义类"><a href="#定义类" class="headerlink" title="定义类"></a>定义类</h3><p>实际上类是特殊的函数。类的语法有两个组成部分：<strong>类表达式和类声明</strong></p><p><strong>类声明</strong></p><pre><code class="js"> class Rectangle&#123;   constructor(height,width)&#123;     this.height = height     this.width = width   &#125; &#125;</code></pre><p><strong>类表达式</strong></p><pre><code class="js">let Rectangle = class Rectangle2 &#123;  constructor(height, width) &#123;    this.height = height;    this.width = width;  &#125;&#125;</code></pre><h3 id="使用-extends-扩展子类"><a href="#使用-extends-扩展子类" class="headerlink" title="使用 extends 扩展子类"></a>使用 extends 扩展子类</h3><p><code>extends</code>关键字在 类声明 或 类表达式 中用于创建一个类作为另一个类的一个子类。</p><pre><code class="js">class Animal &#123;  constructor(name) &#123;    this.name = name;  &#125;  speak() &#123;    console.log(`$&#123;this.name&#125; makes a noise.`);  &#125;&#125;class Dog extends Animal &#123;  constructor(name) &#123;    super(name); // 调用超类构造函数并传入name参数  &#125;  speak() &#123;    console.log(`$&#123;this.name&#125; barks.`);  &#125;&#125;var d = new Dog(&#39;Mitzie&#39;);d.speak();// &#39;Mitzie barks.&#39;</code></pre><h3 id="使用-super-调用超类"><a href="#使用-super-调用超类" class="headerlink" title="使用 super 调用超类"></a>使用 super 调用超类</h3><p><code>super</code> 关键字用于调用对象的父对象上的函数。</p><pre><code class="js">class Cat &#123;  constructor(name) &#123;    this.name = name;  &#125;  speak() &#123;    console.log(this.name + &#39; makes a noise.&#39;);  &#125;&#125;class Lion extends Cat &#123;  speak() &#123;    super.speak();    console.log(this.name + &#39; roars.&#39;);  &#125;&#125;</code></pre><h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>Abstract Factory（抽象工厂）属于创建型模式，工厂类模式抽象程度从低到高分为：简单工厂模式 -&gt; 工厂模式 -&gt; 抽象工厂模式。</p><p><strong>提供一个接口以创建一系列相关或相互依赖的对象，而无须指定它们具体的类。</strong></p><p>使用工厂函数，你可以根据需要创建任意数量的用户对象。假如你正在开发一个聊天应用，你会用一个用户对象表示当前用户，以及用很多个用户对象表示其他已登录和在聊天的用户，以便显示他们的名字和头像等等。</p><p>让我们把 user 对象转换为一个 <code>createUser()</code> 工厂方法:</p><pre><code class="js">const createUser = (&#123; userName, avatar &#125;) =&gt; (&#123;  userName,  avatar,  setUserName (userName) &#123;    this.userName = userName;    return this;  &#125;&#125;);console.log(createUser(&#123; userName: &#39;echo&#39;, avatar: &#39;echo.png&#39; &#125;));/*&#123;  &quot;avatar&quot;: &quot;echo.png&quot;,  &quot;userName&quot;: &quot;echo&quot;,  &quot;setUserName&quot;: [Function setUserName]&#125;*/</code></pre><p>最后，你还要切记，不要把事情搞复杂，工厂函数不是必需的，对于某个问题，你的解决思路应当是：</p><p><code>纯函数 &gt; 工厂函数 &gt; 函数式 Mixin &gt; 类</code></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
+
+&lt;h2 id=&quot;类&quot;&gt;&lt;a href=&quot;#类&quot; class=&quot;headerlink&quot; title=&quot;类&quot;&gt;&lt;/a&gt;类&lt;/h2&gt;&lt;p&gt;类是用于创建对象的模板。他们用代码封装数据以处理该数据</summary>
+      
+    
+    
+    
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>学习Javascript应懂得的33个概念之Object.create和Object.assign</title>
     <link href="https://shinichikudo-fe.github.io/2021/01/07/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BObject-create%E5%92%8CObject-assign/"/>
     <id>https://shinichikudo-fe.github.io/2021/01/07/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BObject-create%E5%92%8CObject-assign/</id>
     <published>2021-01-07T01:23:17.000Z</published>
-    <updated>2021-01-07T02:52:06.506Z</updated>
+    <updated>2021-01-08T01:19:46.025Z</updated>
     
     <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p>来源<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">MDN</a></p><h2 id="Object-create"><a href="#Object-create" class="headerlink" title="Object.create()"></a>Object.create()</h2><p><code>Object.create()</code>方法创建一个新对象，使用现有的对象来提供新创建的对象的<code>__proto__</code>。</p><pre><code class="js">const person = &#123;  isHuman: false,  printIntroduction: function() &#123;    console.log(`My name is $&#123;this.name&#125;. Am I human? $&#123;this.isHuman&#125;`);  &#125;&#125;;const me = Object.create(person);me.name = &#39;Matthew&#39;; // &quot;name&quot; is a property set on &quot;me&quot;, but not on &quot;person&quot;me.isHuman = true; // inherited properties can be overwrittenme.printIntroduction();</code></pre><h2 id="Object-assign-target-…source"><a href="#Object-assign-target-…source" class="headerlink" title="Object.assign(target,…source)"></a>Object.assign(target,…source)</h2><p><code>Object.assign()</code> 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象。它将返回目标对象。如果目标对象中的属性具有相同的键，则属性将被源中的属性覆盖。后来的源的属性将类似地覆盖早先的属性。</p><p><code>null</code> 或 <code>undefined</code> 源被视为空对象一样对待，不会对目标对象产生任何影响。”</p><pre><code class="js">const target1 = &#123;a: 1, b: 2&#125;const target2 = &#123;c: 3, d: 4&#125;const returnTarget = Object.assign(target1, target2)console.log(target1)console.log(returnTarget)</code></pre><h3 id="深拷贝的问题"><a href="#深拷贝的问题" class="headerlink" title="深拷贝的问题"></a>深拷贝的问题</h3><p>针对深拷贝，需要使用其他办法，因为 <code>Object.assign()</code>拷贝的是（可枚举）属性值。</p><p>假如源值是一个对象的引用，它仅仅会复制其引用值。</p><pre><code class="js">const log = console.log;function test() &#123;  &#39;use strict&#39;;  let obj1 = &#123; a: 0 , b: &#123; c: 0&#125;&#125;;  let obj2 = Object.assign(&#123;&#125;, obj1);  log(JSON.stringify(obj2));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;  obj1.a = 1;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 0&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;  obj2.a = 2;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 0&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 2, b: &#123; c: 0&#125;&#125;  obj2.b.c = 3;  log(JSON.stringify(obj1));  // &#123; a: 1, b: &#123; c: 3&#125;&#125;  log(JSON.stringify(obj2));  // &#123; a: 2, b: &#123; c: 3&#125;&#125;  // Deep Clone  obj1 = &#123; a: 0 , b: &#123; c: 0&#125;&#125;;  let obj3 = JSON.parse(JSON.stringify(obj1));  obj1.a = 4;  obj1.b.c = 4;  log(JSON.stringify(obj3));  // &#123; a: 0, b: &#123; c: 0&#125;&#125;&#125;test();</code></pre>]]></content>
     
@@ -35,6 +61,10 @@
     
     
     
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
     
   </entry>
   
@@ -493,31 +523,6 @@
 
 &lt;p&gt;&lt;a href=&quot;https://juejin.im/post/6844903490989342728&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言</summary>
-      
-    
-    
-    
-    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
-    
-    
-    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习Javascript应懂得33个概念之表达式和语句</title>
-    <link href="https://shinichikudo-fe.github.io/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/"/>
-    <id>https://shinichikudo-fe.github.io/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/</id>
-    <published>2020-09-17T09:39:52.000Z</published>
-    <updated>2020-09-17T10:19:18.469Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="表达式与语句的区分"><a href="#表达式与语句的区分" class="headerlink" title="表达式与语句的区分"></a>表达式与语句的区分</h1><p>引子：表达式和语句很基础，但是有时会犯错，比如：</p><pre><code class="js">function()&#123;&#125;//报错(function()&#123;&#125;)//不报错function f(x)&#123; return x + 1 &#125;()//报错function f(x)&#123; return x + 1 &#125;(1)//不报错，为什么返回 1</code></pre><p>能明白为什么？</p><ul><li><p>第一行代码：因为<code>JavaScript</code> 将 <code>function</code> 关键字当作一个 <strong>函数声明语句</strong> 的开始，而函数声明语句 <code>function</code> 关键字后面应该是 函数名，这里后面跟圆括号，当然会报错。</p></li><li><p>第二行代码：给它加上一对圆括号，解析器会把()里的当做表达式去解析，在这里就会当做匿名函数表达式解析，所以不会报错。</p></li><li><p>第三行代码：在一条语句后面加上()会被当做分组操作符，分组操作符里必须要有表达式，所以这里报错；</p></li><li><p>第四行代码：在一条函数声明语句后面加上(1)，仅仅是相当于在声明语句之后又跟了一条毫无关系的表达式，等价于下面代码：</p></li></ul><pre><code class="js">function f(x)&#123; return x + 1 &#125;(1)//1</code></pre><p>所以返回了无关紧要的答案；</p><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><h3 id="表达式（expression）"><a href="#表达式（expression）" class="headerlink" title="表达式（expression）"></a>表达式（expression）</h3><p>js 中的一个短语，js 解释器会将其计算出一个结果。程序中的常量是最简单的一类表达式。</p><p><strong>变量名也是一种简单的表达式</strong>，它的值就是赋值给变量的值。<br>复杂表达式是由简单表达式组成的。</p><p>比如，数据访问表达式是由一个表示数组的表达式、左方括号、一个整数表达式和右方括号构成。它们所组成的新的表达式的运算结果是该数组的特定位置的元素值。</p><p>同样的，函数调用表达式由一个表示函数对象的表达式和0个或多个参数表达式构成。</p><p>将简单表达式组合成复杂表达式最常用的方法就是使用运算符（opetator）。</p><p>运算符按照特定的运算规则对操作数（通常是两个）进行运算，并计算出新值。</p><p>乘法运算符<code>*</code>是比较简单的例子。表达式<code>x*y</code>是对两个变量表达式x和y进行运算并得出结果。有时我们更愿意说运算符返回了一个值而不是“计算”出了一个值。</p><h3 id="语句（statement）"><a href="#语句（statement）" class="headerlink" title="语句（statement）"></a>语句（statement）</h3><p><strong>js 整句或命令。js 语句是以分号结束；表达式计算出一个值，但语句用来自行以使某件事发生。</strong><br><strong>“使某件事发生”的一个方法是计算带有副作用的表达式。</strong></p><p>诸如赋值和函数调用这些有副作用的表达式，是可以作为单独的语句的，这种把表达式当做语句的用法也称作表达式语句（expression statement）。类似的语句还有声明语句（declaration statement），声明语句用来声明新变量或定义新函数。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;表达式与语句的区分&quot;&gt;&lt;a href=&quot;#表达式与语句的区分&quot; class=&quot;headerlink&quot; title=&quot;表达式与语句的区分&quot;&gt;&lt;/a&gt;表达式与语句的区分&lt;/h1&gt;&lt;p&gt;引子：表达式和语句很基础，但是有时会犯错，比如：&lt;/p&gt;
-&lt;pre&gt;&lt;code cl</summary>
       
     
     

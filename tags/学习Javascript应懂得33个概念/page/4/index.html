@@ -140,22 +140,22 @@
             <a href="/categories/Js"><b>「
                 </b>JS<b> 」</b></a>
             
-            September 15, 2020
+            September 17, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/09/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%AD%E5%8C%85/" title="学习Javascript应懂得33个概念之闭包" class="posttitle">学习Javascript应懂得33个概念之闭包</a></h3>
+            <a href="/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/" title="学习Javascript应懂得33个概念之表达式和语句" class="posttitle">学习Javascript应懂得33个概念之表达式和语句</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                5.5k
+                1.8k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                5 mins.
+                2 mins.
             </span>
             
             
@@ -166,9 +166,12 @@
         
         <div class="md-content animated fadeIn">
             
-            <p>MDN上对闭包的解释是：函数和对其周围状态（<strong>lexical environment，词法环境</strong>）的引用捆绑在一起构成<strong>闭包（closure）</strong>。也就是说，闭包可以<strong>让你从内部函数访问外部函数作用域</strong>。在 JavaScript...</p>
+            <p>引子：表达式和语句很基础，但是有时会犯错，比如：</p>
+<pre><code class="js">function()&#123;&#125;//报错
+(function()&#123;&#125;)//不报错
+function f(x)&#123...</code></pre>
             
-            <span class="read-more"><a href="/2020/09/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%97%AD%E5%8C%85/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -189,6 +192,115 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Js">
+                  <b>「 </b>JS<b> 」</b>
+                </a>
+            
+            September 17, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/" title="学习Javascript应懂得33个概念之表达式和语句" class="posttitle">学习Javascript应懂得33个概念之表达式和语句</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        1.8k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        2 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>引子：表达式和语句很基础，但是有时会犯错，比如：</p>
+<pre><code class="js">function()&#123;&#125;//报错
+(function()&#123;&#125;)//不报错
+function f(x)&#123; return x + 1 &#125;()//报错
+function f(x)&#123; return x + 1 &#125;(1)//不报错，为什么返回 1</code></pre>
+<p>能明白为什么？</p>
+<ul>
+<li><p>第一行代码：因为<code>JavaScript</code> 将 <code>function</code> 关键字当作一个 <strong>函数声明语句</strong> 的开始，而函数声明语句 ...</p></li></ul>
+            
+            <span class="read-more"><a href="/2020/09/17/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%92%8C%E8%AF%AD%E5%8F%A5/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Js">
+                  <b>「 </b>JS<b> 」</b>
+                </a>
+            
+            September 16, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/" title="学习Javascript应懂得33个概念之map,reduce,filter等高阶函数" class="posttitle">学习Javascript应懂得33个概念之map,reduce,filter等高阶函数</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        4.9k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        4 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce">原文地址来自MDN</a><br>跟着写一遍，加强下记录</p>
+<p><code>map()</code> 方法<strong>创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值</strong>。</p>
+<pre><code class="js">const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map(x =&gt; x * 2);
+
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+</code></pre>
+<pre><code class="js">var new_array = arr.map(function...</code></pre>
+            
+            <span class="read-more"><a href="/2020/09/16/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8Bmap-reduce-filter%E7%AD%89%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -353,113 +465,9 @@
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Js">
-                  <b>「 </b>JS<b> 」</b>
-                </a>
-            
-            September 14, 2020
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2020/09/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B-%E4%B8%8E-%EF%BC%8Ctypeof%E4%B8%8Eintanceof/" title="学习Javascript应懂得33个概念之&#x3D;&#x3D;与&#x3D;&#x3D;&#x3D;，typeof与intanceof" class="posttitle">学习Javascript应懂得33个概念之&#x3D;&#x3D;与&#x3D;&#x3D;&#x3D;，typeof与intanceof</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        6k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        5 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <meta name="referrer" content="no-referrer">
-
-<p>通过js中判断类型是否相等及检测数据类型的方法，来更深入的了解js的奥秘</p>
-<ul>
-<li>严格相等比较 (也被称作”strict equality”, “identity”, “triple equals”)，使用 <code>===</code> ,</li>
-<li>抽象相等比较 (“loose equality”，”double equals”) ，使用 <code>==</code></li>
-<li><code>Object.is</code> （ECMAScript 2015/ ES6 新特性）</li>
-</ul>
-<p>简而言之，在比较两件事情时，双等号将执行<strong>类型转换</strong>; 三等号将进行相同的比较，而<strong>不进行类型转换</strong> (如果类型不同,...</p>
-            
-            <span class="read-more"><a href="/2020/09/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B-%E4%B8%8E-%EF%BC%8Ctypeof%E4%B8%8Eintanceof/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Js">
-                  <b>「 </b>JS<b> 」</b>
-                </a>
-            
-            September 11, 2020
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2020/09/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%9A%90%E5%BC%8F%EF%BC%8C%E6%98%BE%E5%BC%8F%EF%BC%8C%E5%90%8D%E4%B9%89%E5%92%8C%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/" title="学习javascript应懂得33个概念之隐式，显式，名义和鸭子类型" class="posttitle">学习javascript应懂得33个概念之隐式，显式，名义和鸭子类型</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        6.1k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        6 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <meta name="referrer" content="no-referrer">
-
-<p>javasciprt是属于弱类型的语言。灵活的同时也带来一些问题，有时我们修改一些代码时，看上去是对的，结果出现了我们意想不到的结果。</p>
-<p>在 JavaScript 中，当我们进行比较操作或者加减乘除四则运算操作时，常常会触发 JavaScript 的隐式类型转换机制；而这部分也往往是令人迷惑的地方。譬如浏览器中的 <code>console.log</code> 操作常常会将<strong>任何值都转化为字符串</strong>然后展示，而数学运算则会首先将值<strong>转化为数值类型</strong>（除了 <code>Date</code> 类型对象）然后进行操作。</p>
-<h3 id="关系操作符（-lt-gt-lt-gt-）"><a href="#关系操作符（-lt-gt-lt-gt-）" class="headerlink" title="关系操作符（&lt;, &gt;, &lt;=, &gt;=）"></a>关系操作符（&lt;, &gt;, &...</h3>
-            
-            <span class="read-more"><a href="/2020/09/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E9%9A%90%E5%BC%8F%EF%BC%8C%E6%98%BE%E5%BC%8F%EF%BC%8C%E5%90%8D%E4%B9%89%E5%92%8C%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
     </div>
     
-    <div id="pager"><a href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/page/5/" class="more" data-loading="Loading..." data-load-more="Load more">Load more</a></div>
+    <div id="pager"><a href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/page/5/" class="more" data-loading="加载中..." data-load-more="Load more">Load more</a></div>
     
 </div>
 <div id="preview"></div>
