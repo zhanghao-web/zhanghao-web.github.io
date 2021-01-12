@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习Javascript应懂得33个概念之Memoization</title>
+      <link href="/2021/01/12/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BMemoization/"/>
+      <url>/2021/01/12/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BMemoization/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p><a href="https://segmentfault.com/a/1190000016703106">原文地址</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>memoization 来源于拉丁语 memorandum (“to be remembered”)，不要与 memorization 混淆了。</strong></p><p>简单来说，<code>memoization</code> 是一种优化技术，主要用于<strong>通过存储昂贵的函数调用的结果来加速计算机程序，并在再次发生相同的输入时返回缓存的结果</strong>。</p><h2 id="阶乘"><a href="#阶乘" class="headerlink" title="阶乘"></a>阶乘</h2><h3 id="不使用memoization"><a href="#不使用memoization" class="headerlink" title="不使用memoization"></a>不使用memoization</h3><pre><code class="js">const factorial = n =&gt;&#123;  if(n === 1)&#123;    return 1  &#125;else&#123;    return factorial(n - 1) * n  &#125;&#125;</code></pre><h3 id="使用memoiztion"><a href="#使用memoiztion" class="headerlink" title="使用memoiztion"></a>使用memoiztion</h3><pre><code class="js">const cache = []const factorial = n =&gt;&#123;  if(n === 1)&#123;    return 1  &#125;else if(cache[n - 1])&#123;    return cache[n - 1]  &#125;else&#123;    let result = factorial(n - 1) * n    cache[n - 1] = result    return result  &#125;&#125;</code></pre><h3 id="使用闭包和memoiztion"><a href="#使用闭包和memoiztion" class="headerlink" title="使用闭包和memoiztion"></a>使用闭包和memoiztion</h3><p>常见的方式就是 闭包 和 memoiztion 一起搭配使用：</p><pre><code class="js">const factorialMemo = () =&gt;&#123;  const cache = []  const factorial = n =&gt;&#123;    if(n === 1)&#123;      return 1    &#125; else if(cache[n - 1])&#123;      console.log(`get factorial($&#123;n&#125;) from cache...`)      return cache[n - 1]    &#125;else &#123;      let result = factorial(n - 1) * n      cache[n - 1] = result      return result    &#125;  &#125;&#125;</code></pre><p>继续变形,下面这种编写方式是最常见的形式。</p><pre><code class="js">const factorMemo = func =&gt;&#123;  const cache = []  return function(n)&#123;    if(cache[n - 1])&#123;      console.log(`get factorial($&#123;n&#125;) from cache...`)      return cache[n - 1]    &#125;else&#123;      const result = func.apply(null,arguments)      cache[n - 1] = result      return result    &#125;  &#125;&#125;const factorial = factorMemo(function(n)&#123;  return n === 1 ? 1 : factorial(n - 1) * n&#125;)</code></pre><p>从阶乘的这个例子可以知道 <code>memoization</code> 是一个<em>空间换时间的方式</em>，存储执行结果，下次再次发生相同的输入会直接输出结果，提高了执行的速度。</p><h2 id="underscore-源码中的-memoization"><a href="#underscore-源码中的-memoization" class="headerlink" title="underscore 源码中的 memoization"></a>underscore 源码中的 memoization</h2><pre><code class="js">// Memoize an expensive function by storing its results._.memoize = function(func, hasher) &#123;    var memoize = function(key) &#123;        var cache = memoize.cache;        var address = &#39;&#39; + (hasher ? hasher.apply(this, arguments) : key);        if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);        return cache[address];    &#125;;    memoize.cache = &#123;&#125;;    return memoize;&#125;;</code></pre><p>代码一目了然，使用 <code>_.memoize</code> 来实现阶乘如下：</p><pre><code class="js">const factorial = _.memoize(function(n) &#123;    return n === 1 ? 1 : factorial(n - 1) * n&#125;);</code></pre><p>参照这个源码，上面的阶乘继续可以变形如下：</p><pre><code class="js">const factorialMemo = func =&gt; &#123;    const memoize = function(n) &#123;        const cache = memoize.cache        if (cache[n - 1]) &#123;            console.log(`get factorial($&#123;n&#125;) from cache...`)            return cache[n - 1]        &#125; else &#123;            const result = func.apply(null, arguments)            cache[n - 1] = result            return result        &#125;    &#125;    // CHANGE    memoize.cache = []    return memoize&#125;const factorial = factorialMemo(function(n) &#123;    return n === 1 ? 1 : factorial(n - 1) * n&#125;);</code></pre><h2 id="reselect-源码中的-memoization"><a href="#reselect-源码中的-memoization" class="headerlink" title="reselect 源码中的 memoization"></a>reselect 源码中的 memoization</h2><pre><code class="js">export function defaultMemoize(func, equalityCheck = defaultEqualityCheck) &#123;    let lastArgs = null    let lastResult = null    // we reference arguments instead of spreading them for performance reasons    return function () &#123;        if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) &#123;            // apply arguments instead of spreading for performance.            lastResult = func.apply(null, arguments)        &#125;        lastArgs = arguments        return lastResult    &#125;&#125;;</code></pre><p>从源码可以知道当 <code>lastArgs</code> 与 <code>arguments</code> 相同的时候，就不会再执行 <code>func</code>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>学习Javascript应懂得33个概念之设计模式</title>
       <link href="/2021/01/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
       <url>/2021/01/11/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
