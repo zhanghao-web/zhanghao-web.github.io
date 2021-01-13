@@ -6,7 +6,7 @@
   <link href="https://shinichikudo-fe.github.io/atom.xml" rel="self"/>
   
   <link href="https://shinichikudo-fe.github.io/"/>
-  <updated>2021-01-12T02:11:29.895Z</updated>
+  <updated>2021-01-13T05:53:47.620Z</updated>
   <id>https://shinichikudo-fe.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习Javascript应懂得33个概念之纯函数，函数副作用和状态变化</title>
+    <link href="https://shinichikudo-fe.github.io/2021/01/13/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%BA%AF%E5%87%BD%E6%95%B0%EF%BC%8C%E5%87%BD%E6%95%B0%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96/"/>
+    <id>https://shinichikudo-fe.github.io/2021/01/13/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%BA%AF%E5%87%BD%E6%95%B0%EF%BC%8C%E5%87%BD%E6%95%B0%E5%89%AF%E4%BD%9C%E7%94%A8%E5%92%8C%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96/</id>
+    <published>2021-01-13T02:34:05.000Z</published>
+    <updated>2021-01-13T05:53:47.620Z</updated>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><h2 id="纯函数（pure-function）"><a href="#纯函数（pure-function）" class="headerlink" title="纯函数（pure function）"></a>纯函数（pure function）</h2><p><a href="http://huziketang.mangojuice.top/books/react/lesson32">原文地址</a></p><p>简单的来说，<strong>一个函数返回结果只依赖于它的参数，并且在执行过程里面没有副作用，我们就把这个函数叫做纯函数</strong></p><p>1.函数的返回结果只依赖于它的参数<br>2.函数执行过程里面没有副作用</p><h3 id="函数的返回结果只依赖于它的参数"><a href="#函数的返回结果只依赖于它的参数" class="headerlink" title="函数的返回结果只依赖于它的参数"></a>函数的返回结果只依赖于它的参数</h3><pre><code class="js">const a = 1const foo = (b) =&gt; a + bfoo(2) // 3</code></pre><p><code>foo</code> 函数不是一个纯函数，因为它返回的结果依赖于外部变量 <code>a</code>，我们在不知道 <code>a</code> 的值的情况下，并不能保证 <code>foo(2)</code> 的返回值是 3。虽然 <code>foo</code> 函数的代码实现并没有变化，传入的参数也没有变化，但它的返回值却是不可预料的，现在 <code>foo(2)</code> 是 3，可能过了一会就是 4 了，因为 <code>a</code> 可能发生了变化变成了 2。</p><pre><code class="js">const a = 1const foo = (x, b) =&gt; x + bfoo(1, 2) // =&gt; 3</code></pre><p>现在 foo 的返回结果只依赖于它的参数 <code>x</code> 和 <code>b</code>，foo(1, 2) 永远是 3。今天是 3，明天也是 3，在服务器跑是 3，在客户端跑也 3，不管你外部发生了什么变化，foo(1, 2) 永远是 3。<em>只要 foo 代码不改变，你传入的参数是确定的，那么 foo(1, 2) 的值永远是可预料的</em>。</p><p>这就是纯函数的第一个条件：<strong>一个函数的返回结果只依赖于它的参数</strong>。</p><h3 id="函数执行过程没有副作用"><a href="#函数执行过程没有副作用" class="headerlink" title="函数执行过程没有副作用"></a>函数执行过程没有副作用</h3><p>一个函数执行过程对产生了外部可观察的变化那么就说这个函数是有副作用的。</p><p>我们修改了一下 <code>foo</code>:</p><pre><code class="js">const a = 1const foo = (obj, b) =&gt; &#123;  return obj.x + b&#125;const counter = &#123; x: 1 &#125;foo(counter, 2) // =&gt; 3counter.x // =&gt; 1</code></pre><p>我们把原来的 <code>x</code> 换成了 <code>obj</code>，我现在可以往里面传一个对象进行计算，计算的过程里面并不会对传入的对象进行修改，计算前后的 <code>counter</code> 不会发生任何变化，计算前是 1，计算后也是 1，它现在是纯的。但是我再稍微修改一下它：</p><pre><code class="js">const a = 1const foo = (obj, b) =&gt; &#123;  obj.x = 2  return obj.x + b&#125;const counter = &#123; x: 1 &#125;foo(counter, 2) // =&gt; 4counter.x // =&gt; 2</code></pre><p>现在情况发生了变化，我在 <code>foo</code> 内部加了一句 <code>obj.x = 2</code>，计算前 <code>counter.x</code> 是 1，但是计算以后 <code>counter.x</code> 是 2。foo 函数的执行对外部的 <code>counter</code> 产生了影响，它产生了副作用，因为它修改了外部传进来的对象，现在它是不纯的。</p><p>但是你在函数内部构建的变量，然后进行数据的修改不是副作用：</p><pre><code class="js">const foo = (b) =&gt; &#123;  const obj = &#123; x: 1 &#125;  obj.x = 2  return obj.x + b&#125;</code></pre><p>虽然 <code>foo</code> 函数内部修改了 <code>obj</code>，但是 <code>obj</code> 是内部变量，外部程序根本观察不到，修改 <code>obj</code> 并不会产生外部可观察的变化，这个函数是没有副作用的，因此它是一个纯函数。</p><p>除了修改外部的变量，一个函数在执行过程中还有很多方式产生外部可观察的变化，比如说调用 DOM API 修改页面，或者你发送了 <code>Ajax</code> 请求，还有调用 <code>window.reload</code> 刷新浏览器，甚至是 <code>console.log</code> 往控制台打印数据也是副作用。</p><p>纯函数很严格，也就是说你几乎除了计算数据以外什么都不能干，计算的时候还不能依赖除了函数参数以外的数据。</p><p>为什么要煞费苦心地构建纯函数？因为纯函数非常“靠谱”，执行一个纯函数你不用担心它会干什么坏事，它不会产生不可预料的行为，也不会对外部产生影响。不管何时何地，你给它什么它就会乖乖地吐出什么。如果你的应用程序大多数函数都是由纯函数组成，那么你的程序测试、调试起来会非常方便。</p><h2 id="js副作用"><a href="#js副作用" class="headerlink" title="js副作用"></a>js副作用</h2><p><a href="https://www.jb51.net/article/28079.htm">原文地址</a></p><blockquote><p>函数副作用 指当调用函数时，除了返回函数值之外，还对主调用函数产生附加的影响。例如修改全局变量（函数外的变量）或修改参数。函数副作用会给程序设计带来不必要的麻烦，给程序带来十分难以查找的错误，并且降低程序的可读性。严格的函数式语言要求函数必须无副作用。</p></blockquote><p>函数的副作用相关的几个概念， <code>Pure Function</code>、 <code>Impure Function</code>、 <code>Referential Transparent</code>。</p><p><code>纯函数 ( Pure Function )</code><br>输入输出数据流全是显式（Explicit）的。 显式（Explicit）的意思是，函数与外界交换数据只有一个唯一渠道——参数和返回值。函数从函数外部接受的所有输入信息都通过参数传递到该函数内部。函数输出到函数外部的所有信息都通过返回值传递到该函数外部。</p><p><code>非纯函数 ( Impure Function )</code><br>与之相反。 隐式（Implicit）的意思是，函数通过参数和返回值以外的渠道，和外界进行数据交换。比如读取/修改全局变量，都叫作以隐式的方式和外界进行数据交换。</p><p><code>引用透明 ( Referential Transparent )</code><br>引用透明的概念与函数的副作用相关，且受其影响。 如果程序中两个相同值的表达式能在该程序的任何地方互相替换，而不影响程序的动作，那么该程序就具有引用透明性。它的优点是比非引用透明的语言的语义更容易理解，不那么晦涩。纯函数式语言没有变量，所以它们都具有引用透明性</p><p>以下示例说明了引用透明与函数副作用的结合</p><pre><code class="js">result1 = (fun(a) + b) / (fun(a) -c);temp = fun(a);result2 = (temp + b) / (temp -c);</code></pre><p>如果函数没有副作用，那么result1和result2将是等价的。然而如果fun有副作用，比如让b或c加1，那么result1和result2将不相等。因此，副作用违背了引用透明性。</p><p>在JavaScript中，引入了函数。但显然JS中的函数可以访问、修改全局变量（或定义在函数外的变量），如下</p><pre><code class="js">var a = 5;function fun()&#123;a = 10;&#125;fun(); // a 变成了10</code></pre><blockquote><p>JS中要想保证函数无副作用这项特性，只能依靠编程人员的习惯，即</p></blockquote><ul><li>1.函数入口使用参数运算，而不修改它</li><li>2.函数内不修改函数外的变量，如全局变量</li><li>3.运算结果通过函数返回给外部（出口）</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
+
+&lt;h2 id=&quot;纯函数（pure-function）&quot;&gt;&lt;a href=&quot;#纯函数（pure-function）&quot; class=&quot;headerlink&quot; title=&quot;纯函数（pure </summary>
+      
+    
+    
+    
+    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
+    
+    
+    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>学习Javascript应懂得33个概念之Memoization</title>
@@ -497,33 +523,6 @@
       
     <summary type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/ruanyf/es6tutorial/blob/2e1c10776a9350debfec47de8ddeaf1c2c5a80cc/docs/function.md&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;递归简介&quot;</summary>
-      
-    
-    
-    
-    <category term="Js" scheme="https://shinichikudo-fe.github.io/categories/Js/"/>
-    
-    
-    <category term="学习Javascript应懂得33个概念" scheme="https://shinichikudo-fe.github.io/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>学习Javascript应懂得33个概念之立即执行函数, 模块化, 命名空间</title>
-    <link href="https://shinichikudo-fe.github.io/2020/09/22/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0-%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/"/>
-    <id>https://shinichikudo-fe.github.io/2020/09/22/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0-%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4/</id>
-    <published>2020-09-22T05:45:52.000Z</published>
-    <updated>2020-09-27T08:32:50.536Z</updated>
-    
-    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p><a href="https://segmentfault.com/a/1190000006966358">原文地址</a></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>立即执行函数, 模块化, 命名空间 ，主要是解决两个问题——“<strong>命名空间冲突”，“文件依赖管理</strong>”。</p><p>坑：<br>1.命名空间冲突</p><ul><li>(1)我自己测试好的代码和大家合并后怎么起冲突了？</li><li>(2)页面脚本的变量或函数覆盖了公有脚本的。                                                 </li></ul><p>2.文件依赖管理</p><ul><li>(1)明明项目需要引入的包都引进来了怎么还报缺少包？</li><li>(2)手动管理依赖，有天要更换某个插件，要深入代码内部进行修改</li><li>(3)如下图，显示的代码加载，依赖关系复杂。在F.js中，分不清某个变量是来自C.js，还是E.js</li><li>(4)两次加载同一个模块。比如引入了两遍JQ</li></ul><p><img src="https://segmentfault.com/img/bVDlA5?w=398&h=183" alt="keng"></p><p>3.其他的</p><ul><li>(1)为了实现脚本复用，将一个很大的公用public文件引入各个页面中，其中的某些函数，只有个别页面用到。</li><li>(2)某个功能的函数群函数，与另一个功能的函数群摆在一起，使用注释来分隔。</li></ul><p><strong>目前解决的方法是:模块化</strong></p><p>1.<em>命名空间</em>：各个模块的命名空间独立。A模块的变量x不会覆盖B模块的变量x。<br>2.<em>模块的依赖关系</em>:通过模块管理工具如<code>webpack/requireJS/browserify</code>等进行管理。</p><h2 id="模块化的基本原理——解决命名空间冲突"><a href="#模块化的基本原理——解决命名空间冲突" class="headerlink" title="模块化的基本原理——解决命名空间冲突"></a>模块化的基本原理——解决命名空间冲突</h2><p>JavaScript的缺陷，首当其冲就是全局变量。这使得每想命名一个变量的时候都要三思又三思，生怕上方无穷远的地方有一个同事些的代码和自己冲突。以下是一些防范方法</p><h3 id="一、使用命名空间"><a href="#一、使用命名空间" class="headerlink" title="一、使用命名空间"></a>一、使用命名空间</h3><p>代码如下：</p><pre><code class="js">//定义var module = &#123;    name: &#39;rouwan&#39;,    sayName:function()&#123;        console.log(this.name)    &#125;&#125;//使用var a = module.name;console.log(a)</code></pre><p><strong>总结</strong>：直接修改name不会影响<code>module.name</code>，一定程度保护了命名空间。<br>有两个缺点，一，外部还是可以修改module的属性和方法。二，命名空间有时长起来超乎你的想象。适合一些小型的封装，如一些配置。</p><h3 id="二、立即执行函数-闭包（实现模块的基本方法）"><a href="#二、立即执行函数-闭包（实现模块的基本方法）" class="headerlink" title="二、立即执行函数 + 闭包（实现模块的基本方法）"></a>二、立即执行函数 + 闭包（实现模块的基本方法）</h3><p>立即函数可以创建作用域，闭包则可以形成私有变量和函数</p><pre><code class="js">//创建var module = (function()&#123;  var privateName = &#39;inner&#39;;            //私有变量  var privateFunc = function()&#123;        //私有函数      console.log(&#39;私有函数&#39;)  &#125;  return &#123;                                  name: &#39;rouwan&#39;,                    //公有属性      sayName:function()&#123;                //公有函数          console.log(this.name)      &#125;  &#125;&#125;)()//使用module.sayName();    //&#39;rouwan&#39;</code></pre><p>总结：这是目前比较常用的模块定义方式，<strong>可以区分私有成员和公有成员</strong>。<br>公有变量和方法，和之前一样可以直接通过<code>module.name</code>的方式修改。私有变量和方法，是无法访问的，除非给你个修改私有成员的公有方法。</p><h3 id="三、在上述基础上，引入其他模块"><a href="#三、在上述基础上，引入其他模块" class="headerlink" title="三、在上述基础上，引入其他模块"></a>三、在上述基础上，引入其他模块</h3><pre><code class="js">//定义var module1 = (function(mod)&#123;  var privateName = &#39;inner1&#39;;  var privateFunc = function()&#123;    console.log(&#39;私有函数1&#39;)  &#125;  return &#123;    name : &#39;rouwan1&#39;,    sayName: function()&#123;        console.log(this.name)    &#125;,    anotherName:mod.name,            //另一个模块上的公有参数    sayAnotherName:mod.sayName       //另一个模块上的公有方法  &#125;&#125;)(anotherModule) //引入了另一个模块//使用module1.sayOtherName()</code></pre><h3 id="四、其他的方式"><a href="#四、其他的方式" class="headerlink" title="四、其他的方式"></a>四、其他的方式</h3><p>放大模式等是以往用来管理大型模块，进行文件拆分的方法。现在<code>webpack</code>等模块化工具都很完善的情况下，已经显得有点落后了。就不介绍了。</p><h2 id="告别刀耕火种的时代——模块化构建工具（解决依赖管理）"><a href="#告别刀耕火种的时代——模块化构建工具（解决依赖管理）" class="headerlink" title="告别刀耕火种的时代——模块化构建工具（解决依赖管理）"></a>告别刀耕火种的时代——模块化构建工具（解决依赖管理）</h2><p>我了解js模块是从<strong>立即执行函数</strong>开始的。但是等到真正使用构建工具的时候，却发现业界采用的模块化方案，却并非是<strong>一个一个由立即函数+闭包</strong>形成的集群。</p><p>而是用了诸如<strong>AMD/CMD/CommonJS/ES6</strong>模块等等模块化实现。</p><p>这里面的原因可能有这几个，<br>一，闭包的性能问题。<br>二，当模块增多的时候，需要解决模块间的依赖管理问题。</p><p>关于依赖管理，目前项目里碰到了几个不舒服的地方：</p><p>1.引用多个不同的文件<br>2.HTML中引入了两遍的jq，导致脚本报错。<br>3.有一个公用脚本，包含了N多的公用模块。有些页面明明只用到了一个模块，也必须全部加载一遍。</p><p>因此，必须使用模块化管理工具!</p><p>webpack和requireJS比较：<br><img src="https://segmentfault.com/img/bVDm01?w=746&h=254" alt="webpack和requireJS"></p><p>几种模块化规范比较：<br><img src="https://segmentfault.com/img/bVDm2P?w=890&h=316" alt="模块化"></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000006966358&quot;&gt;原文地址&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前</summary>
       
     
     
