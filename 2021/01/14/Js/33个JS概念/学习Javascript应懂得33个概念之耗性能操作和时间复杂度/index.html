@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之耗性能操作和时间复杂度 - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+原文地址
+算法定义算法的定义是这样的：解题方案的准确而完善的描述，是一系列解决问题的清晰指令。
+算法的效率既然算法是解决问题的描述，那么就像一千个人眼中有一千个阿姆雷特他大姨夫一样，解决同一个问,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之耗性能操作和时间复杂度</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+                
+                January 14, 2021
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2021/01/14/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E8%80%97%E6%80%A7%E8%83%BD%E6%93%8D%E4%BD%9C%E5%92%8C%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="学习Javascript应懂得33个概念之耗性能操作和时间复杂度" class="">学习Javascript应懂得33个概念之耗性能操作和时间复杂度</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    5.7k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    5 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903543640424461">原文地址</a></p>
+<h2 id="算法定义"><a href="#算法定义" class="headerlink" title="算法定义"></a>算法定义</h2><p>算法的定义是这样的：解题方案的准确而完善的描述，是一系列解决问题的清晰指令。</p>
+<h2 id="算法的效率"><a href="#算法的效率" class="headerlink" title="算法的效率"></a>算法的效率</h2><p>既然算法是解决问题的描述，那么就像一千个人眼中有一千个阿姆雷特他大姨夫一样，解决同一个问题的办法也是多种多样的，只是在这过程中我们所使用/消耗的时间或者时间以外的代价（计算机消耗的则为内存了）不一样。为了更快、更好、更强的发扬奥利奥..哦不，提高算法的效率。所以很多时候<strong>一个优秀的算法就在于它与其他实现同一个问题的算法相比，在时间或空间（内存）或者时间和空间（内存）上都得到明显的降低</strong>。</p>
+<p>所以呢，算法的效率主要由以下两个复杂度来评估：</p>
+<blockquote>
+<p>时间复杂度：评估执行程序所需的时间。可以估算出程序对处理器的使用程度。</p>
+</blockquote>
+<blockquote>
+<p>空间复杂度：评估执行程序所需的存储空间。可以估算出程序对计算机内存的使用程度。</p>
+</blockquote>
+<p>设计算法时，<strong>时间复杂度要比空间复杂度更容易出问题</strong>，所以一般情况一下我们只对时间复杂度进行研究。<br>一般面试或者工作的时候没有特别说明的话，复杂度就是指时间复杂度。</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>接下来我们还需要知道另一个概念：<strong>时间频度</strong>。这个时候你可能会说：“不是说好一起学算法吗，这些东东是什么？赠品吗？”。非也非也，这是非卖品。</p>
+<p>因为一个算法执行所消耗的时间理论上是不能算出来的，没错正是理论上，so我们任然可以在程序中测试获得。但是我们不可能又没必要对每个算法进行测试，只需要知道大概的哪个算法执行所花费的时间多，哪个花费的时间少就行了。如果一个算法所花费的时间与算法中代码语句执行次数成正比，那么那个算法执行语句越多，它的花费时间也就越多。我们把一个算法中的语句执行次数称为时间频度。通常（ps:很想知道通常是谁）用<code>T(n)</code>表示。</p>
+<p>在时间频度<code>T(n)</code>中，n又代表着问题的规模，当n不断变化时，<code>T(n)</code>也会不断地随之变化。为了了解这个变化的规律，时间复杂度这一概念就被引入了。一般情况下算法基础本操作的重复执行次数为问题规模n的某个函数，用也就是时间频度<code>T(n)</code>。如果有某个辅助函数f(n)，当趋于无穷大的时候，<code>T(n)/f(n)</code>的极限值是不为零的某个常数，那么<code>f(n)</code>是<code>T(n)</code>的同数量级函数，记作<code>T(n)=O(f(n))</code>，被称为算法的渐进时间复杂度，又简称为时间复杂度。</p>
+<h3 id="大O表示法"><a href="#大O表示法" class="headerlink" title="大O表示法"></a>大O表示法</h3><p><strong>用O(n)来体现算法时间复杂度的记法被称作大O表示法</strong></p>
+<p>一般我们我们评估一个算法都是直接评估它的最坏的复杂度。</p>
+<p>大O表示法O<code>(f(n))</code>中的<code>f(n)</code>的值可以为<code>1、n、logn、n^2</code> 等，所以我们将<code>O(1)、O(n)、O(logn)、O( n^2 )</code>分别称为常数阶、线性阶、对数阶和平方阶。下面我们来看看推导大O阶的方法：</p>
+<p><strong>推导大O阶</strong></p>
+<ul>
+<li>1.用常数1取代运行时间中的所有加法常数</li>
+<li>2.只保留最高阶项</li>
+<li>3.去除最高阶的常数</li>
+</ul>
+<p><strong>举例</strong></p>
+<ul>
+<li>常数例</li>
+</ul>
+<pre><code class="js">let sum = 0, n = 10; // 语句执行一次 
+let sum = (1+n)*n/2; // 语句执行一次 
+console.log(`The sum is : $&#123;sum&#125;`) //语句执行一次 </code></pre>
+<p>这样的一段代码它的执行次数为 3 ，然后我们套用规则1，则这个算法的时间复杂度为O(1)，也就是常数阶。</p>
+<ul>
+<li>线性阶</li>
+</ul>
+<pre><code class="js">let i =0; // 语句执行一次 
+while (i &lt; n) &#123; // 语句执行n次 
+  console.log(`Current i is $&#123;i&#125;`); //语句执行n次
+  i++; // 语句执行n次
+&#125;</code></pre>
+<p>这个算法中代码总共执行了 <code>3n + 1</code>次，根据规则 2-&gt;3，因此该算法的时间复杂度是<code>O(n)</code>。</p>
+<ul>
+<li>对数阶</li>
+</ul>
+<pre><code class="js">let number = 1 // 语句执行一次
+while (number &lt; n) &#123; // 语句执行logn次
+  number *= 2; // 语句执行logn次
+&#125;</code></pre>
+<p>上面的算法中，<code>number</code>每次都放大两倍，我们假设这个循环体执行了m次，那么2^m = n即m = logn，所以整段代码执行次数为1 + 2*logn，则<code>f(n) = logn</code>，时间复杂度为O(logn)。</p>
+<ul>
+<li>平方阶</li>
+</ul>
+<pre><code class="js">for (let i = 0; i &lt; n; i++) &#123; // 语句执行n次 
+  for (let j = 0; j &lt; n; j++) &#123; // 语句执行n^2次 
+     console.log(&#39;I am here!&#39;); // 语句执行n^2
+  &#125;
+&#125;</code></pre>
+<p>上面的嵌套循环中，代码共执行 <code>2*n^2 + n</code>，则<code>f(n) = n^2</code>。所以该算法的时间复杂度为<code>O(n^2 )</code></p>
+<h3 id="常见时间复杂度的比较"><a href="#常见时间复杂度的比较" class="headerlink" title="常见时间复杂度的比较"></a>常见时间复杂度的比较</h3><p>常见的时间复杂度函数相信大家在大学中都已经见过了，这里也不多做解释了：</p>
+<p><code>O(1)&lt;O(log n)&lt;O(n)&lt;O(n log n)&lt;O(n²)&lt;O(n³)&lt;O(2ⁿ)&lt;O(n!)</code></p>
+<p>先从简单直观的 <code>O(1)</code> 和 <code>O(n)</code> 复杂度说起。<code>O(1)</code> 表示一次操作即可直接取得目标元素（比如字典或哈希表），<code>O(n)</code> 意味着先要检查 n 个元素来搜索目标，但是 <code>O(log n)</code> 是什么意思呢？</p>
+<p>你第一次听说 <code>O(log n)</code> 时间复杂度可能是在学二分搜索算法的时候。二分搜索一定有某种行为使其时间复杂度为 log n。我们来看看是二分搜索是如何实现的。</p>
+<p>因为在最好情况下二分搜索的时间复杂度是 O(1)，最坏情况（平均情况）下 <code>O(log n)</code>，我们直接来看最坏情况下的例子。已知有 16 个元素的有序数组。</p>
+<p>举个最坏情况的例子，比如我们要找的是数字 13。</p>
+<p><img src="https://camo.githubusercontent.com/40f76a3e99b36549d2f5ac233780ef275daacf4e/68747470733a2f2f63646e2d696d616765732d312e6d656469756d2e636f6d2f6d61782f3830302f312a644f4e586b583670635a6c4a735734704a54326134772e6a706567" alt="demo1"></p>
+<p>选中间的元素作为中心点（长度的一半）</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/13/12726f93c83b795478e688fbe973ce77?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo2"></p>
+<p>13 小于中心点，所以不用考虑数组的后一半</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/13/bc3501220fdd4c705893aeeca3a286fc?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo3"></p>
+<p>重复这个过程，每次都寻找子数组的中间元素</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/13/3e61716a0b5ac34ffb52e35cb9ab39d0?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo4"><br><img src="https://user-gold-cdn.xitu.io/2017/6/13/68d35559a005b7b177b804938ae0d3ee?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo5"></p>
+<p>每次和中间元素比较都会使搜索范围减半。</p>
+<p>所以为了从 16 个元素中找到目标元素，我们需要把数组平均分割 4 次，也就是说，</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/13/faa38db12044c0150ead404b953ca668?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo6"></p>
+<p>简化后的公式</p>
+<p>类似的，如果有 n 个元素，</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/6/13/873e481a75e31a6d23d57cff15094b95?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo7"></p>
+<p>归纳一下<br><img src="https://user-gold-cdn.xitu.io/2017/6/13/0ef16a72ef31ea8bee0002afb703dbaa?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo8"></p>
+<p>分子和分母代入指数<br><img src="https://user-gold-cdn.xitu.io/2017/6/13/710b9141e0f9e1e76b0b7ca6bf120589?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo9"></p>
+<p>等式两边同时乘以 2^k<br><img src="https://user-gold-cdn.xitu.io/2017/6/13/c0d863682bbc66aa5ac1471edf0f3d17?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="demo10"></p>
+<p>对数形式</p>
+<p>所以 log n 的确是有意义的，不是吗？没有其他什么可以表示这种行为。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">205 <p>Articles</p></a></li>
+                    <li><a href="/categories">29 <p>Categories</p></a></li>
+                    <li><a href="/tags">58 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">算法定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%88%E7%8E%87"><span class="toc-number">2.</span> <span class="toc-text">算法的效率</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">2.1.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7O%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">大O表示法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">2.3.</span> <span class="toc-text">常见时间复杂度的比较</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
