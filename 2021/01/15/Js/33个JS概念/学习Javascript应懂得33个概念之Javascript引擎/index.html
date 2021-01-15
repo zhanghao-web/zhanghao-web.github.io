@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>学习Javascript应懂得33个概念之Javascript引擎 - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+各个浏览器引擎
+
+
+应用程序（实现）
+方言和最后版本
+ECMAScript版本
+
+
+
+Chrome浏览器，V8引擎
+JavaScript
+ECMA-262，版本3
+
+
+Mozilla Firef,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">学习Javascript应懂得33个概念之Javascript引擎</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                January 15, 2021
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2021/01/15/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8BJavascript%E5%BC%95%E6%93%8E/" title="学习Javascript应懂得33个概念之Javascript引擎" class="">学习Javascript应懂得33个概念之Javascript引擎</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    6.1k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    6 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<h2 id="各个浏览器引擎"><a href="#各个浏览器引擎" class="headerlink" title="各个浏览器引擎"></a>各个浏览器引擎</h2><table>
+<thead>
+<tr>
+<th align="left">应用程序（实现）</th>
+<th align="center">方言和最后版本</th>
+<th align="right">ECMAScript版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Chrome浏览器，V8引擎</td>
+<td align="center">JavaScript</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">Mozilla Firefox，Gecko排版引擎，SpiderMonkey和Rhino</td>
+<td align="center">JavaScript 1.8.1</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">Opera</td>
+<td align="center">一些JavaScript 1.5特性及一些JScript扩展</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">KHTML排版引擎，KDE项目的Konqueror与苹果的Safari</td>
+<td align="center">JavaScript 1.5</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">Adobe Acrobat</td>
+<td align="center">JavaScript 1.5</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">OpenLaszlo Platform</td>
+<td align="center">JavaScript 1.4</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">Max/MSP</td>
+<td align="center">JavaScript 1.5</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td align="left">ANT Galio 3</td>
+<td align="center">JavaScript 1.5附带RMAI扩展</td>
+<td align="right">ECMA-262，版本3</td>
+</tr>
+</tbody></table>
+<p>我们一般说的javascript引擎指的就是就是Chrome的V8 引擎</p>
+<h2 id="V8-引擎"><a href="#V8-引擎" class="headerlink" title="V8 引擎"></a>V8 引擎</h2><p>V8是Google Chrome浏览器内置的<code>JavaScript</code>脚本引擎。<br>Google Chrome使用V8的API，但引擎的内核部分是独立于浏览器之外的。<br>V8引擎编译和执行<code>JavaScript</code>源代码。<br>速度是V8追求的主要设计目标之一，它把<code>JavaScript</code>代码直接编译成机器码运行，比起传统的“中间代码+解释器”的引擎，优势不言而喻。<br>V8的团队说Chrome对脚本的解析和执行速度是Firefox和Safari的10倍，是IE的56倍。</p>
+<p>V8 是一个全新的 <code>JavaScript</code> 引擎，它在设计之初就以高效地执行大型的 <code>JavaScript</code> 应用程序为目的。V8的<code>JavaScript</code>渲染引擎亮点在于更快速更强壮的<code>JavaScript</code>解析。V8是一个非常反传统的<code>JavaScript</code>引擎，它能够在后台动态的对JS的对象进行分类——一个在其他高级语言中很常见但JS本身不支持的特性。V8对JS的解析不是基于反复loop源代码进行解释而是直接将JS代码编译成机器码运行。换句话说，V8引擎实际上可以看做是JS的扩展和编译器——而传统上类似于JS的解释型语言恰恰是不需要编译器的。最后，高级语言的内存管理效能一直是决定其运行效率的重要因素，而当前的JS虚拟机在这方面做的比较基本，对内存的回收也非常保守。V8使用的是非常强势的内存管理策略，一切在运行堆栈里无用的数据都会被强行回收，从而可以大大提高JS代码的运行效率。+</p>
+<h2 id="了解Javascript引擎的执行机制"><a href="#了解Javascript引擎的执行机制" class="headerlink" title="了解Javascript引擎的执行机制"></a>了解Javascript引擎的执行机制</h2><p><strong>首先,请牢记2点:</strong></p>
+<blockquote>
+<p>(1) JS是单线程语言</p>
+<p>(2) JS的Event Loop是JS的执行机制。深入了解JS的执行,就等于深入了解JS里的event loop</p>
+</blockquote>
+<h3 id="三问"><a href="#三问" class="headerlink" title="三问"></a>三问</h3><p>技术的出现,都跟现实世界里的应用场景密切相关的。</p>
+<p>同样的,我们就结合现实场景,来回答这三个问题</p>
+<h4 id="JS为什么是单线程的"><a href="#JS为什么是单线程的" class="headerlink" title="JS为什么是单线程的?"></a>JS为什么是单线程的?</h4><p>JS最初被设计用在浏览器中,那么想象一下,如果浏览器中的JS是多线程的。</p>
+<pre><code class="html">场景描述:
+
+那么现在有2个线程,process1 process2,由于是多线程的JS,所以他们对同一个dom,同时进行操作
+
+process1 删除了该dom,而process2 编辑了该dom,同时下达2个矛盾的命令,浏览器究竟该如何执行呢?</code></pre>
+<p>这样想,JS为什么被设计成单线程应该就容易理解了吧。</p>
+<h4 id="JS为什么需要异步"><a href="#JS为什么需要异步" class="headerlink" title="JS为什么需要异步?"></a>JS为什么需要异步?</h4><pre><code class="html">场景描述:
+
+如果JS中不存在异步,只能自上而下执行,如果上一行解析时间很长,那么下面的代码就会被阻塞。
+对于用户而言,阻塞就意味着&quot;卡死&quot;,这样就导致了很差的用户体验</code></pre>
+<p>所以,JS中存在异步执行。</p>
+<h4 id="JS单线程又是如何实现异步的呢"><a href="#JS单线程又是如何实现异步的呢" class="headerlink" title="JS单线程又是如何实现异步的呢?"></a>JS单线程又是如何实现异步的呢?</h4><p>既然JS是单线程的,只能在一条线程上执行,又是如何实现的异步呢?</p>
+<p><strong><em>是通过的事件循环(event loop),理解了event loop机制,就理解了JS的执行机制</em></strong></p>
+<h3 id="JS中的event-loop"><a href="#JS中的event-loop" class="headerlink" title="JS中的event loop"></a>JS中的event loop</h3><p>例1,观察它的执行顺序</p>
+<pre><code class="js">  console.log(1)
+
+  setTimeout(function()&#123;
+      console.log(2)
+  &#125;,0)
+
+  console.log(3)
+
+  // 1 3 2</code></pre>
+<p>也就是说,setTimeout里的函数并没有立即执行,而是延迟了一段时间,满足一定条件后,才去执行的,这类代码,我们叫异步代码。</p>
+<p>所以,这里我们首先知道了JS里的一种分类方式,就是将任务分为: <strong>同步任务和异步任务</strong></p>
+<p>按照这种分类方式:JS的执行机制是</p>
+<ol>
+<li>首先判断JS是同步还是异步,同步就进入主线程,异步就进入event table</li>
+<li>异步任务在event table中注册函数,当满足触发条件后,被推入event queue</li>
+<li>同步任务进入主线程后一直执行,直到主线程空闲时,才会去event queue中查看是否有可执行的异步任务,如果有就推入主线程中</li>
+</ol>
+<p>以上三步循环执行,这就是event loop</p>
+<p>所以上面的例子,你是否可以描述它的执行顺序了呢?</p>
+<pre><code class="html">console.log(1) 是同步任务,放入主线程里
+setTimeout() 是异步任务,被放入event table, 0秒之后被推入event queue里
+console.log(3 是同步任务,放到主线程里
+
+当 1、 3在控制条被打印后,主线程去event queue(事件队列)里查看是否有可执行的函数,执行setTimeout里的函数</code></pre>
+<p>所以,上面关于event loop就是我对JS执行机制的理解,直到我遇到了下面这段代码</p>
+<pre><code class="js"> setTimeout(function()&#123;
+     console.log(&#39;定时器开始啦&#39;)
+ &#125;);
+
+ new Promise(function(resolve)&#123;
+     console.log(&#39;马上执行for循环啦&#39;);
+     for(var i = 0; i &lt; 10000; i++)&#123;
+         i == 99 &amp;&amp; resolve();
+     &#125;
+ &#125;).then(function()&#123;
+     console.log(&#39;执行then函数啦&#39;)
+ &#125;);
+
+ console.log(&#39;代码执行结束&#39;);
+
+// 马上执行for循环啦 --- 代码执行结束 --- 执行then函数啦 --- 定时器开始啦</code></pre>
+<p>那么,难道是异步任务的执行顺序,不是前后顺序,而是另有规定? 事实上,按照异步和同步的划分方式,并不准确。</p>
+<p>而准确的划分方式是:</p>
+<ul>
+<li>**macro-task(宏任务)**：包括整体代码script，setTimeout，setInterval</li>
+<li>**micro-task(微任务)**：Promise，process.nextTick</li>
+</ul>
+<p><img src="https://segmentfault.com/img/bV1TKz?w=879&h=723" alt="js event loop"></p>
+<p>按照这种分类方式:JS的执行机制是</p>
+<ul>
+<li>执行一个宏任务,过程中如果遇到微任务,就将其放到微任务的【事件队列】里</li>
+<li>当前宏任务执行完成后,会查看微任务的【事件队列】,并将里面全部的微任务依次执行完</li>
+</ul>
+<p>尝试按照刚学的执行机制,去分析例2:</p>
+<pre><code class="html">首先执行script下的宏任务,遇到setTimeout,将其放到宏任务的【队列】里
+
+遇到 new Promise直接执行,打印&quot;马上执行for循环啦&quot;
+
+遇到then方法,是微任务,将其放到微任务的【队列里】
+
+打印 &quot;代码执行结束&quot;
+
+本轮宏任务执行完毕,查看本轮的微任务,发现有一个then方法里的函数, 打印&quot;执行then函数啦&quot;
+
+到此,本轮的event loop 全部完成。
+
+
+下一轮的循环里,先执行一个宏任务,发现宏任务的【队列】里有一个 setTimeout里的函数,执行打印&quot;定时器开始啦&quot;</code></pre>
+<h3 id="谈谈setTimeout"><a href="#谈谈setTimeout" class="headerlink" title="谈谈setTimeout"></a>谈谈setTimeout</h3><p>这段setTimeout代码什么意思? 我们一般说: 3秒后,会执行setTimeout里的那个函数</p>
+<pre><code class="js"> setTimeout(function()&#123;
+    console.log(&#39;执行了&#39;)
+ &#125;,3000)    </code></pre>
+<p>准确的解释是: 3秒后,<code>setTimeout</code>里的函数被会推入<code>event queue</code>,而<code>event queue</code>(事件队列)里的任务,只有在主线程空闲时才会执行。</p>
+<p>如果主线程执行内容很多,执行时间超过3秒,比如执行了10秒,那么这个函数只能10秒后执行了</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">206 <p>Articles</p></a></li>
+                    <li><a href="/categories">29 <p>Categories</p></a></li>
+                    <li><a href="/tags">58 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E4%B8%AA%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%95%E6%93%8E"><span class="toc-number">1.</span> <span class="toc-text">各个浏览器引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#V8-%E5%BC%95%E6%93%8E"><span class="toc-number">2.</span> <span class="toc-text">V8 引擎</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3Javascript%E5%BC%95%E6%93%8E%E7%9A%84%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text">了解Javascript引擎的执行机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E9%97%AE"><span class="toc-number">3.1.</span> <span class="toc-text">三问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS%E4%B8%AD%E7%9A%84event-loop"><span class="toc-number">3.2.</span> <span class="toc-text">JS中的event loop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%88%E8%B0%88setTimeout"><span class="toc-number">3.3.</span> <span class="toc-text">谈谈setTimeout</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
