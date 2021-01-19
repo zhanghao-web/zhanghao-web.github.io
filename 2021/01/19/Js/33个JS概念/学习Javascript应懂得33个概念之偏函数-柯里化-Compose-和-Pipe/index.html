@@ -1,0 +1,717 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>偏函数, 柯里化, Compose 和 Pipe - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+偏函数所谓偏函数，就是固定一个函数的一个或者多个参数，返回一个新的函数，这个函数用于接受剩余的参数
+为什么我们通常使用偏函数？
+这里我们偏函数的好处是：通过创建一个名称易懂的独立函数（doubl,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">偏函数, 柯里化, Compose 和 Pipe</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Js"><b>「
+                    </b>JS<b> 」</b></a>
+                
+                January 19, 2021
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2021/01/19/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%81%8F%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-Compose-%E5%92%8C-Pipe/" title="偏函数, 柯里化, Compose 和 Pipe" class="">偏函数, 柯里化, Compose 和 Pipe</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    11k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    10 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5/" rel="tag">学习Javascript应懂得33个概念</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<h2 id="偏函数"><a href="#偏函数" class="headerlink" title="偏函数"></a>偏函数</h2><p>所谓偏函数，就是<strong>固定一个函数的一个或者多个参数，返回一个新的函数，这个函数用于接受剩余的参数</strong></p>
+<p>为什么我们通常使用偏函数？</p>
+<p>这里我们偏函数的好处是：<strong>通过创建一个名称易懂的独立函数<code>（double，triple）</code>，调用是无需每次传入第一个参数，因为第一个参数通过<code>bind</code>提供了固定值</strong>。</p>
+<p>另一种使用偏函数情况是，<strong>当我们有一个很通用的函数，为了方便提供一个较常用的变体</strong>。</p>
+<p>首先，我们来看一个简单的例子，下面只是一个普普通通的函数，</p>
+<pre><code class="js">function add(a,b)&#123;
+    return a + b;
+&#125;
+console.log(add(1,2));//结果3
+console.log(add(1,3));//结果4
+console.log(add(1,4));//结果5
+console.log(add(1,5));//结果6
+console.log(add(1,6));//结果7
+console.log(add(1,7));//结果8</code></pre>
+<p>不知道大家有没有发现，往<code>add()</code>传入的第一个参数全都是相同的，也就是1，对于这样相同的参数，我们已经重复输入了6次。参数少的情况还好办，那参数多的时候就非常不方便了，请往下看：</p>
+<pre><code class="js">function add(a,b,c,d,e)&#123;
+    return a + b + c + d + e;
+&#125;
+console.log(add(1,2,3,4,5));
+console.log(add(1,2,3,1,2));
+console.log(add(1,2,3,3,5));
+console.log(add(1,2,3,2,11));
+console.log(add(1,2,3,3,8));
+console.log(add(1,2,3,7,5));</code></pre>
+<p>我们可以定义一个函数,把它命名为<code>partial</code>，这个函数就相当于一个工厂，需要接受一个入参函数，这个工厂用来生产偏函数，按照这个思路，可以写出大概的构架如下：</p>
+<pre><code class="js">//入参函数
+function add(a,b)&#123;
+    return a + b;
+&#125;
+//生产偏函数的工厂，接受一个入参函数，返回一个新的函数，用于接受剩余的参数
+function partial(fn,a)&#123;
+    return function(b)&#123;
+        return fn(a,b);
+    &#125;
+&#125;
+var parAdd = partial(add,1);//变量parAdd接受返回的新函数
+console.log(parAdd(2));//在调用的时候传入剩余的参数
+console.log(parAdd(3));//在调用的时候传入剩余的参数
+console.log(parAdd(4));//在调用的时候传入剩余的参数
+console.log(parAdd(5));//在调用的时候传入剩余的参数</code></pre>
+<h3 id="偏函数的简单应用"><a href="#偏函数的简单应用" class="headerlink" title="偏函数的简单应用"></a>偏函数的简单应用</h3><ul>
+<li><code>Function.prototype.bind()</code></li>
+</ul>
+<p>这是MDN对于<code>bind()</code>的描述：<code>bind()</code> 函数会创建一个新函数（称为绑定函数），新函数与被调函数（绑定函数的目标函数）具有相同的函数体（在 ECMAScript 5 规范中内置的call属性）。当新函数被调用时 this 值绑定到 <code>bind()</code> 的第一个参数，该参数不能被重写。绑定函数被调用时，<code>bind()</code> 也接受预设的参数提供给原函数。一个绑定函数也能使用new操作符创建对象：这种行为就像把原函数当成构造器。提供的 this 值被忽略，同时调用时的参数被提供给模拟函数。<br>不知道大家有木有发现在上面的描述中，出现了几个很重要的表述，创建一个新函数，具有相同的函数体，调用时的参数被提供给模拟函数，哈哈，这不正和我刚刚说的生产偏函数工厂相似吗。所以对于上面的应用，我们还可以这样改写：</p>
+<pre><code class="js">function add(a,b)&#123;
+    return a + b;
+&#125;
+var obj = &#123;&#125;;
+obj.parAdd = add.bind(obj,1);
+console.log(obj.parAdd(2));//结果3</code></pre>
+<h3 id="使用没有上下文的偏函数"><a href="#使用没有上下文的偏函数" class="headerlink" title="使用没有上下文的偏函数"></a>使用没有上下文的偏函数</h3><p>如果想固定一些参数，但不绑定<code>this</code>呢？</p>
+<p>内置的<code>bind</code>不允许这样，我们不能忽略上下文并跳转到参数。幸运的是，可以仅绑定参数<code>partial</code>函数容易实现。</p>
+<pre><code class="js">function partial(func, ...argsBound) &#123;
+  return function(...args) &#123; // (*)
+    return func.call(this, ...argsBound, ...args);
+  &#125;
+&#125;
+
+// Usage:
+let user = &#123;
+  firstName: &quot;John&quot;,
+  say(time, phrase) &#123;
+    alert(`[$&#123;time&#125;] $&#123;this.firstName&#125;: $&#123;phrase&#125;!`);
+  &#125;
+&#125;;
+
+// add a partial method that says something now by fixing the first argument
+user.sayNow = partial(user.say, new Date().getHours() + &#39;:&#39; + new Date().getMinutes());
+
+user.sayNow(&quot;Hello&quot;);
+// Something like:
+// [10:00] Hello, John!</code></pre>
+<p>调用<code>partial(func[, arg1, arg2...])</code>函数的结果为调用func的包装器（*号行）：</p>
+<p>this一致（因为<code>user.sayNow</code>是通过<code>user</code>调用的）<br>然后给其<code>...garsBound—— partial</code>使用该参数(“10:00”)进行调用。<br>然后提供参数<code>...gars</code>——提供给包装器的参数(“Hello“)<br>所以使用<code>spread</code>运算符很容易实现，是吗？<br>loadash库也提供了<code>—.partial</code>实现。</p>
+<h2 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h2><p>有时人们混淆上面提及的偏函数和另一个名称为<code>“柯里化”</code>函数功能，柯里化是另一个有趣的处理函数技术，这里我们必须要涉及。</p>
+<p><strong>与柯里化的区别</strong>：</p>
+<ul>
+<li><p>柯里化是将一个多参数函数转换成多个单参数函数，也就是将一个 n 元函数转换成 n 个一元函数。</p>
+</li>
+<li><p>局部应用则是固定一个函数的一个或者多个参数，也就是将一个 n 元函数转换成一个 n - x 元函数。</p>
+</li>
+</ul>
+<p><strong>柯里化（Currying）</strong>：转换一个调用函数<code>f(a,b,c)</code>为<code>f(a)(b)(c)</code>方式调用。</p>
+<p>让我们实现柯里化函数，执行一个两元参数函数，即转换<code>f(a,b)</code>至<code>f(a)(b)</code>:</p>
+<pre><code class="js">function curry(func) &#123;
+  return function(a) &#123;
+    return function(b) &#123;
+      return func(a, b);
+    &#125;;
+  &#125;;
+&#125;
+
+// usage
+function sum(a, b) &#123;
+  return a + b;
+&#125;
+
+let carriedSum = curry(sum);
+
+alert( carriedSum(1)(2) ); // 3</code></pre>
+<p>上面是通过一系列包装器实现的。</p>
+<p><code>curry(func)</code>的结果是<code>function(a)</code>的一个包装器。<br>当调用<code>sum(1)</code>是，参数被保存在词法环境中，然后返回新的包装器<code>function(b)</code><br>然后<code>sum(1)(2)</code>提供2并最终调用<code>function(b)</code>，然后传递调用给原始多参数函数<code>sum</code>。</p>
+<p>有一些柯里化的高级实现，如lodash库中<code>_.curry</code>可以实现更复杂功能。其返回一个包装器,它允许函数提供全部参数被正常调用或返回偏函数。</p>
+<pre><code class="js">function curry(func) &#123;
+
+  return function curried(...args) &#123;
+    if (args.length &gt;= func.length) &#123;
+      return func.apply(this, args);
+    &#125; else &#123;
+      return function(...args2) &#123;
+        return curried.apply(this, args.concat(args2));
+      &#125;
+    &#125;
+  &#125;;
+
+&#125;
+
+function sum(a, b, c) &#123;
+  return a + b + c;
+&#125;
+
+let curriedSum = curry(sum);
+
+// still callable normally
+alert( curriedSum(1, 2, 3) ); // 6
+
+// get the partial with curried(1) and call it with 2 other arguments
+alert( curriedSum(1)(2,3) ); // 6</code></pre>
+<h2 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h2><p>compose就是执行一系列的任务（函数），比如有以下任务队列，</p>
+<pre><code class="js">let tasks = [step1, step2, step3, step4]</code></pre>
+<p>每一个step都是一个步骤，按照步骤一步一步的执行到结尾，这就是一个compose<br>compose在函数式编程中是一个很重要的工具函数，在这里实现的compose有三点说明</p>
+<ul>
+<li>第一个函数是多元的（接受多个参数），后面的函数都是单元的（接受一个参数）</li>
+<li>执行顺序的自右向左的</li>
+<li>所有函数的执行都是同步的（异步的后面文章会讲到）</li>
+</ul>
+<p>还是用一个例子来说，比如有以下几个函数</p>
+<pre><code class="js">let init = (...args) =&gt; args.reduce((ele1, ele2) =&gt; ele1 + ele2, 0)
+let step2 = (val) =&gt; val + 2
+let step3 = (val) =&gt; val + 3
+let step4 = (val) =&gt; val + 4</code></pre>
+<p>这几个函数组成一个任务队列</p>
+<pre><code class="js">steps = [step4, step3, step2, init]</code></pre>
+<p>使用compose组合这个队列并执行</p>
+<pre><code class="js">let composeFunc = compose(...steps)
+
+console.log(composeFunc(1, 2, 3)) 
+//执行过程
+//6 -&gt; 6 + 2 = 8 -&gt; 8 + 3 = 11 -&gt; 11 + 4 = 15</code></pre>
+<p>所以流程就是从init自右到左依次执行，下一个任务的参数是上一个任务的返回结果，并且任务都是同步的，这样就能保证任务可以按照有序的方向和有序的时间执行。</p>
+<h3 id="实现compose的五种思路"><a href="#实现compose的五种思路" class="headerlink" title="实现compose的五种思路"></a>实现compose的五种思路</h3><p>所有思路的执行过程都是上面的例子，以下只讲compose实现</p>
+<h4 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h4><p>这个思路就是使用递归的过程思想，不断的检测队列中是否还有任务，如果有任务就执行，并把执行结果往后传递，这里是一个局部的思维，无法预知任务何时结束。直观上最容易结束和理解。</p>
+<pre><code class="js">const compose = function(...args) &#123;
+  let length = args.length
+  let count = length - 1
+  let result
+  return function f1 (...arg1) &#123;
+    result = args[count].apply(this, arg1)
+    if (count &lt;= 0) &#123;
+      count = length - 1
+      return result
+    &#125;
+    count--
+    return f1.call(null, result)
+  &#125;
+&#125;</code></pre>
+<h4 id="函数组合"><a href="#函数组合" class="headerlink" title="函数组合"></a>函数组合</h4><p>这个思路是一种函数组合的思想，将函数两两组合，不断的生成新的函数，生成的新函数挟裹了函数执行的逻辑信息，然后再两两组合，不断的传递下去，这种思路可以提前遍历所有任务，将任务组合成一个可以展开的组合结构，最后执行的时候就像推导多米诺骨牌一样。</p>
+<p>函数的组合过程</p>
+<pre><code class="js">f1 = (...arg) =&gt; step2.call(null, init.apply(null, arg))
+f2 = (...arg) =&gt; step3.call(null, f1.apply(null, arg))
+f3 = (...arg) =&gt; step4.call(null, f2.apply(null, arg))</code></pre>
+<p><code>compose实现</code></p>
+<pre><code class="js">const _pipe = (f, g) =&gt; (...arg) =&gt; g.call(null, f.apply(null, arg))
+const compose = (...args) =&gt; args.reverse().reduce(_pipe, args.shift())</code></pre>
+<h4 id="函数交织（AOP）"><a href="#函数交织（AOP）" class="headerlink" title="函数交织（AOP）"></a>函数交织（AOP）</h4><p>这个实现的灵感来自javascript设计模式中的高阶函数，因为<code>compose</code>的任务在本质上就是<strong>函数执行，再加上顺序</strong>，所以可以把实现顺序执行放到函数本身，对函数的原型进行方法的绑定。方法的作用对象是函数，面向对象封装的数据，面向函数封装的是函数的行为。</p>
+<p>需要对函数绑定两个行为 <code>before</code> 和 <code>after</code>，<code>before</code>执行函数多元部分（启动），after执行函数单元部分</p>
+<pre><code class="js">Function.prototype.before = function(fn) &#123;
+  const self = this
+  return function(...args) &#123;
+    let result = fn.apply(null, args)
+    return self.call(null, result)
+  &#125;
+&#125;
+
+Function.prototype.after = function(fn) &#123;
+  const self = this
+  return function(...args) &#123;
+    let result = self.apply(null, args)
+    return fn.call(null, result)
+  &#125;
+&#125;</code></pre>
+<p>这里对函数进行方法的绑定，返回的是带着函数执行的规则的另外一个函数，在这里是次序的排列规则，对返回的函数依然可以进行链式调用。</p>
+<p><code>compose 实现</code></p>
+<pre><code class="js">const compose = function(...args) &#123;
+  let before = args.pop()
+  let start = args.pop()
+  if (args.length) &#123;
+    return args.reduce(function(f1, f2) &#123;
+      return f1.after(f2)
+    &#125;, start.before(before))
+  &#125;
+  return start.before(before)
+&#125;</code></pre>
+<p>函数执行过程</p>
+<pre><code class="js">step2.before(init).after(step3).after(step4)
+fn3.after(step4)
+fn3 = fn2.after(step3)
+fn2 = fn1.before(step1)
+fn1 = init -&gt; step2 -&gt; step3 -&gt; step4</code></pre>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>ES6引入了<code>Promise</code>，<code>Promise</code>可以指定一个<code>sequence</code>，来规定一个执行<code>then</code>的过程，<code>then</code>函数会等到执行完成后，再执行下一个<code>then</code>的处理。启动<code>sequence</code>可以使用<br><code>Promise.resolve()</code>这个函数。构建<code>sequence</code>可以使用reduce</p>
+<p>compose实现</p>
+<pre><code class="js">const compose = function(...args) &#123;
+  let init = args.pop()
+  return function(...arg) &#123;
+    return args.reverse().reduce(function(sequence, func) &#123;
+      return sequence.then(function(result) &#123;
+        return func.call(null, result)
+      &#125;)
+    &#125;, Promise.resolve(init.apply(null, arg)))
+  &#125;
+&#125;</code></pre>
+<h4 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h4><p><code>Generator</code>主要使用<code>yield</code>来构建协程，采用中断，处理，再中断的流程。可以事先规定好协程的执行顺序，然后再下次处理的时候进行参数（结果）交接，有一点要注意的是，由于执行的第一个next是不能传递参数的，所以第一个函数的执行需要手动调用，再空耗一个<code>next</code>，后面的就可以同步执行了。<br><code>generator</code>构建</p>
+<pre><code class="js">
+function* iterateSteps(steps) &#123;
+  let n
+  for (let i = 0; i &lt; steps.length; i++) &#123;
+    if (n) &#123;
+      n = yield steps[i].call(null, n)
+    &#125; else &#123;
+      n = yield
+    &#125;
+  &#125;
+&#125;</code></pre>
+<p><code>compose实现</code></p>
+<pre><code class="js">const compose = function(...steps) &#123;
+  let g = iterateSteps(steps)
+  return function(...args) &#123;
+    let val = steps.pop().apply(null, args)
+    // 这里是第一个值
+    console.log(val)
+    // 因为无法传参数 所以无所谓执行 就是空耗一个yield
+    g.next()
+    return steps.reverse.reduce((val, val1) =&gt; g.next(val).value, val)
+  &#125;
+&#125;</code></pre>
+<h2 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h2><p><code>pipe</code>函数跟<code>compose</code>函数的左右是一样的，也是将参数平铺，只不过他的顺序是<strong>从左往右</strong>。我们来实现下，只需要将reduceRight改成reduce就行了：</p>
+<pre><code class="js">const pipe = function()&#123;
+  const args = [].slice.apply(arguments);
+  return function(x) &#123;
+    return args.reduce((res, cb) =&gt; cb(res), x);
+  &#125;
+&#125;
+
+// 参数顺序改为从左往右
+let calculate = pipe(add, multiply);
+let res = calculate(10);
+console.log(res);    // 结果还是200</code></pre>
+<p>ES6写法: </p>
+<pre><code class="js">const pipe = (...args) =&gt; x =&gt; args.reduce((res, cb) =&gt; cb(res), x)</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">208 <p>Articles</p></a></li>
+                    <li><a href="/categories">29 <p>Categories</p></a></li>
+                    <li><a href="/tags">58 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%8F%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">偏函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%8F%E5%87%BD%E6%95%B0%E7%9A%84%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">偏函数的简单应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B2%A1%E6%9C%89%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%81%8F%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">使用没有上下文的偏函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compose"><span class="toc-number">3.</span> <span class="toc-text">Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0compose%E7%9A%84%E4%BA%94%E7%A7%8D%E6%80%9D%E8%B7%AF"><span class="toc-number">3.1.</span> <span class="toc-text">实现compose的五种思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pipe"><span class="toc-number">4.</span> <span class="toc-text">Pipe</span></a></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
