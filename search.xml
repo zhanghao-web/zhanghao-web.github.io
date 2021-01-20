@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>学习JavaScript应懂得33</title>
+      <link href="/2021/01/20/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0JavaScript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/"/>
+      <url>/2021/01/20/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0JavaScript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93/</url>
+      
+        <content type="html"><![CDATA[<meta name="referrer" content="no-referrer"/><p><a href="https://www.cnblogs.com/edisonchou/p/edc_clean_code_notes.html">原文地址</a><br><a href="https://juejin.cn/post/6844903550468767758">https://juejin.cn/post/6844903550468767758</a></p><p><img src="https://raw.githubusercontent.com/ShinichiKudo-FE/PictureBed/master/blogImg/clean%20code.png" alt="clean code"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习Javascript应懂得33个概念之代码整洁之道 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>偏函数, 柯里化, Compose 和 Pipe</title>
       <link href="/2021/01/19/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%81%8F%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-Compose-%E5%92%8C-Pipe/"/>
       <url>/2021/01/19/Js/33%E4%B8%AAJS%E6%A6%82%E5%BF%B5/%E5%AD%A6%E4%B9%A0Javascript%E5%BA%94%E6%87%82%E5%BE%9733%E4%B8%AA%E6%A6%82%E5%BF%B5%E4%B9%8B%E5%81%8F%E5%87%BD%E6%95%B0-%E6%9F%AF%E9%87%8C%E5%8C%96-Compose-%E5%92%8C-Pipe/</url>
