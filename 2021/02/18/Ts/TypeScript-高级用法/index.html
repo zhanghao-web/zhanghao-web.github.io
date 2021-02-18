@@ -1,0 +1,706 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TypeScript 高级用法 - 默默默默燃</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="description" content="一枚前端搬砖队队员的记录册,
+
+原文地址
+类型unknowunknown 指的是不可预先定义的类型，在很多场景下，它可以替代 any 的功能同时保留静态检查的能力。
+const num: number = 10;
+(num a,"> 
+    <meta name="author" content="张白告丶"> 
+    <link rel="alternative" href="atom.xml" title="默默默默燃" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 5.1.1"></head>
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">默默默默燃</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://ShinichiKudo-FE.github.io">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">TypeScript 高级用法</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/Ts"><b>「
+                    </b>TS<b> 」</b></a>
+                
+                February 18, 2021
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2021/02/18/Ts/TypeScript-%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/" title="TypeScript 高级用法" class="">TypeScript 高级用法</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    16k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    15 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ts/" rel="tag">Ts</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <meta name="referrer" content="no-referrer"/>
+
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6926794697553739784#heading-1">原文地址</a></p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><h3 id="unknow"><a href="#unknow" class="headerlink" title="unknow"></a>unknow</h3><p><code>unknown</code> 指的是<strong>不可预先定义的类型</strong>，在很多场景下，它可以替代 <code>any</code> 的功能同时保留静态检查的能力。</p>
+<pre><code class="ts">const num: number = 10;
+(num as unknown as string).split(&#39;&#39;);      // 注意，这里和any一样完全可以通过静态检查</code></pre>
+<p>这个时候 <code>unknown</code> 的作用就跟 <code>any</code> 高度类似了，你可以把它转化成任何类型，不同的地方是，<strong>在静态编译的时候，unknown 不能调用任何方法，而 any 可以</strong>。</p>
+<pre><code class="ts">const foo: unknown = &#39;string&#39;;
+foo.substr(1);       // Error: 静态检查不通过报错
+const bar: any = 10;
+any.substr(1);        // Pass: any类型相当于放弃了静态检查</code></pre>
+<p>unknown 的一个使用场景是，<strong>避免使用 any 作为函数的参数类型而导致的静态类型检查 bug</strong>：</p>
+<pre><code class="ts">function test(input: unknown):number &#123;
+  if(Array.isArray(input))&#123;
+    return input.length
+  &#125;
+  return input.length
+&#125;</code></pre>
+<h3 id="void"><a href="#void" class="headerlink" title="void"></a>void</h3><p>在 TS 中，<code>void</code> 和 <code>undefined</code> 功能高度类似，可以在逻辑上避免不小心使用了空指针导致的错误。</p>
+<pre><code class="ts">function foo() &#123;&#125;      // 这个空函数没有返回任何值，返回类型缺省为void
+const a = foo();    // 此时a的类型定义为void，你也不能调用a的任何属性方法</code></pre>
+<p>void 和 undefined 类型最大的区别是，你可以理解为 <strong>undefined 是 void 的一个子集，当你对函数返回值并不在意时，使用 void 而不是 undefined</strong>。举一个 React 中的实际的例子。</p>
+<pre><code class="ts">// Parent.tsx
+function Parent(): JSX.Element &#123;
+  const getValue = (): number =&gt; &#123; return 2 &#125;;       /* 这里函数返回的是number类型 */
+  // const getValue = (): string =&gt; &#123; return &#39;str&#39; &#125;;    /* 这里函数返回的string类型，同样可以传给子属性 */
+  return &lt;Child getValue=&#123;getValue&#125; /&gt;
+&#125;</code></pre>
+<pre><code class="ts">// Child.tsx
+type Props = &#123;
+  getValue: () =&gt; void;  // 这里的void表示逻辑上不关注具体的返回值类型，number、string、undefined等都可以
+&#125;
+function Child(&#123; getValue &#125;: Props) =&gt; &lt;div&gt;&#123;getValue()&#125;&lt;/div&gt;</code></pre>
+<h3 id="never"><a href="#never" class="headerlink" title="never"></a>never</h3><p><code>never</code> 是<em>指没法正常结束返回的类型，<strong>一个必定会报错或者死循环的函数</strong>会返回这样的类型</em>。</p>
+<pre><code class="ts">function foo(): never &#123; throw new Error(&#39;error message&#39;) &#125;  // throw error 返回值是never
+function foo(): never &#123; while(true)&#123;&#125; &#125;  // 这个死循环的也会无法正常退出
+function foo(): never &#123; let count = 1; while(count)&#123; count ++; &#125; &#125;  // Error: 这个无法将返回值定义为never，因为无法在静态编译阶段直接识别出</code></pre>
+<p>还有就是永远没有相交的类型：</p>
+<pre><code class="ts">type human = &#39;boy&#39; &amp; &#39;girl&#39; // 这两个单独的字符串类型并不可能相交，故human为never类型</code></pre>
+<p>不过任何类型联合上 never 类型，还是原来的类型：</p>
+<pre><code class="ts">type language = &#39;ts&#39; | never   // language的类型还是&#39;ts&#39;类型</code></pre>
+<p>关于 never 有如下特性：</p>
+<ul>
+<li>在一个函数中调用了返回 never 的函数后，之后的代码都会变成<code>deadcode</code></li>
+</ul>
+<pre><code class="ts">function test() &#123;
+  foo();          // 这里的foo指上面返回never的函数
+  console.log(111);     // Error: 编译器报错，此行代码永远不会执行到
+&#125;</code></pre>
+<ul>
+<li>无法把其他类型赋给 <code>never</code>：</li>
+</ul>
+<pre><code class="ts">let n: never;
+let o: any = &#123;&#125;;
+n = o;  // Error: 不能把一个非never类型赋值给never类型，包括any</code></pre>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><h3 id="非空断言运算符"><a href="#非空断言运算符" class="headerlink" title="非空断言运算符 !"></a>非空断言运算符 <code>!</code></h3><p>这个运算符可以用在变量名或者函数名之后，用来强调对应的元素是非 <code>null|undefined</code> 的</p>
+<pre><code class="ts">function onClick(callback?: () =&gt; void) &#123;
+  callback!();        // 参数是可选入参，加了这个感叹号!之后，TS编译不报错
+&#125;</code></pre>
+<p>你可以查看编译后的 ES5 代码，居然没有做任何防空判断。</p>
+<pre><code class="js">function onClick(callback) &#123;
+  callback();
+&#125;</code></pre>
+<p>这个符号的场景，特别适用于我们已经明确知道不会返回空值的场景，从而减少冗余的代码判断，如 React 的 <code>Ref</code>。</p>
+<pre><code class="js">function Demo(): JSX.Elememt &#123;
+  const divRef = useRef&lt;HTMLDivElement&gt;();
+  useEffect(() =&gt; &#123;
+    divRef.current!.scrollIntoView();     // 当组件Mount后才会触发useEffect，故current一定是有值的
+  &#125;, []);
+  return &lt;div ref=&#123;divRef&#125;&gt;Demo&lt;/div&gt;
+&#125;</code></pre>
+<h3 id="可选链运算符"><a href="#可选链运算符" class="headerlink" title="可选链运算符 ?."></a>可选链运算符 <code>?.</code></h3><p>相比上面<code>!</code>作用于编译阶段的非空判断，<code>?.</code>这个是开发者最需要的运行时(当然编译时也有效)的非空判断。</p>
+<pre><code class="ts">obj?.prop    obj?.[index]    func?.(args)</code></pre>
+<p><code>?.</code>用来判断左侧的表达式是否是 null | undefined，如果是则会停止表达式运行，可以减少我们大量的<code>&amp;&amp;</code>运算。</p>
+<p>比如我们写出<code>a?.b</code>时，编译器会自动生成如下代码</p>
+<pre><code class="ts">a === null || a === void 0 ? void 0 : a.b;</code></pre>
+<p>这里涉及到一个小知识点:<code>undefined</code>这个值在<strong>非严格模式下会被重新赋值</strong>，使用<code>void 0</code>必定返回真正的 undefined。</p>
+<h3 id="数字分隔符"><a href="#数字分隔符" class="headerlink" title="数字分隔符_"></a>数字分隔符_</h3><pre><code class="ts">let num:number = 1_2_345.6_78_9</code></pre>
+<p>_可以用来对长数字做任意的分隔，主要设计是为了便于数字的阅读，编译出来的代码是没有下划线的，请放心食用。</p>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><h3 id="键值获取-keyof"><a href="#键值获取-keyof" class="headerlink" title="键值获取 keyof"></a>键值获取 <code>keyof</code></h3><p><code>keyof</code> 可以<strong>获取一个类型所有键值，返回一个联合类型</strong>，如下：</p>
+<pre><code class="js">type Person = &#123;
+  name: string;
+  age: number;
+&#125;
+type PersonKey = keyof Person;  // PersonKey得到的类型为 &#39;name&#39; | &#39;age&#39;</code></pre>
+<p>keyof 的一个典型用途是<strong>限制访问对象的 key 合法化</strong>，因为 any 做索引是不被接受的。</p>
+<pre><code class="ts">function getValue (p: Person, k: keyof Person) &#123;
+  return p[k];  // 如果k不如此定义，则无法以p[k]的代码格式通过编译
+&#125;</code></pre>
+<p>总结起来 <code>keyof</code> 的语法格式如下</p>
+<blockquote>
+<p>类型 = keyof 类型</p>
+</blockquote>
+<h3 id="实例类型获取-typeof"><a href="#实例类型获取-typeof" class="headerlink" title="实例类型获取 typeof"></a>实例类型获取 <code>typeof</code></h3><p>typeof 是获取一个对象/实例的类型，如下：</p>
+<pre><code class="ts">const me: Person = &#123; name: &#39;gzx&#39;, age: 16 &#125;;
+type P = typeof me;  // &#123; name: string, age: number | undefined &#125;
+const you: typeof me = &#123; name: &#39;mabaoguo&#39;, age: 69 &#125;  // 可以通过编译</code></pre>
+<p><code>typeof</code> <strong>只能用在具体的对象上</strong>，这与 js 中的 <code>typeof</code> 是一致的，并且它会根据左侧值自动决定应该执行哪种行为。</p>
+<pre><code class="ts">const typestr = typeof me;   // typestr的值为&quot;object&quot;</code></pre>
+<p><code>typeof</code> 可以和 <code>keyof</code> 一起使用(因为 <code>typeof</code> 是返回一个类型嘛)，如下：</p>
+<pre><code class="ts">type PersonKey = keyof typeof me;   // &#39;name&#39; | &#39;age&#39;</code></pre>
+<p>总结起来 typeof 的语法格式如下：</p>
+<blockquote>
+<p>类型 = typeof 实例对象</p>
+</blockquote>
+<h3 id="遍历属性-in"><a href="#遍历属性-in" class="headerlink" title="遍历属性 in"></a>遍历属性 <code>in</code></h3><p><code>in</code> 只能用在类型的定义中，可以对枚举类型进行遍历，如下：</p>
+<pre><code class="js">// 这个类型可以将任何类型的键值转化成number类型
+type TypeToNumber&lt;T&gt; = &#123;
+  [key in keyof T]: number
+&#125;</code></pre>
+<p><code>keyof</code> 返回泛型 <code>T</code> 的所有键枚举类型，<code>key</code>是自定义的任何变量名，中间用in链接，外围用<code>[]</code>包裹起来(这个是固定搭配)，冒号右侧<code>number</code>将所有的key定义为<code>number</code>类型。</p>
+<p>于是可以这样使用了：</p>
+<pre><code class="ts">const obj: TypeToNumber&lt;Person&gt; = &#123; name: 10, age: 10 &#125;</code></pre>
+<p>总结起来 in 的语法格式如下：</p>
+<blockquote>
+</blockquote>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p><code>泛型</code>在 TS 中可以说是一个非常重要的属性，它承载了从静态定义到动态调用的桥梁，同时也是 TS 对自己类型定义的<code>元编程</code>。泛型可以说是 TS 类型工具的精髓所在，也是整个 TS 最难学习的部分，这里专门分两章总结一下。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>泛型可以用在普通类型定义，类定义、函数定义上，如下：</p>
+<pre><code class="ts">// 普通类型定义
+type Dog&lt;T&gt; = &#123; name: string, type: T &#125;
+// 普通类型使用
+const dog: Dog&lt;number&gt; = &#123; name: &#39;ww&#39;, type: 20 &#125;
+
+// 类定义
+class Cat&lt;T&gt; &#123;
+  private type: T;
+  constructor(type: T) &#123; this.type = type; &#125;
+&#125;
+// 类使用
+const cat: Cat&lt;number&gt; = new Cat&lt;number&gt;(20); // 或简写 const cat = new Cat(20)
+
+// 函数定义
+function swipe&lt;T, U&gt;(value: [T, U]): [U, T] &#123;
+  return [value[1], value[0]];
+&#125;
+// 函数使用
+swipe&lt;Cat&lt;number&gt;, Dog&lt;number&gt;&gt;([cat, dog])  // 或简写 swipe([cat, dog])</code></pre>
+<p>注意，<strong>如果对一个类型名定义了泛型，那么使用此类型名的时候一定要把泛型类型也写上去</strong>。而对于变量来说，它的类型可以在调用时推断出来的话，就可以省略泛型书写。</p>
+<p>泛型的语法格式简单总结如下：</p>
+<blockquote>
+<p>类型名&lt;泛型列表&gt; 具体类型定义</p>
+</blockquote>
+<h3 id="泛型推导与默认值"><a href="#泛型推导与默认值" class="headerlink" title="泛型推导与默认值"></a>泛型推导与默认值</h3><p>上面提到了，我们可以简化对泛型类型定义的书写，因为TS会自动根据变量定义时的类型推导出变量类型，这一般是发生在函数调用的场合的。</p>
+<pre><code class="js">type Dog&lt;T&gt; = &#123; name: string, type: T &#125;
+function adopt&lt;T&gt;(dog: Dog&lt;T&gt;) &#123; return dog &#125;;
+const dog = &#123; name: &#39;ww&#39;, type: &#39;hsq&#39; &#125;;  // 这里按照Dog类型的定义一个type为string的对象
+adopt(dog);  // Pass: 函数会根据入参类型推断出type为string</code></pre>
+<p>若不适用函数泛型推导，我们若需要定义变量类型则必须指定泛型类型。</p>
+<pre><code class="js">const dog: Dog&lt;string&gt; = &#123; name: &#39;ww&#39;, type: &#39;hsq&#39; &#125;  // 不可省略&lt;string&gt;这部分</code></pre>
+<p>如果我们想不指定，可以使用泛型默认值的方案。</p>
+<pre><code class="js">type Dog&lt;T = any&gt; = &#123; name: string, type: T &#125;
+const dog: Dog = &#123; name: &#39;ww&#39;, type: &#39;hsq&#39; &#125;
+dog.type = 123;    // 不过这样type类型就是any了，无法自动推导出来，失去了泛型的意义</code></pre>
+<p>泛型默认值的语法格式简单总结如下：</p>
+<blockquote>
+<p>泛型名 = 默认类型</p>
+</blockquote>
+<h3 id="泛型约束"><a href="#泛型约束" class="headerlink" title="泛型约束"></a>泛型约束</h3><p>有的时候，我们可以不用关注泛型具体的类型，如：</p>
+<pre><code class="ts">function fill&lt;T&gt;(length: number, value: T): T[] &#123;
+  return new Array(length).fill(value);
+&#125;</code></pre>
+<p>这个函数接受一个长度参数和默认值，结果就是生成使用默认值填充好对应个数的数组。我们不用对传入的参数做判断，直接填充就行了，但是有时候，我们需要限定类型，这时候使用<code>extends</code>关键字即可。</p>
+<pre><code class="ts">function sum&lt;T extends number&gt;(value: T[]): number&#123;
+  let count = 0
+  value.forEach( v =&gt; count += v)
+  return count
+&#125;</code></pre>
+<p>这样你就可以以<code>sum([1,2,3])</code>这种方式调用求和函数，而像<code>sum([&#39;1&#39;, &#39;2&#39;])</code>这种是无法通过编译的。</p>
+<p><code>泛型约束</code>也可以用在多个泛型参数的情况。</p>
+<pre><code class="ts">function pick&lt;T, U extends keyof T&gt;()&#123;&#125;;</code></pre>
+<p>这里的意思是<strong>限制了 U 一定是 T 的 key 类型中的子集</strong>，这种用法常常出现在一些泛型工具库中。</p>
+<p><code>extends</code> 的语法格式简单总结如下，注意下面的类型既可以是一般意义上的类型也可以是泛型。</p>
+<blockquote>
+<p>泛型名 extends 类型</p>
+</blockquote>
+<h3 id="泛型条件"><a href="#泛型条件" class="headerlink" title="泛型条件"></a>泛型条件</h3><p>上面提到 extends，其实也可以当做一个三元运算符，如下：</p>
+<pre><code class="ts">T extends U? X: Y</code></pre>
+<p>上面提到 extends，其实也可以当做一个三元运算符，如下：</p>
+<pre><code class="ts">T extends U? X: Y</code></pre>
+<p>这里便不限制 T 一定要是 U 的子类型，如果是 U 子类型，则将 T 定义为 X 类型，否则定义为 Y 类型。</p>
+<p>注意，生成的结果是分配式的。</p>
+<p>举个例子，如果我们把 X 换成 T，如此形式：</p>
+<pre><code class="ts">T extends U? T: never。</code></pre>
+<p>此时返回的 T，是满足原来的 T 中包含 U 的部分，可以理解为 T 和 U 的交集。</p>
+<p>所以，extends 的语法格式可以扩展为</p>
+<blockquote>
+<p>泛型名A extends 类型B ? 类型C: 类型D</p>
+</blockquote>
+<h3 id="泛型推断-infer"><a href="#泛型推断-infer" class="headerlink" title="泛型推断 infer"></a>泛型推断 <code>infer</code></h3><p><code>infer</code> 的中文是“推断”的意思，一般是搭配上面的泛型条件语句使用的，所谓推断，就是你不用预先指定在泛型列表中，在运行时会自动判断，不过你得先预定义好整体的结构。举个例子</p>
+<pre><code class="ts">type Foo&lt;T&gt; = T extends &#123;t: infer Test&#125; ? Test: string</code></pre>
+<p>首选看 <code>extends</code> 后面的内容，<code>&#123;t: infer Test&#125;</code>可以看成是一个包含t属性的类型定义，这个t属性的 value 类型通过<code>infer</code>进行推断后会赋值给Test类型，如果泛型实际参数符合<code>&#123;t: infer Test&#125;</code>的定义那么返回的就是Test类型，否则默认给缺省的string类型。</p>
+<p>举个例子加深下理解：</p>
+<pre><code class="ts">type One = Foo&lt;number&gt;  // string，因为number不是一个包含t的对象类型
+type Two = Foo&lt;&#123;t: boolean&#125;&gt;  // boolean，因为泛型参数匹配上了，使用了infer对应的type
+type Three = Foo&lt;&#123;a: number, t: () =&gt; void&#125;&gt; // () =&gt; void，泛型定义是参数的子集，同样适配</code></pre>
+<p><code>infer</code>用来<strong>对满足的泛型类型进行子类型的抽取</strong>，有很多高级的泛型工具也巧妙的使用了这个方法。</p>
+<h2 id="泛型工具"><a href="#泛型工具" class="headerlink" title="泛型工具"></a>泛型工具</h2><h3 id="Partical"><a href="#Partical" class="headerlink" title="Partical"></a>Partical<T></h3><p>此工具的作用就是将泛型中全部属性变为可选的。</p>
+<pre><code class="ts">type Partial&lt;T&gt; = &#123;
+    [P in keyof T]?: T[P]
+&#125;</code></pre>
+<p>举个例子，这个类型定义在下面也会用到。</p>
+<pre><code class="ts">type Animal = &#123;
+  name: string,
+  category: string,
+  age: number,
+  eat: () =&gt; number
+&#125;</code></pre>
+<p>使用 Partical 包裹一下。</p>
+<pre><code class="ts">type PartOfAnimal = Partical&lt;Animal&gt;;
+const ww: PartOfAnimal = &#123; name: &#39;ww&#39; &#125;; // 属性全部可选后，可以只赋值部分属性了</code></pre>
+<h3 id="Record-lt-K-T-gt"><a href="#Record-lt-K-T-gt" class="headerlink" title="Record&lt;K, T&gt;"></a>Record&lt;K, T&gt;</h3><p>此工具的作用是<code>将 K 中所有属性值转化为 T 类型</code>，我们常用它来申明一个普通 object 对象。</p>
+<pre><code class="ts">type Record&lt;K extends keyof any,T&gt; = &#123;
+  [key in K]: T
+&#125;</code></pre>
+<p>这里特别说明一下，<code>keyof any</code>对应的类型为<code>number | string | symbol</code>，也就是可以做对象键(专业说法叫索引 index)的类型集合。</p>
+<p>举个例子：</p>
+<pre><code class="ts">const obj: Record&lt;string, string&gt; = &#123; &#39;name&#39;: &#39;mbg&#39;, &#39;tag&#39;: &#39;年轻人不讲武德&#39; &#125;</code></pre>
+<h3 id="Pick-lt-T-K-gt"><a href="#Pick-lt-T-K-gt" class="headerlink" title="Pick&lt;T, K&gt;"></a>Pick&lt;T, K&gt;</h3><p>此工具的作用是<code>将 T 类型中的 K 键列表提取出来</code>，生成新的子键值对类型。</p>
+<pre><code class="ts">type Pick&lt;T, K extends keyof T&gt; = &#123;
+  [P in K]: T[P]
+&#125;</code></pre>
+<p>我们还是用上面的Animal定义，看一下 Pick 如何使用。</p>
+<pre><code class="ts">const bird: Pick&lt;Animal, &quot;name&quot; | &quot;age&quot;&gt; = &#123; name: &#39;bird&#39;, age: 1 &#125;</code></pre>
+<h3 id="Exclude-lt-T-U-gt"><a href="#Exclude-lt-T-U-gt" class="headerlink" title="Exclude&lt;T, U&gt;"></a>Exclude&lt;T, U&gt;</h3><p>此工具是在 T 类型中，去除 T 类型和 U 类型的交集，返回剩余的部分。</p>
+<pre><code class="ts">type Exclude&lt;T, U&gt; = T extends U ? never : T</code></pre>
+<p>注意这里的 extends 返回的 T 是原来的 T 中和 U 无交集的属性，而任何属性联合 never 都是自身，具体可在上文查阅。</p>
+<p>举个例子</p>
+<pre><code class="ts">type T1 = Exclude&lt;&quot;a&quot; | &quot;b&quot; | &quot;c&quot;, &quot;a&quot; | &quot;b&quot;&gt;;   // &quot;c&quot;
+type T2 = Exclude&lt;string | number | (() =&gt; void), Function&gt;; // string | number</code></pre>
+<h3 id="Omit-lt-T-K-gt"><a href="#Omit-lt-T-K-gt" class="headerlink" title="Omit&lt;T, K&gt;"></a>Omit&lt;T, K&gt;</h3><p>此工具可认为是适用于键值对对象的 Exclude，它会<strong>去除类型 T 中包含 K 的键值对</strong>。</p>
+<pre><code class="ts">type Omit = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;</code></pre>
+<p>还是用上面的 Animal 举个例子：</p>
+<pre><code class="ts">const OmitAnimal:Omit&lt;Animal, &#39;name&#39;|&#39;age&#39;&gt; = &#123; category: &#39;lion&#39;, eat: () =&gt; &#123; console.log(&#39;eat&#39;) &#125; &#125;</code></pre>
+<p>可以发现，Omit 与 Pick 得到的结果完全相反，一个是取非结果，一个取交结果。</p>
+<h3 id="ReturnType"><a href="#ReturnType" class="headerlink" title="ReturnType"></a>ReturnType<T></h3><p>此工具就是获取 T 类型(函数)对应的返回值类型：</p>
+<pre><code class="ts">type ReturnType&lt;T extends (...args: any) =&gt; any&gt;
+  = T extends (...args: any) =&gt; infer R ? R : any;</code></pre>
+<p>看源码其实有点多，其实可以稍微简化成下面的样子：</p>
+<pre><code class="ts">type ReturnType&lt;T extends func&gt; = T extends () =&gt; infer R ? R: any;</code></pre>
+<p>通过使用 <code>infer</code> 推断返回值类型，然后返回此类型，如果你彻底理解了 <code>infer</code> 的含义，那这段就很好理解。</p>
+<p>举个例子：</p>
+<pre><code class="ts">function foo(x: string | number): string | number &#123; /*..*/ &#125;
+type FooType = ReturnType&lt;foo&gt;;  // string | number</code></pre>
+<h3 id="Required"><a href="#Required" class="headerlink" title="Required"></a>Required<T></h3><p>此工具可以将类型 T 中所有的属性变为必选项。</p>
+<pre><code class="ts">type Required&lt;T&gt; = &#123;
+  [P in keyof T]-?: T[P]
+&#125;</code></pre>
+<p>这里有一个很有意思的语法<code>-?</code>，你可以理解为就是 TS 中把?可选属性减去的意思。</p>
+<p>除了这些以外，还有很多的内置的类型工具，可以参考<a target="_blank" rel="noopener" href="https://www.typescriptlang.org/docs/handbook/utility-types.html">TypeScript Handbook</a>获得更详细的信息，同时 Github 上也有很多第三方类型辅助工具，如<a target="_blank" rel="noopener" href="https://github.com/piotrwitek/utility-types">utility-types</a>等。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='ec894e2b66f752e8b7fb'
+        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-r='blog-comments'
+        data-o='TriDiamond'
+        data-a='TriDiamond'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="/img/favicon.png" height=300 width=300></img>
+                    <p>张白告丶</p>
+                    <span>Think like an artist, develop like an artisan</span>
+                    <dl>
+                        <dd><a href="https://github.com/zhanghao-web" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <!-- <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd> -->
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">210 <p>Articles</p></a></li>
+                    <li><a href="/categories">29 <p>Categories</p></a></li>
+                    <li><a href="/tags">59 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#unknow"><span class="toc-number">1.1.</span> <span class="toc-text">unknow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#void"><span class="toc-number">1.2.</span> <span class="toc-text">void</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#never"><span class="toc-number">1.3.</span> <span class="toc-text">never</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.</span> <span class="toc-text">运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%A9%BA%E6%96%AD%E8%A8%80%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.1.</span> <span class="toc-text">非空断言运算符 !</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%E9%93%BE%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.2.</span> <span class="toc-text">可选链运算符 ?.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6"><span class="toc-number">2.3.</span> <span class="toc-text">数字分隔符_</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%94%AE%E5%80%BC%E8%8E%B7%E5%8F%96-keyof"><span class="toc-number">3.1.</span> <span class="toc-text">键值获取 keyof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B%E7%B1%BB%E5%9E%8B%E8%8E%B7%E5%8F%96-typeof"><span class="toc-number">3.2.</span> <span class="toc-text">实例类型获取 typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%B1%9E%E6%80%A7-in"><span class="toc-number">3.3.</span> <span class="toc-text">遍历属性 in</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">4.1.</span> <span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%8E%A8%E5%AF%BC%E4%B8%8E%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="toc-number">4.2.</span> <span class="toc-text">泛型推导与默认值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%BA%A6%E6%9D%9F"><span class="toc-number">4.3.</span> <span class="toc-text">泛型约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%9D%A1%E4%BB%B6"><span class="toc-number">4.4.</span> <span class="toc-text">泛型条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%8E%A8%E6%96%AD-infer"><span class="toc-number">4.5.</span> <span class="toc-text">泛型推断 infer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E5%B7%A5%E5%85%B7"><span class="toc-number">5.</span> <span class="toc-text">泛型工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Partical"><span class="toc-number">5.1.</span> <span class="toc-text">Partical</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Record-lt-K-T-gt"><span class="toc-number">5.2.</span> <span class="toc-text">Record&lt;K, T&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pick-lt-T-K-gt"><span class="toc-number">5.3.</span> <span class="toc-text">Pick&lt;T, K&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exclude-lt-T-U-gt"><span class="toc-number">5.4.</span> <span class="toc-text">Exclude&lt;T, U&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Omit-lt-T-K-gt"><span class="toc-number">5.5.</span> <span class="toc-text">Omit&lt;T, K&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ReturnType"><span class="toc-number">5.6.</span> <span class="toc-text">ReturnType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Required"><span class="toc-number">5.7.</span> <span class="toc-text">Required</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2021
+        <span class="gradient-text">
+            张白告丶
+        </span>.
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>

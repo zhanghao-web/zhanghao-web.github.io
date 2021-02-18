@@ -140,22 +140,22 @@
             <a href="/categories/Ts"><b>「
                 </b>TS<b> 」</b></a>
             
-            November 02, 2020
+            February 18, 2021
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/11/02/Ts/Typescript%E5%9F%BA%E7%A1%80%E5%8F%8A%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" title="Typescript基础及问题汇总" class="posttitle">Typescript基础及问题汇总</a></h3>
+            <a href="/2021/02/18/Ts/TypeScript-%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/" title="TypeScript 高级用法" class="posttitle">TypeScript 高级用法</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                15k
+                16k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                14 mins.
+                15 mins.
             </span>
             
             
@@ -168,10 +168,12 @@
             
             <meta name="referrer" content="no-referrer">
 
-<p>可以合并为一个文件，为此我们需要添加–outFile[OutputJSFileName]编译选项</p>
-<pre><code class="js">$tsc --outFile common.js file1.ts file2.js file3.js...</code></pre>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6926794697553739784#heading-1">原文地址</a></p>
+<h3 id="unknow"><a href="#unknow" class="headerlink" title="unknow"></a>unknow</h3><p><code>unknown</code> 指的是<strong>不可预先定义的类型</strong>，在很多场景下，它可以替代 <code>any</code> 的功能同时保留静态检查的能力。</p>
+<pre><code class="ts">const num: number = 10;
+(num as unknown...</code></pre>
             
-            <span class="read-more"><a href="/2020/11/02/Ts/Typescript%E5%9F%BA%E7%A1%80%E5%8F%8A%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2021/02/18/Ts/TypeScript-%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -192,6 +194,65 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Ts">
+                  <b>「 </b>TS<b> 」</b>
+                </a>
+            
+            November 02, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/11/02/Ts/Typescript%E5%9F%BA%E7%A1%80%E5%8F%8A%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" title="Typescript基础及问题汇总" class="posttitle">Typescript基础及问题汇总</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        15k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        14 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ts/" rel="tag">Ts</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <meta name="referrer" content="no-referrer">
+
+<p>可以合并为一个文件，为此我们需要添加–outFile[OutputJSFileName]编译选项</p>
+<pre><code class="js">$tsc --outFile common.js file1.ts file2.js file3.js</code></pre>
+<p>上述命令将三个文件合并到common.js文件中</p>
+<p>ts必须指定数据类型，可以分为3种：</p>
+<ul>
+<li>1.js有的类型</li>
+</ul>
+<p>blooean类型，number类型，string类型，null类型，undefined,数组类型</p>
+<ul>
+<li>2.ts特有的类型</li>
+</ul>
+<p>tuple类型（元组类型），emnu类型（枚举类型），any类...</p>
+            
+            <span class="read-more"><a href="/2020/11/02/Ts/Typescript%E5%9F%BA%E7%A1%80%E5%8F%8A%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -348,59 +409,9 @@ interface Dog extends Animal &#123;
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/Ts">
-                  <b>「 </b>TS<b> 」</b>
-                </a>
-            
-            July 15, 2019
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2019/07/15/Ts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-vue-typescript-%E7%BC%96%E5%86%99%E9%A1%B5%E9%9D%A2-1/" title="如何使用 vue + typescript 编写页面(1)" class="posttitle">如何使用 vue + typescript 编写页面(1)</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        8.3k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        8 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Ts/" rel="tag">Ts</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <p><a target="_blank" rel="noopener" href="https://juejin.im/post/5c662a7de51d4562e71c4277#comment">原文地址</a></p>
-<p>使用 vue-cli 创建项目</p>
-<p><code>vue create demo</code> ，demo就是创建项目的名称<br>提示选择预设，选择 <code>Manually select features</code> 回车确认<br>选择<code>typescript</code> <code>vuex</code>  <code>router</code> <code>babel</code> <code>css pre-processors</code>，不使用<code>linter</code>，不选单元测试有需要另说<br>回车后按照需要选择合适的选项<br>选择完毕后回车等待资源准备</p>
-<p>熟悉几个vue的装饰器 <code>vue-property-decorator</code></p>
-<p>以下的装饰器的功能和原js编写的功能相同/相似，可以...</p>
-            
-            <span class="read-more"><a href="/2019/07/15/Ts/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-vue-typescript-%E7%BC%96%E5%86%99%E9%A1%B5%E9%9D%A2-1/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
     </div>
     
-    <div id="pager"><a href="/categories/Ts/page/2/" class="more" data-loading="加载中..." data-load-more="Load more">Load more</a></div>
+    <div id="pager"><a href="/categories/Ts/page/2/" class="more" data-loading="Loading..." data-load-more="Load more">Load more</a></div>
     
 </div>
 <div id="preview"></div>
