@@ -140,22 +140,22 @@
             <a href="/categories/React"><b>「
                 </b>REACT<b> 」</b></a>
             
-            March 26, 2018
+            March 27, 2018
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2018/03/26/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3-React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E8%A7%A3/" title="React 源码分析 3 React生命周期详解" class="posttitle">React 源码分析 3 React生命周期详解</a></h3>
+            <a href="/2018/03/27/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4-setState%E6%9C%BA%E5%88%B6/" title="React 源码分析 4 setState机制" class="posttitle">React 源码分析 4 setState机制</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                18k
+                13k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                17 mins.
+                11 mins.
             </span>
             
             
@@ -166,11 +166,9 @@
         
         <div class="md-content animated fadeIn">
             
-            <meta name="referrer" content="no-referrer">
-
-<p><br>调用流程可以参看上图。分为实例化，存在期和销毁三个不同阶段。介绍生命周期流程的文章很多，相信大部分同学也有所了解，我们就不详细分析了。很多同学肯定有疑问，这些方法在React内部是在哪些方法中被调用...</p>
+            <p>React作为一门前端框架，虽然只是focus在MVVM中的View部分，但还是实现了View和model的绑定。修改数据的同时，可以实现View的刷新。这大大简化了我们的逻辑，只用关心数据流的变化，...</p>
             
-            <span class="read-more"><a href="/2018/03/26/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3-React%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E8%AF%A6%E8%A7%A3/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2018/03/27/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4-setState%E6%9C%BA%E5%88%B6/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -191,6 +189,53 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/React">
+                  <b>「 </b>REACT<b> 」</b>
+                </a>
+            
+            March 27, 2018
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2018/03/27/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4-setState%E6%9C%BA%E5%88%B6/" title="React 源码分析 4 setState机制" class="posttitle">React 源码分析 4 setState机制</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        13k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        11 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>React作为一门前端框架，虽然只是focus在MVVM中的View部分，但还是实现了View和model的绑定。修改数据的同时，可以实现View的刷新。这大大简化了我们的逻辑，只用关心数据流的变化，同时减少了代码量，使得后期维护也更加方便。这个特性则要归功于setState()方法。React中利用队列机制来管理state，避免了很多重复的View刷新。下面我们来从源码角度探寻下setState机制。</p>
+<p>我们都知道setState是以修改和新增的方式改变state的，不会改变没有涉及到的state...</p>
+            
+            <span class="read-more"><a href="/2018/03/27/React/React-%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4-setState%E6%9C%BA%E5%88%B6/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -387,59 +432,6 @@
 <p>1.最普通的方法，一个welcome，一个goodbye。两个函数先从localStorage...</p>
             
             <span class="read-more"><a href="/2018/03/21/React/%E5%8A%A9%E4%BD%A0%E7%90%86%E8%A7%A3React%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(/img/welcome-cover.jpg);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/React">
-                  <b>「 </b>REACT<b> 」</b>
-                </a>
-            
-            March 20, 2018
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2018/03/20/React/React%E7%9A%84Diff%E7%AE%97%E6%B3%95/" title="React的Diff算法" class="posttitle">React的Diff算法</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        6.7k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        6 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/React/" rel="tag">React</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <meta name="referrer" content="no-referrer">
-
-<p><strong>React</strong> 是 Facebook 开发的构建用户界面的类库.<br>它从设计之初就将性能作为重点.<br>这篇文章我展示 diff 算法和渲染过程怎样工作, 你可以借鉴优化自己的应用.</p>
-<p>在深入实现的细节之前, 需要了解一下 React 怎样工作的.</p>
-<pre><code class="javascript">class MyComponent extends React.Component&#123;
-    render() &#123;
-        if (this.props.first) &#123;
-            return &lt;div className=&quot;first&quot...</code></pre>
-            
-            <span class="read-more"><a href="/2018/03/20/React/React%E7%9A%84Diff%E7%AE%97%E6%B3%95/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
 </div>
